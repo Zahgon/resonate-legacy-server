@@ -3,9 +3,6 @@ package kafka
 import (
 	"context"
 	"encoding/json"
-	"fmt"
-	"log/slog"
-	"strings"
 	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
@@ -14,7 +11,6 @@ import (
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 
-	cmdUtil "github.com/resonatehq/resonate/cmd/util"
 	i_api "github.com/resonatehq/resonate/internal/api"
 	"github.com/resonatehq/resonate/internal/app/subsystems/api"
 	"github.com/resonatehq/resonate/internal/kernel/t_api"
@@ -131,29 +127,18 @@ type Config struct {
 }
 
 func (c *Config) Bind(cmd *cobra.Command, flg *pflag.FlagSet, vip *viper.Viper, name string, prefix string, keyPrefix string) {
-	cmdUtil.Bind(c, cmd, flg, vip, name, prefix, keyPrefix)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (c *Config) Decode(value any, decodeHook mapstructure.DecodeHookFunc) error {
-	decoderConfig := &mapstructure.DecoderConfig{
-		Result:     c,
-		DecodeHook: decodeHook,
-	}
-
-	decoder, err := mapstructure.NewDecoder(decoderConfig)
-	if err != nil {
-		return err
-	}
-
-	if err := decoder.Decode(value); err != nil {
-		return err
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (c *Config) New(a i_api.API, _ *metrics.Metrics) (i_api.Subsystem, error) {
-	return New(a, c)
+	_ = "STUB: not implemented"
+	return *new(i_api.Subsystem), nil
 }
 
 type Kafka struct {
@@ -166,123 +151,35 @@ type Kafka struct {
 }
 
 func New(a i_api.API, config *Config) (i_api.Subsystem, error) {
-	bootstrapServers := strings.Join(config.Brokers, ",")
-
-	// Create consumer
-	consumer, err := kafka.NewConsumer(&kafka.ConfigMap{
-		"allow.auto.create.topics": true,
-		"auto.offset.reset":        "earliest",
-		"bootstrap.servers":        bootstrapServers,
-		"enable.auto.commit":       false,
-		"group.id":                 config.ConsumerGroup,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("failed to create kafka consumer: %w", err)
-	}
-
-	if err := consumer.Subscribe(config.Topic, nil); err != nil {
-		return nil, fmt.Errorf("failed to subscribe to topic %q: %w", config.Topic, err)
-	}
-
-	// Create producer
-	producer, err := kafka.NewProducer(&kafka.ConfigMap{
-		"acks":                     "all",
-		"allow.auto.create.topics": true,
-		"bootstrap.servers":        bootstrapServers,
-		"retries":                  3,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("failed to create kafka producer: %w", err)
-	}
-
-	shutdownCtx, shutdownCancel := context.WithCancel(context.Background())
-
-	k := &Kafka{
-		config:         config,
-		api:            api.New(a, "kafka"),
-		consumer:       consumer,
-		producer:       producer,
-		shutdownCtx:    shutdownCtx,
-		shutdownCancel: shutdownCancel,
-	}
-
-	slog.Debug("kafka initialized",
-		"brokers", config.Brokers,
-		"topic", config.Topic,
-		"target", config.Target,
-		"consumerGroup", config.ConsumerGroup,
-	)
-
-	return k, nil
+	_ = "STUB: not implemented"
+	return *new(i_api.Subsystem), nil
 }
 
-func (k *Kafka) String() string {
-	return "kafka"
-}
+// Create consumer
 
-func (k *Kafka) Kind() string {
-	return "kafka"
-}
+// Create producer
 
-func (k *Kafka) Addr() string {
-	return fmt.Sprintf("%v", k.config.Brokers)
-}
+func (k *Kafka) String() string { _ = "STUB: not implemented"; return "" }
 
-func (k *Kafka) Start(errors chan<- error) {
-	slog.Info("starting kafka consumer", "topic", k.config.Topic, "target", k.config.Target)
+func (k *Kafka) Kind() string { _ = "STUB: not implemented"; return "" }
 
-	server := &server{
-		api:    k.api,
-		config: k.config,
-		kafka:  k,
-	}
+func (k *Kafka) Addr() string { _ = "STUB: not implemented"; return "" }
 
-	for {
-		select {
-		case <-k.shutdownCtx.Done():
-			return
-		default:
-			msg, err := k.consumer.ReadMessage(-1)
-			if err != nil {
-				// if topic does not exist, continue
-				if kafkaErr, ok := err.(kafka.Error); ok && kafkaErr.Code() == kafka.ErrUnknownTopicOrPart {
-					slog.Warn("kafka topic does not exist, retrying", "topic", k.config.Topic)
+func (k *Kafka) Start(errors chan<- error) { _ = "STUB: not implemented"; return }
 
-					// it appears that the second call to ReadMessage will block
-					// until the topic exists, so don't sleep (!!)
-					continue
-				}
+// if topic does not exist, continue
 
-				slog.Error("kafka consumer error", "error", err)
-				errors <- err
-				return
-			}
-
-			server.handleRequest(msg)
-
-			if _, err := k.consumer.CommitMessage(msg); err != nil {
-				slog.Warn("failed to commit message", "error", err)
-			}
-		}
-	}
-}
+// it appears that the second call to ReadMessage will block
+// until the topic exists, so don't sleep (!!)
 
 func (k *Kafka) Stop() error {
+	_ = "STUB: not implemented"
 	// Cancel shutdown context
-	k.shutdownCancel()
-
-	if err := k.consumer.Close(); err != nil {
-		slog.Warn("failed to close consumer", "error", err)
-	}
-
-	// Ensure all outstanding messages are flushed before closing producer
-	// (optional but closer to SyncProducer semantics)
-	k.producer.Flush(int(k.config.Timeout.Milliseconds()))
-
-	k.producer.Close()
-
 	return nil
 }
+
+// Ensure all outstanding messages are flushed before closing producer
+// (optional but closer to SyncProducer semantics)
 
 type server struct {
 	api    *api.API
@@ -318,179 +215,33 @@ type KafkaResponse struct {
 	Error         *api.Error      `json:"error,omitempty"`
 }
 
-func (s *server) handleRequest(msg *kafka.Message) {
-	var kafkaReq KafkaRequest
-	if err := json.Unmarshal(msg.Value, &kafkaReq); err != nil {
-		topic := ""
-		if msg.TopicPartition.Topic != nil {
-			topic = *msg.TopicPartition.Topic
-		}
-		slog.Warn("failed to unmarshal kafka message",
-			"error", err,
-			"topic", topic,
-			"partition", msg.TopicPartition.Partition,
-			"offset", msg.TopicPartition.Offset,
-		)
-		return
-	}
+func (s *server) handleRequest(msg *kafka.Message) { _ = "STUB: not implemented"; return }
 
-	// Filter by target - discard if not for this server
-	if kafkaReq.Target != s.config.Target {
-		slog.Debug("discarding message with wrong target",
-			"expected", s.config.Target,
-			"actual", kafkaReq.Target,
-			"operation", kafkaReq.Operation,
-		)
-		return
-	}
+// Filter by target - discard if not for this server
 
-	// Route based on operation
-	switch kafkaReq.Operation {
-	// Promises
-	case "promises.read":
-		s.handleReadPromise(&kafkaReq)
-	case "promises.search":
-		s.handleSearchPromises(&kafkaReq)
-	case "promises.create":
-		s.handleCreatePromise(&kafkaReq)
-	case "promises.createtask":
-		s.handleCreatePromiseAndTask(&kafkaReq)
-	case "promises.complete":
-		s.handleCompletePromise(&kafkaReq)
-	case "promises.callback":
-		s.handleCreateCallback(&kafkaReq)
-	case "promises.subscribe":
-		s.handleCreateSubscription(&kafkaReq)
+// Route based on operation
 
-	// Schedules
-	case "schedules.read":
-		s.handleReadSchedule(&kafkaReq)
-	case "schedules.search":
-		s.handleSearchSchedules(&kafkaReq)
-	case "schedules.create":
-		s.handleCreateSchedule(&kafkaReq)
-	case "schedules.delete":
-		s.handleDeleteSchedule(&kafkaReq)
+// Promises
 
-	// Tasks
-	case "tasks.claim":
-		s.handleClaimTask(&kafkaReq)
-	case "tasks.complete":
-		s.handleCompleteTask(&kafkaReq)
-	case "tasks.drop":
-		s.handleDropTask(&kafkaReq)
-	case "tasks.heartbeat":
-		s.handleHeartbeatTasks(&kafkaReq)
+// Schedules
 
-	default:
-		s.respondError(&kafkaReq, &api.Error{
-			Code:    400,
-			Message: fmt.Sprintf("unknown operation: %s", kafkaReq.Operation),
-		})
-	}
-}
+// Tasks
 
-func (s *server) log(operation string, err error) {
-	slog.Debug("kafka", "operation", operation, "error", err)
-}
+func (s *server) log(operation string, err error) { _ = "STUB: not implemented"; return }
 
 // Helper function to process requests
 func (s *server) processRequest(kafkaReq *KafkaRequest, payload t_api.RequestPayload) (t_api.ResponsePayload, *api.Error) {
-	defer s.log(kafkaReq.Operation, nil)
-
-	// Process the request
-	res, apiErr := s.api.Process(kafkaReq.RequestId, &t_api.Request{
-		Head: kafkaReq.Metadata,
-		Data: payload,
-	})
-
-	if apiErr != nil {
-		return nil, apiErr
-	}
-
-	return res.Data, nil
+	_ = "STUB: not implemented"
+	return *new(t_api.ResponsePayload), nil
 }
+
+// Process the request
 
 func (s *server) respondError(kafkaReq *KafkaRequest, error *api.Error) {
-	response := &KafkaResponse{
-		Target:        kafkaReq.ReplyTo.Target,
-		CorrelationId: kafkaReq.CorrelationId,
-		Operation:     kafkaReq.Operation,
-		Success:       false,
-		Error:         error,
-	}
-
-	responseBytes, err := json.Marshal(response)
-	if err != nil {
-		slog.Error("failed to encode error response", "error", err)
-		return
-	}
-
-	s.send(kafkaReq, responseBytes)
+	_ = "STUB: not implemented"
+	return
 }
 
-func (s *server) sendReply(kafkaReq *KafkaRequest, data []byte) {
-	response := &KafkaResponse{
-		Target:        kafkaReq.ReplyTo.Target,
-		CorrelationId: kafkaReq.CorrelationId,
-		Operation:     kafkaReq.Operation,
-		Success:       true,
-		Response:      data,
-	}
+func (s *server) sendReply(kafkaReq *KafkaRequest, data []byte) { _ = "STUB: not implemented"; return }
 
-	responseBytes, err := json.Marshal(response)
-	if err != nil {
-		slog.Error("failed to encode error response", "error", err)
-		return
-	}
-
-	s.send(kafkaReq, responseBytes)
-}
-
-func (s *server) send(kafkaReq *KafkaRequest, value []byte) {
-	msg := &kafka.Message{
-		TopicPartition: kafka.TopicPartition{
-			Topic:     &kafkaReq.ReplyTo.Topic,
-			Partition: kafka.PartitionAny,
-		},
-		Value: value,
-	}
-
-	if kafkaReq.ReplyTo.Partition != nil {
-		msg.TopicPartition.Partition = *kafkaReq.ReplyTo.Partition
-	}
-	if kafkaReq.ReplyTo.Key != nil {
-		msg.Key = []byte(*kafkaReq.ReplyTo.Key)
-	}
-
-	deliveryChan := make(chan kafka.Event, 1)
-	defer close(deliveryChan)
-
-	if err := s.kafka.producer.Produce(msg, deliveryChan); err != nil {
-		slog.Error("failed to send reply", "error", err, "topic", kafkaReq.ReplyTo.Topic, "target", kafkaReq.ReplyTo.Target)
-		return
-	}
-
-	ev := <-deliveryChan
-	m, ok := ev.(*kafka.Message)
-	if !ok {
-		slog.Error("unexpected event type from producer", "event", ev)
-		return
-	}
-
-	if m.TopicPartition.Error != nil {
-		slog.Error("failed to deliver reply",
-			"error", m.TopicPartition.Error,
-			"topic", kafkaReq.ReplyTo.Topic,
-			"target", kafkaReq.ReplyTo.Target,
-		)
-		return
-	}
-
-	slog.Debug("sent reply",
-		"topic", kafkaReq.ReplyTo.Topic,
-		"target", kafkaReq.ReplyTo.Target,
-		"partition", m.TopicPartition.Partition,
-		"offset", m.TopicPartition.Offset,
-	)
-}
+func (s *server) send(kafkaReq *KafkaRequest, value []byte) { _ = "STUB: not implemented"; return }

@@ -2,9 +2,6 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/resonatehq/resonate/internal/app/subsystems/api"
-	"github.com/resonatehq/resonate/internal/kernel/t_api"
-	"github.com/resonatehq/resonate/internal/util"
 	"github.com/resonatehq/resonate/pkg/promise"
 )
 
@@ -14,31 +11,7 @@ type readScheduleHeader struct {
 	RequestId string `header:"request-id"`
 }
 
-func (s *server) readSchedule(c *gin.Context) {
-	var header readScheduleHeader
-	if err := c.ShouldBindHeader(&header); err != nil {
-		err := api.RequestValidationError(err)
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
-
-	metadata := map[string]string{}
-	if auth := c.GetString("authorization"); auth != "" {
-		metadata["authorization"] = auth
-	}
-	res, err := s.api.Process(header.RequestId, &t_api.Request{
-		Head: metadata,
-		Data: &t_api.ScheduleGetRequest{
-			Id: extractId(c.Param("id")),
-		},
-	})
-	if err != nil {
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
-
-	c.JSON(s.code(res.Status), res.AsScheduleGetResponse().Schedule)
-}
+func (s *server) readSchedule(c *gin.Context) { _ = "STUB: not implemented"; return }
 
 // Search
 
@@ -53,55 +26,10 @@ type searchSchedulesParams struct {
 	Cursor *string           `form:"cursor" json:"cursor,omitempty"`
 }
 
-func (s *server) searchSchedules(c *gin.Context) {
-	var header searchSchedulesHeader
-	if err := c.ShouldBindHeader(&header); err != nil {
-		err := api.RequestValidationError(err)
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
+func (s *server) searchSchedules(c *gin.Context) { _ = "STUB: not implemented"; return }
 
-	var params searchSchedulesParams
-	if err := c.ShouldBindQuery(&params); err != nil {
-		err := api.RequestValidationError(err)
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
-
-	// tags needs to be parsed manually
-	// see: https://github.com/gin-gonic/gin/issues/2606
-	params.Tags = c.QueryMap("tags")
-
-	req, err := s.api.SearchSchedules(
-		util.SafeDeref(params.Id),
-		params.Tags,
-		util.SafeDeref(params.Limit),
-		util.SafeDeref(params.Cursor),
-	)
-	if err != nil {
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
-
-	metadata := map[string]string{}
-	if auth := c.GetString("authorization"); auth != "" {
-		metadata["authorization"] = auth
-	}
-	res, err := s.api.Process(header.RequestId, &t_api.Request{
-		Head: metadata,
-		Data:  req,
-	})
-	if err != nil {
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
-
-	searchSchedules := res.AsScheduleSearchResponse()
-	c.JSON(s.code(res.Status), gin.H{
-		"schedules": searchSchedules.Schedules,
-		"cursor":    searchSchedules.Cursor,
-	})
-}
+// tags needs to be parsed manually
+// see: https://github.com/gin-gonic/gin/issues/2606
 
 // Create
 
@@ -120,50 +48,7 @@ type createScheduleBody struct {
 	PromiseTags    map[string]string `json:"promiseTags,omitempty"`
 }
 
-func (s *server) createSchedule(c *gin.Context) {
-	var header createScheduleHeader
-	if err := c.ShouldBindHeader(&header); err != nil {
-		err := api.RequestValidationError(err)
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
-
-	var body createScheduleBody
-	if err := c.ShouldBindJSON(&body); err != nil {
-		err := api.RequestValidationError(err)
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
-
-	if err := s.api.ValidateCron(body.Cron); err != nil {
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
-
-	metadata := map[string]string{}
-	if auth := c.GetString("authorization"); auth != "" {
-		metadata["authorization"] = auth
-	}
-	res, err := s.api.Process(header.RequestId, &t_api.Request{
-		Head: metadata,
-		Data: &t_api.ScheduleCreateRequest{
-			Id:             body.Id,
-			Description:    body.Description,
-			Cron:           body.Cron,
-			Tags:           body.Tags,
-			PromiseId:      body.PromiseId,
-			PromiseTimeout: body.PromiseTimeout,
-			PromiseParam:   body.PromiseParam,
-			PromiseTags:    body.PromiseTags,
-		},
-	})
-	if err != nil {
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
-
-	c.JSON(s.code(res.Status), res.AsScheduleCreateResponse().Schedule)
-}
+func (s *server) createSchedule(c *gin.Context) { _ = "STUB: not implemented"; return }
 
 // Delete
 
@@ -171,29 +56,6 @@ type deleteScheduleHeader struct {
 	RequestId string `header:"request-id"`
 }
 
-func (s *server) deleteSchedule(c *gin.Context) {
-	var header deleteScheduleHeader
-	if err := c.ShouldBindHeader(&header); err != nil {
-		err := api.RequestValidationError(err)
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
+func (s *server) deleteSchedule(c *gin.Context) { _ = "STUB: not implemented"; return }
 
-	metadata := map[string]string{}
-	if auth := c.GetString("authorization"); auth != "" {
-		metadata["authorization"] = auth
-	}
-	res, err := s.api.Process(header.RequestId, &t_api.Request{
-		Head: metadata,
-		Data: &t_api.ScheduleDeleteRequest{
-			Id: extractId(c.Param("id")),
-		},
-	})
-	if err != nil {
-		c.JSON(s.code(err.Code), gin.H{"error": err})
-		return
-	}
-
-	_ = res.AsScheduleDeleteResponse() // Serves as a type assertion
-	c.JSON(s.code(res.Status), nil)
-}
+// Serves as a type assertion

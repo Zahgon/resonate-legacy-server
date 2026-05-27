@@ -1,10 +1,7 @@
 package tasks
 
 import (
-	"context"
-
 	"github.com/resonatehq/resonate/pkg/client"
-	v1 "github.com/resonatehq/resonate/pkg/client/v1"
 	"github.com/spf13/cobra"
 )
 
@@ -14,46 +11,20 @@ var heartbeatTasksExample = `
 resonate tasks heartbeat --pid bar`
 
 // HeartbeatTaskCmd returns a cobra command for sending a heartbeat to a task.
-func HeartbeatTaskCmd(c client.Client) *cobra.Command {
-	var (
-		pid string
-	)
+func HeartbeatTaskCmd(c client.Client) *cobra.Command { _ = "STUB: not implemented"; return nil }
 
-	// Define the cobra command
-	cmd := &cobra.Command{
-		Use:     "heartbeat",
-		Short:   "Heartbeat tasks",
-		Example: heartbeatTasksExample,
-		RunE: func(cmd *cobra.Command, args []string) error {
-			// Create parameters for the request
-			params := &v1.HeartbeatTasksParams{}
+// Define the cobra command
 
-			// Create the body for heartbeat tasks request
-			body := v1.HeartbeatTasksJSONRequestBody{
-				ProcessId: pid,
-			}
+// Create parameters for the request
 
-			// Call the client method to send the heartbeat (GET request with path params)
-			res, err := c.V1().HeartbeatTasksWithResponse(context.TODO(), params, body)
+// Create the body for heartbeat tasks request
 
-			if err != nil {
-				return err // Return any errors from the request
-			}
+// Call the client method to send the heartbeat (GET request with path params)
 
-			// Handle the response based on the status code
-			if res.StatusCode() == 200 {
-				cmd.Printf("Tasks heartbeated: %d\n", *res.JSON200.TasksAffected)
-			} else {
-				cmd.PrintErrln(res.Status(), string(res.Body))
-				return nil
-			}
+// Return any errors from the request
 
-			return nil // Return nil if no error occurred
-		},
-	}
+// Handle the response based on the status code
 
-	// Define command flags
-	cmd.Flags().StringVar(&pid, "pid", "default", "claimant pid")
+// Return nil if no error occurred
 
-	return cmd
-}
+// Define command flags

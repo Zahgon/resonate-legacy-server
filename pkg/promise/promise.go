@@ -1,13 +1,5 @@
 package promise
 
-import (
-	"encoding/json"
-	"fmt"
-	"strings"
-
-	"github.com/resonatehq/resonate/internal/util"
-)
-
 type Promise struct {
 	Id          string            `json:"id"`
 	State       State             `json:"state"`
@@ -20,34 +12,14 @@ type Promise struct {
 	SortId      int64             `json:"-"` // unexported
 }
 
-func (p *Promise) String() string {
-	return fmt.Sprintf(
-		"Promise(id=%s, state=%s, param=%s, value=%s, timeout=%d, tags=%s, createdOn=%d, completedOn=%d)",
-		p.Id,
-		p.State,
-		p.Param,
-		p.Value,
-		p.Timeout,
-		p.Tags,
-		util.SafeDeref(p.CreatedOn),
-		util.SafeDeref(p.CompletedOn),
-	)
-}
+func (p *Promise) String() string { _ = "STUB: not implemented"; return "" }
 
-func GetTimedoutState(tags map[string]string) State {
-	state := Timedout
-	if tags["resonate:timeout"] == "true" {
-		state = Resolved
-	}
-
-	return state
-}
+func GetTimedoutState(tags map[string]string) State { _ = "STUB: not implemented"; return *new(State) }
 
 func (p1 *Promise) Equals(p2 *Promise) bool {
+	_ = "STUB: not implemented"
 	// for dst only
-	return p1.Id == p2.Id &&
-		p1.State == p2.State &&
-		p1.Timeout == p2.Timeout
+	return false
 }
 
 type State int
@@ -60,60 +32,17 @@ const (
 	Timedout                   // 16
 )
 
-func (s State) String() string {
-	switch s {
-	case Pending:
-		return "PENDING"
-	case Resolved:
-		return "RESOLVED"
-	case Rejected:
-		return "REJECTED"
-	case Canceled:
-		return "REJECTED_CANCELED"
-	case Timedout:
-		return "REJECTED_TIMEDOUT"
-	default:
-		panic("invalid state")
-	}
-}
+func (s State) String() string { _ = "STUB: not implemented"; return "" }
 
-func (s *State) MarshalJSON() ([]byte, error) {
-	return json.Marshal(s.String())
-}
+func (s *State) MarshalJSON() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
-func (s *State) UnmarshalJSON(data []byte) error {
-	var state string
-	if err := json.Unmarshal(data, &state); err != nil {
-		return err
-	}
+func (s *State) UnmarshalJSON(data []byte) error { _ = "STUB: not implemented"; return nil }
 
-	switch strings.ToUpper(state) {
-	case "PENDING":
-		*s = Pending
-	case "RESOLVED":
-		*s = Resolved
-	case "REJECTED":
-		*s = Rejected
-	case "REJECTED_CANCELED":
-		*s = Canceled
-	case "REJECTED_TIMEDOUT":
-		*s = Timedout
-	default:
-		return fmt.Errorf("invalid state '%s'", state)
-	}
-
-	return nil
-}
-
-func (s State) In(mask State) bool {
-	return s&mask != 0
-}
+func (s State) In(mask State) bool { _ = "STUB: not implemented"; return false }
 
 type Value struct {
 	Headers map[string]string `json:"headers,omitempty"`
 	Data    []byte            `json:"data,omitempty"`
 }
 
-func (v Value) String() string {
-	return fmt.Sprintf("Value(headers=%s, data=%s)", v.Headers, v.Data)
-}
+func (v Value) String() string { _ = "STUB: not implemented"; return "" }

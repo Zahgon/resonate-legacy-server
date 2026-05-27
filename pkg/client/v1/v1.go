@@ -4,16 +4,10 @@
 package v1
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
-	"net/url"
-	"strings"
-
-	"github.com/oapi-codegen/runtime"
 )
 
 // Defines values for MesgType.
@@ -397,66 +391,26 @@ type DropTaskJSONRequestBody DropTaskJSONBody
 type HeartbeatTasksJSONRequestBody HeartbeatTasksJSONBody
 
 // AsRecv0 returns the union data inside the Recv as a Recv0
-func (t Recv) AsRecv0() (Recv0, error) {
-	var body Recv0
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
+func (t Recv) AsRecv0() (Recv0, error) { _ = "STUB: not implemented"; return *new(Recv0), nil }
 
 // FromRecv0 overwrites any union data inside the Recv as the provided Recv0
-func (t *Recv) FromRecv0(v Recv0) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
+func (t *Recv) FromRecv0(v Recv0) error { _ = "STUB: not implemented"; return nil }
 
 // MergeRecv0 performs a merge with any union data inside the Recv, using the provided Recv0
-func (t *Recv) MergeRecv0(v Recv0) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
+func (t *Recv) MergeRecv0(v Recv0) error { _ = "STUB: not implemented"; return nil }
 
 // AsRecv1 returns the union data inside the Recv as a Recv1
-func (t Recv) AsRecv1() (Recv1, error) {
-	var body Recv1
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
+func (t Recv) AsRecv1() (Recv1, error) { _ = "STUB: not implemented"; return *new(Recv1), nil }
 
 // FromRecv1 overwrites any union data inside the Recv as the provided Recv1
-func (t *Recv) FromRecv1(v Recv1) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
+func (t *Recv) FromRecv1(v Recv1) error { _ = "STUB: not implemented"; return nil }
 
 // MergeRecv1 performs a merge with any union data inside the Recv, using the provided Recv1
-func (t *Recv) MergeRecv1(v Recv1) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
+func (t *Recv) MergeRecv1(v Recv1) error { _ = "STUB: not implemented"; return nil }
 
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
+func (t Recv) MarshalJSON() ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }
 
-func (t Recv) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *Recv) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
+func (t *Recv) UnmarshalJSON(b []byte) error { _ = "STUB: not implemented"; return nil }
 
 // RequestEditorFn  is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
@@ -490,43 +444,29 @@ type ClientOption func(*Client) error
 
 // Creates a new Client, with reasonable defaults
 func NewClient(server string, opts ...ClientOption) (*Client, error) {
+	_ = "STUB: not implemented"
 	// create a client with sane default values
-	client := Client{
-		Server: server,
-	}
-	// mutate client and add all optional params
-	for _, o := range opts {
-		if err := o(&client); err != nil {
-			return nil, err
-		}
-	}
-	// ensure the server URL always has a trailing slash
-	if !strings.HasSuffix(client.Server, "/") {
-		client.Server += "/"
-	}
-	// create httpClient, if not already present
-	if client.Client == nil {
-		client.Client = &http.Client{}
-	}
-	return &client, nil
+	return nil, nil
 }
+
+// mutate client and add all optional params
+
+// ensure the server URL always has a trailing slash
+
+// create httpClient, if not already present
 
 // WithHTTPClient allows overriding the default Doer, which is
 // automatically created using http.Client. This is useful for tests.
 func WithHTTPClient(doer HttpRequestDoer) ClientOption {
-	return func(c *Client) error {
-		c.Client = doer
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(ClientOption)
 }
 
 // WithRequestEditorFn allows setting up a callback function, which will be
 // called right before sending the request. This can be used to mutate the request.
 func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
-	return func(c *Client) error {
-		c.RequestEditors = append(c.RequestEditors, fn)
-		return nil
-	}
+	_ = "STUB: not implemented"
+	return *new(ClientOption)
 }
 
 // The interface specification for the client above.
@@ -610,1516 +550,326 @@ type ClientInterface interface {
 }
 
 func (c *Client) SearchPromises(ctx context.Context, params *SearchPromisesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewSearchPromisesRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CreatePromiseWithBody(ctx context.Context, params *CreatePromiseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreatePromiseRequestWithBody(c.Server, params, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CreatePromise(ctx context.Context, params *CreatePromiseParams, body CreatePromiseJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreatePromiseRequest(c.Server, params, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CreatePromiseCallbackWithBody(ctx context.Context, id string, params *CreatePromiseCallbackParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreatePromiseCallbackRequestWithBody(c.Server, id, params, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CreatePromiseCallback(ctx context.Context, id string, params *CreatePromiseCallbackParams, body CreatePromiseCallbackJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreatePromiseCallbackRequest(c.Server, id, params, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CreatePromiseSubscriptionWithBody(ctx context.Context, id string, params *CreatePromiseSubscriptionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreatePromiseSubscriptionRequestWithBody(c.Server, id, params, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CreatePromiseSubscription(ctx context.Context, id string, params *CreatePromiseSubscriptionParams, body CreatePromiseSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreatePromiseSubscriptionRequest(c.Server, id, params, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CreatePromiseAndTaskWithBody(ctx context.Context, params *CreatePromiseAndTaskParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreatePromiseAndTaskRequestWithBody(c.Server, params, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CreatePromiseAndTask(ctx context.Context, params *CreatePromiseAndTaskParams, body CreatePromiseAndTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreatePromiseAndTaskRequest(c.Server, params, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) ReadPromise(ctx context.Context, id string, params *ReadPromiseParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewReadPromiseRequest(c.Server, id, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CompletePromiseWithBody(ctx context.Context, id string, params *CompletePromiseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCompletePromiseRequestWithBody(c.Server, id, params, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CompletePromise(ctx context.Context, id string, params *CompletePromiseParams, body CompletePromiseJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCompletePromiseRequest(c.Server, id, params, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) SearchSchedules(ctx context.Context, params *SearchSchedulesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewSearchSchedulesRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CreateScheduleWithBody(ctx context.Context, params *CreateScheduleParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateScheduleRequestWithBody(c.Server, params, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CreateSchedule(ctx context.Context, params *CreateScheduleParams, body CreateScheduleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateScheduleRequest(c.Server, params, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) DeleteSchedule(ctx context.Context, id string, params *DeleteScheduleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteScheduleRequest(c.Server, id, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) ReadSchedule(ctx context.Context, id string, params *ReadScheduleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewReadScheduleRequest(c.Server, id, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) ClaimTaskWithBody(ctx context.Context, params *ClaimTaskParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewClaimTaskRequestWithBody(c.Server, params, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) ClaimTask(ctx context.Context, params *ClaimTaskParams, body ClaimTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewClaimTaskRequest(c.Server, params, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) ClaimTaskGet(ctx context.Context, id string, counter int, params *ClaimTaskGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewClaimTaskGetRequest(c.Server, id, counter, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CompleteTaskWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCompleteTaskRequestWithBody(c.Server, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CompleteTask(ctx context.Context, body CompleteTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCompleteTaskRequest(c.Server, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) CompleteTaskGet(ctx context.Context, id string, counter int, params *CompleteTaskGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCompleteTaskGetRequest(c.Server, id, counter, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) DropTaskWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDropTaskRequestWithBody(c.Server, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) DropTask(ctx context.Context, body DropTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDropTaskRequest(c.Server, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) DropTaskGet(ctx context.Context, id string, counter int, params *DropTaskGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDropTaskGetRequest(c.Server, id, counter, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) HeartbeatTasksWithBody(ctx context.Context, params *HeartbeatTasksParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHeartbeatTasksRequestWithBody(c.Server, params, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) HeartbeatTasks(ctx context.Context, params *HeartbeatTasksParams, body HeartbeatTasksJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHeartbeatTasksRequest(c.Server, params, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) HeartbeatTaskGet(ctx context.Context, id string, counter int, params *HeartbeatTaskGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewHeartbeatTaskGetRequest(c.Server, id, counter, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewSearchPromisesRequest generates requests for SearchPromises
 func NewSearchPromisesRequest(server string, params *SearchPromisesParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/promises")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Id != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "id", runtime.ParamLocationQuery, *params.Id); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.State != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "state", runtime.ParamLocationQuery, *params.State); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Tags != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("deepObject", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Limit != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Cursor != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCreatePromiseRequest calls the generic CreatePromise builder with application/json body
 func NewCreatePromiseRequest(server string, params *CreatePromiseParams, body CreatePromiseJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewCreatePromiseRequestWithBody(server, params, "application/json", bodyReader)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCreatePromiseRequestWithBody generates requests for CreatePromise with any type of body
 func NewCreatePromiseRequestWithBody(server string, params *CreatePromiseParams, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/promises")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCreatePromiseCallbackRequest calls the generic CreatePromiseCallback builder with application/json body
 func NewCreatePromiseCallbackRequest(server string, id string, params *CreatePromiseCallbackParams, body CreatePromiseCallbackJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewCreatePromiseCallbackRequestWithBody(server, id, params, "application/json", bodyReader)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCreatePromiseCallbackRequestWithBody generates requests for CreatePromiseCallback with any type of body
 func NewCreatePromiseCallbackRequestWithBody(server string, id string, params *CreatePromiseCallbackParams, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/promises/callback/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCreatePromiseSubscriptionRequest calls the generic CreatePromiseSubscription builder with application/json body
 func NewCreatePromiseSubscriptionRequest(server string, id string, params *CreatePromiseSubscriptionParams, body CreatePromiseSubscriptionJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewCreatePromiseSubscriptionRequestWithBody(server, id, params, "application/json", bodyReader)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCreatePromiseSubscriptionRequestWithBody generates requests for CreatePromiseSubscription with any type of body
 func NewCreatePromiseSubscriptionRequestWithBody(server string, id string, params *CreatePromiseSubscriptionParams, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/promises/subscribe/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCreatePromiseAndTaskRequest calls the generic CreatePromiseAndTask builder with application/json body
 func NewCreatePromiseAndTaskRequest(server string, params *CreatePromiseAndTaskParams, body CreatePromiseAndTaskJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewCreatePromiseAndTaskRequestWithBody(server, params, "application/json", bodyReader)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCreatePromiseAndTaskRequestWithBody generates requests for CreatePromiseAndTask with any type of body
 func NewCreatePromiseAndTaskRequestWithBody(server string, params *CreatePromiseAndTaskParams, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/promises/task")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewReadPromiseRequest generates requests for ReadPromise
 func NewReadPromiseRequest(server string, id string, params *ReadPromiseParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/promises/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCompletePromiseRequest calls the generic CompletePromise builder with application/json body
 func NewCompletePromiseRequest(server string, id string, params *CompletePromiseParams, body CompletePromiseJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewCompletePromiseRequestWithBody(server, id, params, "application/json", bodyReader)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCompletePromiseRequestWithBody generates requests for CompletePromise with any type of body
 func NewCompletePromiseRequestWithBody(server string, id string, params *CompletePromiseParams, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/promises/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("PATCH", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewSearchSchedulesRequest generates requests for SearchSchedules
 func NewSearchSchedulesRequest(server string, params *SearchSchedulesParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/schedules")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Id != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "id", runtime.ParamLocationQuery, *params.Id); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Tags != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("deepObject", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Limit != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Cursor != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCreateScheduleRequest calls the generic CreateSchedule builder with application/json body
 func NewCreateScheduleRequest(server string, params *CreateScheduleParams, body CreateScheduleJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewCreateScheduleRequestWithBody(server, params, "application/json", bodyReader)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCreateScheduleRequestWithBody generates requests for CreateSchedule with any type of body
 func NewCreateScheduleRequestWithBody(server string, params *CreateScheduleParams, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/schedules")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewDeleteScheduleRequest generates requests for DeleteSchedule
 func NewDeleteScheduleRequest(server string, id string, params *DeleteScheduleParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/schedules/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewReadScheduleRequest generates requests for ReadSchedule
 func NewReadScheduleRequest(server string, id string, params *ReadScheduleParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/schedules/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewClaimTaskRequest calls the generic ClaimTask builder with application/json body
 func NewClaimTaskRequest(server string, params *ClaimTaskParams, body ClaimTaskJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewClaimTaskRequestWithBody(server, params, "application/json", bodyReader)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewClaimTaskRequestWithBody generates requests for ClaimTask with any type of body
 func NewClaimTaskRequestWithBody(server string, params *ClaimTaskParams, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tasks/claim")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewClaimTaskGetRequest generates requests for ClaimTaskGet
 func NewClaimTaskGetRequest(server string, id string, counter int, params *ClaimTaskGetParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "counter", runtime.ParamLocationPath, counter)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tasks/claim/%s/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCompleteTaskRequest calls the generic CompleteTask builder with application/json body
 func NewCompleteTaskRequest(server string, body CompleteTaskJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewCompleteTaskRequestWithBody(server, "application/json", bodyReader)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCompleteTaskRequestWithBody generates requests for CompleteTask with any type of body
 func NewCompleteTaskRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tasks/complete")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewCompleteTaskGetRequest generates requests for CompleteTaskGet
 func NewCompleteTaskGetRequest(server string, id string, counter int, params *CompleteTaskGetParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "counter", runtime.ParamLocationPath, counter)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tasks/complete/%s/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewDropTaskRequest calls the generic DropTask builder with application/json body
 func NewDropTaskRequest(server string, body DropTaskJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewDropTaskRequestWithBody(server, "application/json", bodyReader)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewDropTaskRequestWithBody generates requests for DropTask with any type of body
 func NewDropTaskRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tasks/drop")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewDropTaskGetRequest generates requests for DropTaskGet
 func NewDropTaskGetRequest(server string, id string, counter int, params *DropTaskGetParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "counter", runtime.ParamLocationPath, counter)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tasks/drop/%s/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewHeartbeatTasksRequest calls the generic HeartbeatTasks builder with application/json body
 func NewHeartbeatTasksRequest(server string, params *HeartbeatTasksParams, body HeartbeatTasksJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewHeartbeatTasksRequestWithBody(server, params, "application/json", bodyReader)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewHeartbeatTasksRequestWithBody generates requests for HeartbeatTasks with any type of body
 func NewHeartbeatTasksRequestWithBody(server string, params *HeartbeatTasksParams, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tasks/heartbeat")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // NewHeartbeatTaskGetRequest generates requests for HeartbeatTaskGet
 func NewHeartbeatTaskGetRequest(server string, id string, counter int, params *HeartbeatTaskGetParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "id", runtime.ParamLocationPath, id)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "counter", runtime.ParamLocationPath, counter)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tasks/heartbeat/%s/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-
-		if params.RequestId != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "request-id", runtime.ParamLocationHeader, *params.RequestId)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("request-id", headerParam0)
-		}
-
-	}
-
-	return req, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *Client) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
-	for _, r := range c.RequestEditors {
-		if err := r(ctx, req); err != nil {
-			return err
-		}
-	}
-	for _, r := range additionalEditors {
-		if err := r(ctx, req); err != nil {
-			return err
-		}
-	}
+	_ = "STUB: not implemented"
 	return nil
 }
 
@@ -2131,24 +881,12 @@ type ClientWithResponses struct {
 // NewClientWithResponses creates a new ClientWithResponses, which wraps
 // Client with return type handling
 func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
-	client, err := NewClient(server, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &ClientWithResponses{client}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // WithBaseURL overrides the baseURL.
-func WithBaseURL(baseURL string) ClientOption {
-	return func(c *Client) error {
-		newBaseURL, err := url.Parse(baseURL)
-		if err != nil {
-			return err
-		}
-		c.Server = newBaseURL.String()
-		return nil
-	}
-}
+func WithBaseURL(baseURL string) ClientOption { _ = "STUB: not implemented"; return *new(ClientOption) }
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
@@ -2240,20 +978,10 @@ type SearchPromisesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r SearchPromisesResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r SearchPromisesResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r SearchPromisesResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r SearchPromisesResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type CreatePromiseResponse struct {
 	Body         []byte
@@ -2263,20 +991,10 @@ type CreatePromiseResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreatePromiseResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r CreatePromiseResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreatePromiseResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r CreatePromiseResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type CreatePromiseCallbackResponse struct {
 	Body         []byte
@@ -2291,20 +1009,10 @@ type CreatePromiseCallbackResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreatePromiseCallbackResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r CreatePromiseCallbackResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreatePromiseCallbackResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r CreatePromiseCallbackResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type CreatePromiseSubscriptionResponse struct {
 	Body         []byte
@@ -2319,20 +1027,10 @@ type CreatePromiseSubscriptionResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreatePromiseSubscriptionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r CreatePromiseSubscriptionResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreatePromiseSubscriptionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r CreatePromiseSubscriptionResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type CreatePromiseAndTaskResponse struct {
 	Body         []byte
@@ -2347,20 +1045,10 @@ type CreatePromiseAndTaskResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreatePromiseAndTaskResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r CreatePromiseAndTaskResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreatePromiseAndTaskResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r CreatePromiseAndTaskResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type ReadPromiseResponse struct {
 	Body         []byte
@@ -2369,20 +1057,10 @@ type ReadPromiseResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ReadPromiseResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r ReadPromiseResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ReadPromiseResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r ReadPromiseResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type CompletePromiseResponse struct {
 	Body         []byte
@@ -2391,20 +1069,10 @@ type CompletePromiseResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CompletePromiseResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r CompletePromiseResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CompletePromiseResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r CompletePromiseResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type SearchSchedulesResponse struct {
 	Body         []byte
@@ -2416,20 +1084,10 @@ type SearchSchedulesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r SearchSchedulesResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r SearchSchedulesResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r SearchSchedulesResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r SearchSchedulesResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type CreateScheduleResponse struct {
 	Body         []byte
@@ -2448,20 +1106,10 @@ type CreateScheduleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateScheduleResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r CreateScheduleResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateScheduleResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r CreateScheduleResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type DeleteScheduleResponse struct {
 	Body         []byte
@@ -2469,20 +1117,10 @@ type DeleteScheduleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DeleteScheduleResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r DeleteScheduleResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DeleteScheduleResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r DeleteScheduleResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type ReadScheduleResponse struct {
 	Body         []byte
@@ -2491,20 +1129,10 @@ type ReadScheduleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ReadScheduleResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r ReadScheduleResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ReadScheduleResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r ReadScheduleResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type ClaimTaskResponse struct {
 	Body         []byte
@@ -2513,20 +1141,10 @@ type ClaimTaskResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ClaimTaskResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r ClaimTaskResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ClaimTaskResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r ClaimTaskResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type ClaimTaskGetResponse struct {
 	Body         []byte
@@ -2535,20 +1153,10 @@ type ClaimTaskGetResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ClaimTaskGetResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r ClaimTaskGetResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ClaimTaskGetResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r ClaimTaskGetResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type CompleteTaskResponse struct {
 	Body         []byte
@@ -2557,20 +1165,10 @@ type CompleteTaskResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CompleteTaskResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r CompleteTaskResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CompleteTaskResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r CompleteTaskResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type CompleteTaskGetResponse struct {
 	Body         []byte
@@ -2579,20 +1177,10 @@ type CompleteTaskGetResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CompleteTaskGetResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r CompleteTaskGetResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CompleteTaskGetResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r CompleteTaskGetResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type DropTaskResponse struct {
 	Body         []byte
@@ -2600,20 +1188,10 @@ type DropTaskResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DropTaskResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r DropTaskResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DropTaskResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r DropTaskResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type DropTaskGetResponse struct {
 	Body         []byte
@@ -2621,20 +1199,10 @@ type DropTaskGetResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DropTaskGetResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r DropTaskGetResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DropTaskGetResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r DropTaskGetResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type HeartbeatTasksResponse struct {
 	Body         []byte
@@ -2645,20 +1213,10 @@ type HeartbeatTasksResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r HeartbeatTasksResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r HeartbeatTasksResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r HeartbeatTasksResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r HeartbeatTasksResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 type HeartbeatTaskGetResponse struct {
 	Body         []byte
@@ -2669,801 +1227,285 @@ type HeartbeatTaskGetResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r HeartbeatTaskGetResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
+func (r HeartbeatTaskGetResponse) Status() string { _ = "STUB: not implemented"; return "" }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r HeartbeatTaskGetResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
+func (r HeartbeatTaskGetResponse) StatusCode() int { _ = "STUB: not implemented"; return 0 }
 
 // SearchPromisesWithResponse request returning *SearchPromisesResponse
 func (c *ClientWithResponses) SearchPromisesWithResponse(ctx context.Context, params *SearchPromisesParams, reqEditors ...RequestEditorFn) (*SearchPromisesResponse, error) {
-	rsp, err := c.SearchPromises(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseSearchPromisesResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseWithBodyWithResponse request with arbitrary body returning *CreatePromiseResponse
 func (c *ClientWithResponses) CreatePromiseWithBodyWithResponse(ctx context.Context, params *CreatePromiseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePromiseResponse, error) {
-	rsp, err := c.CreatePromiseWithBody(ctx, params, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreatePromiseResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *ClientWithResponses) CreatePromiseWithResponse(ctx context.Context, params *CreatePromiseParams, body CreatePromiseJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePromiseResponse, error) {
-	rsp, err := c.CreatePromise(ctx, params, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreatePromiseResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseCallbackWithBodyWithResponse request with arbitrary body returning *CreatePromiseCallbackResponse
 func (c *ClientWithResponses) CreatePromiseCallbackWithBodyWithResponse(ctx context.Context, id string, params *CreatePromiseCallbackParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePromiseCallbackResponse, error) {
-	rsp, err := c.CreatePromiseCallbackWithBody(ctx, id, params, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreatePromiseCallbackResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *ClientWithResponses) CreatePromiseCallbackWithResponse(ctx context.Context, id string, params *CreatePromiseCallbackParams, body CreatePromiseCallbackJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePromiseCallbackResponse, error) {
-	rsp, err := c.CreatePromiseCallback(ctx, id, params, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreatePromiseCallbackResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseSubscriptionWithBodyWithResponse request with arbitrary body returning *CreatePromiseSubscriptionResponse
 func (c *ClientWithResponses) CreatePromiseSubscriptionWithBodyWithResponse(ctx context.Context, id string, params *CreatePromiseSubscriptionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePromiseSubscriptionResponse, error) {
-	rsp, err := c.CreatePromiseSubscriptionWithBody(ctx, id, params, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreatePromiseSubscriptionResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *ClientWithResponses) CreatePromiseSubscriptionWithResponse(ctx context.Context, id string, params *CreatePromiseSubscriptionParams, body CreatePromiseSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePromiseSubscriptionResponse, error) {
-	rsp, err := c.CreatePromiseSubscription(ctx, id, params, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreatePromiseSubscriptionResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseAndTaskWithBodyWithResponse request with arbitrary body returning *CreatePromiseAndTaskResponse
 func (c *ClientWithResponses) CreatePromiseAndTaskWithBodyWithResponse(ctx context.Context, params *CreatePromiseAndTaskParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePromiseAndTaskResponse, error) {
-	rsp, err := c.CreatePromiseAndTaskWithBody(ctx, params, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreatePromiseAndTaskResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *ClientWithResponses) CreatePromiseAndTaskWithResponse(ctx context.Context, params *CreatePromiseAndTaskParams, body CreatePromiseAndTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePromiseAndTaskResponse, error) {
-	rsp, err := c.CreatePromiseAndTask(ctx, params, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreatePromiseAndTaskResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ReadPromiseWithResponse request returning *ReadPromiseResponse
 func (c *ClientWithResponses) ReadPromiseWithResponse(ctx context.Context, id string, params *ReadPromiseParams, reqEditors ...RequestEditorFn) (*ReadPromiseResponse, error) {
-	rsp, err := c.ReadPromise(ctx, id, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseReadPromiseResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompletePromiseWithBodyWithResponse request with arbitrary body returning *CompletePromiseResponse
 func (c *ClientWithResponses) CompletePromiseWithBodyWithResponse(ctx context.Context, id string, params *CompletePromiseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CompletePromiseResponse, error) {
-	rsp, err := c.CompletePromiseWithBody(ctx, id, params, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCompletePromiseResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *ClientWithResponses) CompletePromiseWithResponse(ctx context.Context, id string, params *CompletePromiseParams, body CompletePromiseJSONRequestBody, reqEditors ...RequestEditorFn) (*CompletePromiseResponse, error) {
-	rsp, err := c.CompletePromise(ctx, id, params, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCompletePromiseResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // SearchSchedulesWithResponse request returning *SearchSchedulesResponse
 func (c *ClientWithResponses) SearchSchedulesWithResponse(ctx context.Context, params *SearchSchedulesParams, reqEditors ...RequestEditorFn) (*SearchSchedulesResponse, error) {
-	rsp, err := c.SearchSchedules(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseSearchSchedulesResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreateScheduleWithBodyWithResponse request with arbitrary body returning *CreateScheduleResponse
 func (c *ClientWithResponses) CreateScheduleWithBodyWithResponse(ctx context.Context, params *CreateScheduleParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleResponse, error) {
-	rsp, err := c.CreateScheduleWithBody(ctx, params, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreateScheduleResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *ClientWithResponses) CreateScheduleWithResponse(ctx context.Context, params *CreateScheduleParams, body CreateScheduleJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleResponse, error) {
-	rsp, err := c.CreateSchedule(ctx, params, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreateScheduleResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DeleteScheduleWithResponse request returning *DeleteScheduleResponse
 func (c *ClientWithResponses) DeleteScheduleWithResponse(ctx context.Context, id string, params *DeleteScheduleParams, reqEditors ...RequestEditorFn) (*DeleteScheduleResponse, error) {
-	rsp, err := c.DeleteSchedule(ctx, id, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseDeleteScheduleResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ReadScheduleWithResponse request returning *ReadScheduleResponse
 func (c *ClientWithResponses) ReadScheduleWithResponse(ctx context.Context, id string, params *ReadScheduleParams, reqEditors ...RequestEditorFn) (*ReadScheduleResponse, error) {
-	rsp, err := c.ReadSchedule(ctx, id, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseReadScheduleResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ClaimTaskWithBodyWithResponse request with arbitrary body returning *ClaimTaskResponse
 func (c *ClientWithResponses) ClaimTaskWithBodyWithResponse(ctx context.Context, params *ClaimTaskParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ClaimTaskResponse, error) {
-	rsp, err := c.ClaimTaskWithBody(ctx, params, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseClaimTaskResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *ClientWithResponses) ClaimTaskWithResponse(ctx context.Context, params *ClaimTaskParams, body ClaimTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*ClaimTaskResponse, error) {
-	rsp, err := c.ClaimTask(ctx, params, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseClaimTaskResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ClaimTaskGetWithResponse request returning *ClaimTaskGetResponse
 func (c *ClientWithResponses) ClaimTaskGetWithResponse(ctx context.Context, id string, counter int, params *ClaimTaskGetParams, reqEditors ...RequestEditorFn) (*ClaimTaskGetResponse, error) {
-	rsp, err := c.ClaimTaskGet(ctx, id, counter, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseClaimTaskGetResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompleteTaskWithBodyWithResponse request with arbitrary body returning *CompleteTaskResponse
 func (c *ClientWithResponses) CompleteTaskWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CompleteTaskResponse, error) {
-	rsp, err := c.CompleteTaskWithBody(ctx, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCompleteTaskResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *ClientWithResponses) CompleteTaskWithResponse(ctx context.Context, body CompleteTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*CompleteTaskResponse, error) {
-	rsp, err := c.CompleteTask(ctx, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCompleteTaskResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompleteTaskGetWithResponse request returning *CompleteTaskGetResponse
 func (c *ClientWithResponses) CompleteTaskGetWithResponse(ctx context.Context, id string, counter int, params *CompleteTaskGetParams, reqEditors ...RequestEditorFn) (*CompleteTaskGetResponse, error) {
-	rsp, err := c.CompleteTaskGet(ctx, id, counter, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCompleteTaskGetResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DropTaskWithBodyWithResponse request with arbitrary body returning *DropTaskResponse
 func (c *ClientWithResponses) DropTaskWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DropTaskResponse, error) {
-	rsp, err := c.DropTaskWithBody(ctx, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseDropTaskResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *ClientWithResponses) DropTaskWithResponse(ctx context.Context, body DropTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*DropTaskResponse, error) {
-	rsp, err := c.DropTask(ctx, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseDropTaskResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DropTaskGetWithResponse request returning *DropTaskGetResponse
 func (c *ClientWithResponses) DropTaskGetWithResponse(ctx context.Context, id string, counter int, params *DropTaskGetParams, reqEditors ...RequestEditorFn) (*DropTaskGetResponse, error) {
-	rsp, err := c.DropTaskGet(ctx, id, counter, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseDropTaskGetResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // HeartbeatTasksWithBodyWithResponse request with arbitrary body returning *HeartbeatTasksResponse
 func (c *ClientWithResponses) HeartbeatTasksWithBodyWithResponse(ctx context.Context, params *HeartbeatTasksParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HeartbeatTasksResponse, error) {
-	rsp, err := c.HeartbeatTasksWithBody(ctx, params, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseHeartbeatTasksResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (c *ClientWithResponses) HeartbeatTasksWithResponse(ctx context.Context, params *HeartbeatTasksParams, body HeartbeatTasksJSONRequestBody, reqEditors ...RequestEditorFn) (*HeartbeatTasksResponse, error) {
-	rsp, err := c.HeartbeatTasks(ctx, params, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseHeartbeatTasksResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // HeartbeatTaskGetWithResponse request returning *HeartbeatTaskGetResponse
 func (c *ClientWithResponses) HeartbeatTaskGetWithResponse(ctx context.Context, id string, counter int, params *HeartbeatTaskGetParams, reqEditors ...RequestEditorFn) (*HeartbeatTaskGetResponse, error) {
-	rsp, err := c.HeartbeatTaskGet(ctx, id, counter, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseHeartbeatTaskGetResponse(rsp)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseSearchPromisesResponse parses an HTTP response from a SearchPromisesWithResponse call
 func ParseSearchPromisesResponse(rsp *http.Response) (*SearchPromisesResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &SearchPromisesResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Cursor   *string    `json:"cursor,omitempty"`
-			Promises *[]Promise `json:"promises,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseCreatePromiseResponse parses an HTTP response from a CreatePromiseWithResponse call
 func ParseCreatePromiseResponse(rsp *http.Response) (*CreatePromiseResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CreatePromiseResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Promise
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest Promise
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseCreatePromiseCallbackResponse parses an HTTP response from a CreatePromiseCallbackWithResponse call
 func ParseCreatePromiseCallbackResponse(rsp *http.Response) (*CreatePromiseCallbackResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CreatePromiseCallbackResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Promise *Promise `json:"promise,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest struct {
-			Callback *Callback `json:"callback,omitempty"`
-			Promise  *Promise  `json:"promise,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseCreatePromiseSubscriptionResponse parses an HTTP response from a CreatePromiseSubscriptionWithResponse call
 func ParseCreatePromiseSubscriptionResponse(rsp *http.Response) (*CreatePromiseSubscriptionResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CreatePromiseSubscriptionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Promise *Promise `json:"promise,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest struct {
-			Callback *Callback `json:"callback,omitempty"`
-			Promise  *Promise  `json:"promise,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseCreatePromiseAndTaskResponse parses an HTTP response from a CreatePromiseAndTaskWithResponse call
 func ParseCreatePromiseAndTaskResponse(rsp *http.Response) (*CreatePromiseAndTaskResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CreatePromiseAndTaskResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Promise *Promise `json:"promise,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest struct {
-			Promise *Promise `json:"promise,omitempty"`
-			Task    *Task    `json:"task,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseReadPromiseResponse parses an HTTP response from a ReadPromiseWithResponse call
 func ParseReadPromiseResponse(rsp *http.Response) (*ReadPromiseResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ReadPromiseResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Promise
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseCompletePromiseResponse parses an HTTP response from a CompletePromiseWithResponse call
 func ParseCompletePromiseResponse(rsp *http.Response) (*CompletePromiseResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CompletePromiseResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Promise
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseSearchSchedulesResponse parses an HTTP response from a SearchSchedulesWithResponse call
 func ParseSearchSchedulesResponse(rsp *http.Response) (*SearchSchedulesResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &SearchSchedulesResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Cursor    *string     `json:"cursor,omitempty"`
-			Schedules *[]Schedule `json:"schedules,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseCreateScheduleResponse parses an HTTP response from a CreateScheduleWithResponse call
 func ParseCreateScheduleResponse(rsp *http.Response) (*CreateScheduleResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CreateScheduleResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Cron           string             `json:"cron"`
-			Description    *string            `json:"description,omitempty"`
-			Id             string             `json:"id"`
-			PromiseId      string             `json:"promiseId"`
-			PromiseParam   *Value             `json:"promiseParam,omitempty"`
-			PromiseTags    *map[string]string `json:"promiseTags,omitempty"`
-			PromiseTimeout int64              `json:"promiseTimeout"`
-			Tags           *map[string]string `json:"tags,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest Schedule
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseDeleteScheduleResponse parses an HTTP response from a DeleteScheduleWithResponse call
 func ParseDeleteScheduleResponse(rsp *http.Response) (*DeleteScheduleResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &DeleteScheduleResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseReadScheduleResponse parses an HTTP response from a ReadScheduleWithResponse call
 func ParseReadScheduleResponse(rsp *http.Response) (*ReadScheduleResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ReadScheduleResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Schedule
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseClaimTaskResponse parses an HTTP response from a ClaimTaskWithResponse call
 func ParseClaimTaskResponse(rsp *http.Response) (*ClaimTaskResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ClaimTaskResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest Mesg
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseClaimTaskGetResponse parses an HTTP response from a ClaimTaskGetWithResponse call
 func ParseClaimTaskGetResponse(rsp *http.Response) (*ClaimTaskGetResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ClaimTaskGetResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest Mesg
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseCompleteTaskResponse parses an HTTP response from a CompleteTaskWithResponse call
 func ParseCompleteTaskResponse(rsp *http.Response) (*CompleteTaskResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CompleteTaskResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest Task
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseCompleteTaskGetResponse parses an HTTP response from a CompleteTaskGetWithResponse call
 func ParseCompleteTaskGetResponse(rsp *http.Response) (*CompleteTaskGetResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CompleteTaskGetResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest Task
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseDropTaskResponse parses an HTTP response from a DropTaskWithResponse call
 func ParseDropTaskResponse(rsp *http.Response) (*DropTaskResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &DropTaskResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseDropTaskGetResponse parses an HTTP response from a DropTaskGetWithResponse call
 func ParseDropTaskGetResponse(rsp *http.Response) (*DropTaskGetResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &DropTaskGetResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseHeartbeatTasksResponse parses an HTTP response from a HeartbeatTasksWithResponse call
 func ParseHeartbeatTasksResponse(rsp *http.Response) (*HeartbeatTasksResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &HeartbeatTasksResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			TasksAffected *int64 `json:"tasksAffected,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ParseHeartbeatTaskGetResponse parses an HTTP response from a HeartbeatTaskGetWithResponse call
 func ParseHeartbeatTaskGetResponse(rsp *http.Response) (*HeartbeatTaskGetResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &HeartbeatTaskGetResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			TasksAffected *int64 `json:"tasksAffected,omitempty"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }

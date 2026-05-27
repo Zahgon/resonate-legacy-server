@@ -1,9 +1,6 @@
 package schedule
 
 import (
-	"fmt"
-
-	"github.com/resonatehq/resonate/internal/util"
 	"github.com/resonatehq/resonate/pkg/promise"
 )
 
@@ -22,24 +19,10 @@ type Schedule struct {
 	SortId         int64             `json:"-"` // unexported
 }
 
-func (s *Schedule) String() string {
-	return fmt.Sprintf(
-		"Schedule(id=%s, desc=%s, cron=%s, tags=%s, promiseId=%s, promiseTimeout=%d, promiseParam=%s, promiseTags=%s, lastRunTime=%d, nextRunTime=%d, createdOn=%d)",
-		s.Id,
-		s.Description,
-		s.Cron,
-		s.Tags,
-		s.PromiseId,
-		s.PromiseTimeout,
-		s.PromiseParam,
-		s.PromiseTags,
-		util.SafeDeref(s.LastRunTime),
-		s.NextRunTime,
-		s.CreatedOn,
-	)
-}
+func (s *Schedule) String() string { _ = "STUB: not implemented"; return "" }
 
 func (s1 *Schedule) Equals(s2 *Schedule) bool {
+	_ = "STUB: not implemented"
 	// for dst only
-	return s1.Id == s2.Id
+	return false
 }

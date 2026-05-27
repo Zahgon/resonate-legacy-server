@@ -13,7 +13,6 @@ import (
 	context "context"
 	io "io"
 	http "net/http"
-	reflect "reflect"
 
 	gomock "go.uber.org/mock/gomock"
 )
@@ -32,29 +31,27 @@ type MockHttpRequestDoerMockRecorder struct {
 
 // NewMockHttpRequestDoer creates a new mock instance.
 func NewMockHttpRequestDoer(ctrl *gomock.Controller) *MockHttpRequestDoer {
-	mock := &MockHttpRequestDoer{ctrl: ctrl}
-	mock.recorder = &MockHttpRequestDoerMockRecorder{mock}
-	return mock
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockHttpRequestDoer) EXPECT() *MockHttpRequestDoerMockRecorder {
-	return m.recorder
+	_ = "STUB: not implemented"
+
+	// Do mocks base method.
+	return nil
 }
 
-// Do mocks base method.
 func (m *MockHttpRequestDoer) Do(req *http.Request) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Do", req)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // Do indicates an expected call of Do.
 func (mr *MockHttpRequestDoerMockRecorder) Do(req any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Do", reflect.TypeOf((*MockHttpRequestDoer)(nil).Do), req)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MockClientInterface is a mock of ClientInterface interface.
@@ -71,594 +68,363 @@ type MockClientInterfaceMockRecorder struct {
 
 // NewMockClientInterface creates a new mock instance.
 func NewMockClientInterface(ctrl *gomock.Controller) *MockClientInterface {
-	mock := &MockClientInterface{ctrl: ctrl}
-	mock.recorder = &MockClientInterfaceMockRecorder{mock}
-	return mock
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockClientInterface) EXPECT() *MockClientInterfaceMockRecorder {
-	return m.recorder
+	_ = "STUB: not implemented"
+
+	// ClaimTask mocks base method.
+	return nil
 }
 
-// ClaimTask mocks base method.
 func (m *MockClientInterface) ClaimTask(ctx context.Context, params *ClaimTaskParams, body ClaimTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ClaimTask", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ClaimTask indicates an expected call of ClaimTask.
 func (mr *MockClientInterfaceMockRecorder) ClaimTask(ctx, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ClaimTask", reflect.TypeOf((*MockClientInterface)(nil).ClaimTask), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ClaimTaskGet mocks base method.
 func (m *MockClientInterface) ClaimTaskGet(ctx context.Context, id string, counter int, params *ClaimTaskGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, counter, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ClaimTaskGet", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ClaimTaskGet indicates an expected call of ClaimTaskGet.
 func (mr *MockClientInterfaceMockRecorder) ClaimTaskGet(ctx, id, counter, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, counter, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ClaimTaskGet", reflect.TypeOf((*MockClientInterface)(nil).ClaimTaskGet), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ClaimTaskWithBody mocks base method.
 func (m *MockClientInterface) ClaimTaskWithBody(ctx context.Context, params *ClaimTaskParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ClaimTaskWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ClaimTaskWithBody indicates an expected call of ClaimTaskWithBody.
 func (mr *MockClientInterfaceMockRecorder) ClaimTaskWithBody(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ClaimTaskWithBody", reflect.TypeOf((*MockClientInterface)(nil).ClaimTaskWithBody), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CompletePromise mocks base method.
 func (m *MockClientInterface) CompletePromise(ctx context.Context, id string, params *CompletePromiseParams, body CompletePromiseJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CompletePromise", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompletePromise indicates an expected call of CompletePromise.
 func (mr *MockClientInterfaceMockRecorder) CompletePromise(ctx, id, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CompletePromise", reflect.TypeOf((*MockClientInterface)(nil).CompletePromise), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CompletePromiseWithBody mocks base method.
 func (m *MockClientInterface) CompletePromiseWithBody(ctx context.Context, id string, params *CompletePromiseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CompletePromiseWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompletePromiseWithBody indicates an expected call of CompletePromiseWithBody.
 func (mr *MockClientInterfaceMockRecorder) CompletePromiseWithBody(ctx, id, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CompletePromiseWithBody", reflect.TypeOf((*MockClientInterface)(nil).CompletePromiseWithBody), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CompleteTask mocks base method.
 func (m *MockClientInterface) CompleteTask(ctx context.Context, body CompleteTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CompleteTask", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompleteTask indicates an expected call of CompleteTask.
 func (mr *MockClientInterfaceMockRecorder) CompleteTask(ctx, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CompleteTask", reflect.TypeOf((*MockClientInterface)(nil).CompleteTask), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CompleteTaskGet mocks base method.
 func (m *MockClientInterface) CompleteTaskGet(ctx context.Context, id string, counter int, params *CompleteTaskGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, counter, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CompleteTaskGet", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompleteTaskGet indicates an expected call of CompleteTaskGet.
 func (mr *MockClientInterfaceMockRecorder) CompleteTaskGet(ctx, id, counter, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, counter, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CompleteTaskGet", reflect.TypeOf((*MockClientInterface)(nil).CompleteTaskGet), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CompleteTaskWithBody mocks base method.
 func (m *MockClientInterface) CompleteTaskWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CompleteTaskWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompleteTaskWithBody indicates an expected call of CompleteTaskWithBody.
 func (mr *MockClientInterfaceMockRecorder) CompleteTaskWithBody(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CompleteTaskWithBody", reflect.TypeOf((*MockClientInterface)(nil).CompleteTaskWithBody), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromise mocks base method.
 func (m *MockClientInterface) CreatePromise(ctx context.Context, params *CreatePromiseParams, body CreatePromiseJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromise", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromise indicates an expected call of CreatePromise.
 func (mr *MockClientInterfaceMockRecorder) CreatePromise(ctx, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromise", reflect.TypeOf((*MockClientInterface)(nil).CreatePromise), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseAndTask mocks base method.
 func (m *MockClientInterface) CreatePromiseAndTask(ctx context.Context, params *CreatePromiseAndTaskParams, body CreatePromiseAndTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseAndTask", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseAndTask indicates an expected call of CreatePromiseAndTask.
 func (mr *MockClientInterfaceMockRecorder) CreatePromiseAndTask(ctx, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseAndTask", reflect.TypeOf((*MockClientInterface)(nil).CreatePromiseAndTask), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseAndTaskWithBody mocks base method.
 func (m *MockClientInterface) CreatePromiseAndTaskWithBody(ctx context.Context, params *CreatePromiseAndTaskParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseAndTaskWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseAndTaskWithBody indicates an expected call of CreatePromiseAndTaskWithBody.
 func (mr *MockClientInterfaceMockRecorder) CreatePromiseAndTaskWithBody(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseAndTaskWithBody", reflect.TypeOf((*MockClientInterface)(nil).CreatePromiseAndTaskWithBody), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseCallback mocks base method.
 func (m *MockClientInterface) CreatePromiseCallback(ctx context.Context, id string, params *CreatePromiseCallbackParams, body CreatePromiseCallbackJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseCallback", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseCallback indicates an expected call of CreatePromiseCallback.
 func (mr *MockClientInterfaceMockRecorder) CreatePromiseCallback(ctx, id, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseCallback", reflect.TypeOf((*MockClientInterface)(nil).CreatePromiseCallback), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseCallbackWithBody mocks base method.
 func (m *MockClientInterface) CreatePromiseCallbackWithBody(ctx context.Context, id string, params *CreatePromiseCallbackParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseCallbackWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseCallbackWithBody indicates an expected call of CreatePromiseCallbackWithBody.
 func (mr *MockClientInterfaceMockRecorder) CreatePromiseCallbackWithBody(ctx, id, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseCallbackWithBody", reflect.TypeOf((*MockClientInterface)(nil).CreatePromiseCallbackWithBody), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseSubscription mocks base method.
 func (m *MockClientInterface) CreatePromiseSubscription(ctx context.Context, id string, params *CreatePromiseSubscriptionParams, body CreatePromiseSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseSubscription", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseSubscription indicates an expected call of CreatePromiseSubscription.
 func (mr *MockClientInterfaceMockRecorder) CreatePromiseSubscription(ctx, id, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseSubscription", reflect.TypeOf((*MockClientInterface)(nil).CreatePromiseSubscription), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseSubscriptionWithBody mocks base method.
 func (m *MockClientInterface) CreatePromiseSubscriptionWithBody(ctx context.Context, id string, params *CreatePromiseSubscriptionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseSubscriptionWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseSubscriptionWithBody indicates an expected call of CreatePromiseSubscriptionWithBody.
 func (mr *MockClientInterfaceMockRecorder) CreatePromiseSubscriptionWithBody(ctx, id, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseSubscriptionWithBody", reflect.TypeOf((*MockClientInterface)(nil).CreatePromiseSubscriptionWithBody), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseWithBody mocks base method.
 func (m *MockClientInterface) CreatePromiseWithBody(ctx context.Context, params *CreatePromiseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseWithBody indicates an expected call of CreatePromiseWithBody.
 func (mr *MockClientInterfaceMockRecorder) CreatePromiseWithBody(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseWithBody", reflect.TypeOf((*MockClientInterface)(nil).CreatePromiseWithBody), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreateSchedule mocks base method.
 func (m *MockClientInterface) CreateSchedule(ctx context.Context, params *CreateScheduleParams, body CreateScheduleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreateSchedule", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreateSchedule indicates an expected call of CreateSchedule.
 func (mr *MockClientInterfaceMockRecorder) CreateSchedule(ctx, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSchedule", reflect.TypeOf((*MockClientInterface)(nil).CreateSchedule), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreateScheduleWithBody mocks base method.
 func (m *MockClientInterface) CreateScheduleWithBody(ctx context.Context, params *CreateScheduleParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreateScheduleWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreateScheduleWithBody indicates an expected call of CreateScheduleWithBody.
 func (mr *MockClientInterfaceMockRecorder) CreateScheduleWithBody(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateScheduleWithBody", reflect.TypeOf((*MockClientInterface)(nil).CreateScheduleWithBody), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // DeleteSchedule mocks base method.
 func (m *MockClientInterface) DeleteSchedule(ctx context.Context, id string, params *DeleteScheduleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "DeleteSchedule", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DeleteSchedule indicates an expected call of DeleteSchedule.
 func (mr *MockClientInterfaceMockRecorder) DeleteSchedule(ctx, id, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSchedule", reflect.TypeOf((*MockClientInterface)(nil).DeleteSchedule), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // DropTask mocks base method.
 func (m *MockClientInterface) DropTask(ctx context.Context, body DropTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "DropTask", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DropTask indicates an expected call of DropTask.
 func (mr *MockClientInterfaceMockRecorder) DropTask(ctx, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DropTask", reflect.TypeOf((*MockClientInterface)(nil).DropTask), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // DropTaskGet mocks base method.
 func (m *MockClientInterface) DropTaskGet(ctx context.Context, id string, counter int, params *DropTaskGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, counter, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "DropTaskGet", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DropTaskGet indicates an expected call of DropTaskGet.
 func (mr *MockClientInterfaceMockRecorder) DropTaskGet(ctx, id, counter, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, counter, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DropTaskGet", reflect.TypeOf((*MockClientInterface)(nil).DropTaskGet), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // DropTaskWithBody mocks base method.
 func (m *MockClientInterface) DropTaskWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "DropTaskWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DropTaskWithBody indicates an expected call of DropTaskWithBody.
 func (mr *MockClientInterfaceMockRecorder) DropTaskWithBody(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DropTaskWithBody", reflect.TypeOf((*MockClientInterface)(nil).DropTaskWithBody), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // HeartbeatTaskGet mocks base method.
 func (m *MockClientInterface) HeartbeatTaskGet(ctx context.Context, id string, counter int, params *HeartbeatTaskGetParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, counter, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "HeartbeatTaskGet", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // HeartbeatTaskGet indicates an expected call of HeartbeatTaskGet.
 func (mr *MockClientInterfaceMockRecorder) HeartbeatTaskGet(ctx, id, counter, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, counter, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HeartbeatTaskGet", reflect.TypeOf((*MockClientInterface)(nil).HeartbeatTaskGet), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // HeartbeatTasks mocks base method.
 func (m *MockClientInterface) HeartbeatTasks(ctx context.Context, params *HeartbeatTasksParams, body HeartbeatTasksJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "HeartbeatTasks", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // HeartbeatTasks indicates an expected call of HeartbeatTasks.
 func (mr *MockClientInterfaceMockRecorder) HeartbeatTasks(ctx, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HeartbeatTasks", reflect.TypeOf((*MockClientInterface)(nil).HeartbeatTasks), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // HeartbeatTasksWithBody mocks base method.
 func (m *MockClientInterface) HeartbeatTasksWithBody(ctx context.Context, params *HeartbeatTasksParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "HeartbeatTasksWithBody", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // HeartbeatTasksWithBody indicates an expected call of HeartbeatTasksWithBody.
 func (mr *MockClientInterfaceMockRecorder) HeartbeatTasksWithBody(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HeartbeatTasksWithBody", reflect.TypeOf((*MockClientInterface)(nil).HeartbeatTasksWithBody), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ReadPromise mocks base method.
 func (m *MockClientInterface) ReadPromise(ctx context.Context, id string, params *ReadPromiseParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ReadPromise", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ReadPromise indicates an expected call of ReadPromise.
 func (mr *MockClientInterfaceMockRecorder) ReadPromise(ctx, id, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadPromise", reflect.TypeOf((*MockClientInterface)(nil).ReadPromise), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ReadSchedule mocks base method.
 func (m *MockClientInterface) ReadSchedule(ctx context.Context, id string, params *ReadScheduleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ReadSchedule", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ReadSchedule indicates an expected call of ReadSchedule.
 func (mr *MockClientInterfaceMockRecorder) ReadSchedule(ctx, id, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadSchedule", reflect.TypeOf((*MockClientInterface)(nil).ReadSchedule), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // SearchPromises mocks base method.
 func (m *MockClientInterface) SearchPromises(ctx context.Context, params *SearchPromisesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "SearchPromises", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // SearchPromises indicates an expected call of SearchPromises.
 func (mr *MockClientInterfaceMockRecorder) SearchPromises(ctx, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchPromises", reflect.TypeOf((*MockClientInterface)(nil).SearchPromises), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // SearchSchedules mocks base method.
 func (m *MockClientInterface) SearchSchedules(ctx context.Context, params *SearchSchedulesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "SearchSchedules", varargs...)
-	ret0, _ := ret[0].(*http.Response)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // SearchSchedules indicates an expected call of SearchSchedules.
 func (mr *MockClientInterfaceMockRecorder) SearchSchedules(ctx, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchSchedules", reflect.TypeOf((*MockClientInterface)(nil).SearchSchedules), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MockClientWithResponsesInterface is a mock of ClientWithResponsesInterface interface.
@@ -675,592 +441,361 @@ type MockClientWithResponsesInterfaceMockRecorder struct {
 
 // NewMockClientWithResponsesInterface creates a new mock instance.
 func NewMockClientWithResponsesInterface(ctrl *gomock.Controller) *MockClientWithResponsesInterface {
-	mock := &MockClientWithResponsesInterface{ctrl: ctrl}
-	mock.recorder = &MockClientWithResponsesInterfaceMockRecorder{mock}
-	return mock
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockClientWithResponsesInterface) EXPECT() *MockClientWithResponsesInterfaceMockRecorder {
-	return m.recorder
+	_ = "STUB: not implemented"
+
+	// ClaimTaskGetWithResponse mocks base method.
+	return nil
 }
 
-// ClaimTaskGetWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) ClaimTaskGetWithResponse(ctx context.Context, id string, counter int, params *ClaimTaskGetParams, reqEditors ...RequestEditorFn) (*ClaimTaskGetResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, counter, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ClaimTaskGetWithResponse", varargs...)
-	ret0, _ := ret[0].(*ClaimTaskGetResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ClaimTaskGetWithResponse indicates an expected call of ClaimTaskGetWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) ClaimTaskGetWithResponse(ctx, id, counter, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, counter, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ClaimTaskGetWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).ClaimTaskGetWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ClaimTaskWithBodyWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) ClaimTaskWithBodyWithResponse(ctx context.Context, params *ClaimTaskParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*ClaimTaskResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ClaimTaskWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*ClaimTaskResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ClaimTaskWithBodyWithResponse indicates an expected call of ClaimTaskWithBodyWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) ClaimTaskWithBodyWithResponse(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ClaimTaskWithBodyWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).ClaimTaskWithBodyWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ClaimTaskWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) ClaimTaskWithResponse(ctx context.Context, params *ClaimTaskParams, body ClaimTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*ClaimTaskResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ClaimTaskWithResponse", varargs...)
-	ret0, _ := ret[0].(*ClaimTaskResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ClaimTaskWithResponse indicates an expected call of ClaimTaskWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) ClaimTaskWithResponse(ctx, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ClaimTaskWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).ClaimTaskWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CompletePromiseWithBodyWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CompletePromiseWithBodyWithResponse(ctx context.Context, id string, params *CompletePromiseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CompletePromiseResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CompletePromiseWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*CompletePromiseResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompletePromiseWithBodyWithResponse indicates an expected call of CompletePromiseWithBodyWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CompletePromiseWithBodyWithResponse(ctx, id, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CompletePromiseWithBodyWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CompletePromiseWithBodyWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CompletePromiseWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CompletePromiseWithResponse(ctx context.Context, id string, params *CompletePromiseParams, body CompletePromiseJSONRequestBody, reqEditors ...RequestEditorFn) (*CompletePromiseResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CompletePromiseWithResponse", varargs...)
-	ret0, _ := ret[0].(*CompletePromiseResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompletePromiseWithResponse indicates an expected call of CompletePromiseWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CompletePromiseWithResponse(ctx, id, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CompletePromiseWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CompletePromiseWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CompleteTaskGetWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CompleteTaskGetWithResponse(ctx context.Context, id string, counter int, params *CompleteTaskGetParams, reqEditors ...RequestEditorFn) (*CompleteTaskGetResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, counter, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CompleteTaskGetWithResponse", varargs...)
-	ret0, _ := ret[0].(*CompleteTaskGetResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompleteTaskGetWithResponse indicates an expected call of CompleteTaskGetWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CompleteTaskGetWithResponse(ctx, id, counter, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, counter, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CompleteTaskGetWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CompleteTaskGetWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CompleteTaskWithBodyWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CompleteTaskWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CompleteTaskResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CompleteTaskWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*CompleteTaskResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompleteTaskWithBodyWithResponse indicates an expected call of CompleteTaskWithBodyWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CompleteTaskWithBodyWithResponse(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CompleteTaskWithBodyWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CompleteTaskWithBodyWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CompleteTaskWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CompleteTaskWithResponse(ctx context.Context, body CompleteTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*CompleteTaskResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CompleteTaskWithResponse", varargs...)
-	ret0, _ := ret[0].(*CompleteTaskResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CompleteTaskWithResponse indicates an expected call of CompleteTaskWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CompleteTaskWithResponse(ctx, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CompleteTaskWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CompleteTaskWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseAndTaskWithBodyWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CreatePromiseAndTaskWithBodyWithResponse(ctx context.Context, params *CreatePromiseAndTaskParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePromiseAndTaskResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseAndTaskWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*CreatePromiseAndTaskResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseAndTaskWithBodyWithResponse indicates an expected call of CreatePromiseAndTaskWithBodyWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CreatePromiseAndTaskWithBodyWithResponse(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseAndTaskWithBodyWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CreatePromiseAndTaskWithBodyWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseAndTaskWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CreatePromiseAndTaskWithResponse(ctx context.Context, params *CreatePromiseAndTaskParams, body CreatePromiseAndTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePromiseAndTaskResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseAndTaskWithResponse", varargs...)
-	ret0, _ := ret[0].(*CreatePromiseAndTaskResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseAndTaskWithResponse indicates an expected call of CreatePromiseAndTaskWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CreatePromiseAndTaskWithResponse(ctx, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseAndTaskWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CreatePromiseAndTaskWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseCallbackWithBodyWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CreatePromiseCallbackWithBodyWithResponse(ctx context.Context, id string, params *CreatePromiseCallbackParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePromiseCallbackResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseCallbackWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*CreatePromiseCallbackResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseCallbackWithBodyWithResponse indicates an expected call of CreatePromiseCallbackWithBodyWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CreatePromiseCallbackWithBodyWithResponse(ctx, id, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseCallbackWithBodyWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CreatePromiseCallbackWithBodyWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseCallbackWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CreatePromiseCallbackWithResponse(ctx context.Context, id string, params *CreatePromiseCallbackParams, body CreatePromiseCallbackJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePromiseCallbackResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseCallbackWithResponse", varargs...)
-	ret0, _ := ret[0].(*CreatePromiseCallbackResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseCallbackWithResponse indicates an expected call of CreatePromiseCallbackWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CreatePromiseCallbackWithResponse(ctx, id, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseCallbackWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CreatePromiseCallbackWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseSubscriptionWithBodyWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CreatePromiseSubscriptionWithBodyWithResponse(ctx context.Context, id string, params *CreatePromiseSubscriptionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePromiseSubscriptionResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseSubscriptionWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*CreatePromiseSubscriptionResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseSubscriptionWithBodyWithResponse indicates an expected call of CreatePromiseSubscriptionWithBodyWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CreatePromiseSubscriptionWithBodyWithResponse(ctx, id, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseSubscriptionWithBodyWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CreatePromiseSubscriptionWithBodyWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseSubscriptionWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CreatePromiseSubscriptionWithResponse(ctx context.Context, id string, params *CreatePromiseSubscriptionParams, body CreatePromiseSubscriptionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePromiseSubscriptionResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseSubscriptionWithResponse", varargs...)
-	ret0, _ := ret[0].(*CreatePromiseSubscriptionResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseSubscriptionWithResponse indicates an expected call of CreatePromiseSubscriptionWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CreatePromiseSubscriptionWithResponse(ctx, id, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseSubscriptionWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CreatePromiseSubscriptionWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseWithBodyWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CreatePromiseWithBodyWithResponse(ctx context.Context, params *CreatePromiseParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreatePromiseResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*CreatePromiseResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseWithBodyWithResponse indicates an expected call of CreatePromiseWithBodyWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CreatePromiseWithBodyWithResponse(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseWithBodyWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CreatePromiseWithBodyWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreatePromiseWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CreatePromiseWithResponse(ctx context.Context, params *CreatePromiseParams, body CreatePromiseJSONRequestBody, reqEditors ...RequestEditorFn) (*CreatePromiseResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreatePromiseWithResponse", varargs...)
-	ret0, _ := ret[0].(*CreatePromiseResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreatePromiseWithResponse indicates an expected call of CreatePromiseWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CreatePromiseWithResponse(ctx, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreatePromiseWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CreatePromiseWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreateScheduleWithBodyWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CreateScheduleWithBodyWithResponse(ctx context.Context, params *CreateScheduleParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScheduleResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreateScheduleWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*CreateScheduleResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreateScheduleWithBodyWithResponse indicates an expected call of CreateScheduleWithBodyWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CreateScheduleWithBodyWithResponse(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateScheduleWithBodyWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CreateScheduleWithBodyWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CreateScheduleWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) CreateScheduleWithResponse(ctx context.Context, params *CreateScheduleParams, body CreateScheduleJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScheduleResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "CreateScheduleWithResponse", varargs...)
-	ret0, _ := ret[0].(*CreateScheduleResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // CreateScheduleWithResponse indicates an expected call of CreateScheduleWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) CreateScheduleWithResponse(ctx, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateScheduleWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).CreateScheduleWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // DeleteScheduleWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) DeleteScheduleWithResponse(ctx context.Context, id string, params *DeleteScheduleParams, reqEditors ...RequestEditorFn) (*DeleteScheduleResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "DeleteScheduleWithResponse", varargs...)
-	ret0, _ := ret[0].(*DeleteScheduleResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DeleteScheduleWithResponse indicates an expected call of DeleteScheduleWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) DeleteScheduleWithResponse(ctx, id, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteScheduleWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).DeleteScheduleWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // DropTaskGetWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) DropTaskGetWithResponse(ctx context.Context, id string, counter int, params *DropTaskGetParams, reqEditors ...RequestEditorFn) (*DropTaskGetResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, counter, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "DropTaskGetWithResponse", varargs...)
-	ret0, _ := ret[0].(*DropTaskGetResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DropTaskGetWithResponse indicates an expected call of DropTaskGetWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) DropTaskGetWithResponse(ctx, id, counter, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, counter, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DropTaskGetWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).DropTaskGetWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // DropTaskWithBodyWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) DropTaskWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DropTaskResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "DropTaskWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*DropTaskResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DropTaskWithBodyWithResponse indicates an expected call of DropTaskWithBodyWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) DropTaskWithBodyWithResponse(ctx, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DropTaskWithBodyWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).DropTaskWithBodyWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // DropTaskWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) DropTaskWithResponse(ctx context.Context, body DropTaskJSONRequestBody, reqEditors ...RequestEditorFn) (*DropTaskResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "DropTaskWithResponse", varargs...)
-	ret0, _ := ret[0].(*DropTaskResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // DropTaskWithResponse indicates an expected call of DropTaskWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) DropTaskWithResponse(ctx, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DropTaskWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).DropTaskWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // HeartbeatTaskGetWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) HeartbeatTaskGetWithResponse(ctx context.Context, id string, counter int, params *HeartbeatTaskGetParams, reqEditors ...RequestEditorFn) (*HeartbeatTaskGetResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, counter, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "HeartbeatTaskGetWithResponse", varargs...)
-	ret0, _ := ret[0].(*HeartbeatTaskGetResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // HeartbeatTaskGetWithResponse indicates an expected call of HeartbeatTaskGetWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) HeartbeatTaskGetWithResponse(ctx, id, counter, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, counter, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HeartbeatTaskGetWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).HeartbeatTaskGetWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // HeartbeatTasksWithBodyWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) HeartbeatTasksWithBodyWithResponse(ctx context.Context, params *HeartbeatTasksParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*HeartbeatTasksResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, contentType, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "HeartbeatTasksWithBodyWithResponse", varargs...)
-	ret0, _ := ret[0].(*HeartbeatTasksResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // HeartbeatTasksWithBodyWithResponse indicates an expected call of HeartbeatTasksWithBodyWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) HeartbeatTasksWithBodyWithResponse(ctx, params, contentType, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, contentType, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HeartbeatTasksWithBodyWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).HeartbeatTasksWithBodyWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // HeartbeatTasksWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) HeartbeatTasksWithResponse(ctx context.Context, params *HeartbeatTasksParams, body HeartbeatTasksJSONRequestBody, reqEditors ...RequestEditorFn) (*HeartbeatTasksResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params, body}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "HeartbeatTasksWithResponse", varargs...)
-	ret0, _ := ret[0].(*HeartbeatTasksResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // HeartbeatTasksWithResponse indicates an expected call of HeartbeatTasksWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) HeartbeatTasksWithResponse(ctx, params, body any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params, body}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HeartbeatTasksWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).HeartbeatTasksWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ReadPromiseWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) ReadPromiseWithResponse(ctx context.Context, id string, params *ReadPromiseParams, reqEditors ...RequestEditorFn) (*ReadPromiseResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ReadPromiseWithResponse", varargs...)
-	ret0, _ := ret[0].(*ReadPromiseResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ReadPromiseWithResponse indicates an expected call of ReadPromiseWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) ReadPromiseWithResponse(ctx, id, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadPromiseWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).ReadPromiseWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ReadScheduleWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) ReadScheduleWithResponse(ctx context.Context, id string, params *ReadScheduleParams, reqEditors ...RequestEditorFn) (*ReadScheduleResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, id, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "ReadScheduleWithResponse", varargs...)
-	ret0, _ := ret[0].(*ReadScheduleResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ReadScheduleWithResponse indicates an expected call of ReadScheduleWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) ReadScheduleWithResponse(ctx, id, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, id, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadScheduleWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).ReadScheduleWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // SearchPromisesWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) SearchPromisesWithResponse(ctx context.Context, params *SearchPromisesParams, reqEditors ...RequestEditorFn) (*SearchPromisesResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "SearchPromisesWithResponse", varargs...)
-	ret0, _ := ret[0].(*SearchPromisesResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // SearchPromisesWithResponse indicates an expected call of SearchPromisesWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) SearchPromisesWithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchPromisesWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).SearchPromisesWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // SearchSchedulesWithResponse mocks base method.
 func (m *MockClientWithResponsesInterface) SearchSchedulesWithResponse(ctx context.Context, params *SearchSchedulesParams, reqEditors ...RequestEditorFn) (*SearchSchedulesResponse, error) {
-	m.ctrl.T.Helper()
-	varargs := []any{ctx, params}
-	for _, a := range reqEditors {
-		varargs = append(varargs, a)
-	}
-	ret := m.ctrl.Call(m, "SearchSchedulesWithResponse", varargs...)
-	ret0, _ := ret[0].(*SearchSchedulesResponse)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // SearchSchedulesWithResponse indicates an expected call of SearchSchedulesWithResponse.
 func (mr *MockClientWithResponsesInterfaceMockRecorder) SearchSchedulesWithResponse(ctx, params any, reqEditors ...any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{ctx, params}, reqEditors...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SearchSchedulesWithResponse", reflect.TypeOf((*MockClientWithResponsesInterface)(nil).SearchSchedulesWithResponse), varargs...)
+	_ = "STUB: not implemented"
+	return nil
 }

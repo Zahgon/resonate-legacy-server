@@ -1,9 +1,6 @@
 package t_api
 
 import (
-	"fmt"
-
-	"github.com/resonatehq/resonate/internal/util"
 	"github.com/resonatehq/resonate/pkg/callback"
 	"github.com/resonatehq/resonate/pkg/promise"
 	"github.com/resonatehq/resonate/pkg/schedule"
@@ -28,109 +25,101 @@ type PromiseGetResponse struct {
 	Promise *promise.Promise `json:"promise,omitempty"`
 }
 
-func (r *PromiseGetResponse) String() string {
-	return fmt.Sprintf("PromiseGet(promise=%v)", r.Promise)
-}
+func (r *PromiseGetResponse) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *PromiseGetResponse) Kind() Kind { return PromiseGet }
+func (r *PromiseGetResponse) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type PromiseSearchResponse struct {
 	Promises []*promise.Promise            `json:"promises,omitempty"`
 	Cursor   *Cursor[PromiseSearchRequest] `json:"cursor,omitempty"`
 }
 
-func (r *PromiseSearchResponse) String() string {
-	return fmt.Sprintf("PromiseSearch(promises=%v, cursor=%v)", r.Promises, r.Cursor)
-}
+func (r *PromiseSearchResponse) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *PromiseSearchResponse) Kind() Kind { return PromiseSearch }
+func (r *PromiseSearchResponse) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type PromiseCreateResponse struct {
 	Promise *promise.Promise `json:"promise,omitempty"`
 }
 
-func (r *PromiseCreateResponse) String() string {
-	return fmt.Sprintf("PromiseCreate(promise=%v)", r.Promise)
-}
+func (r *PromiseCreateResponse) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *PromiseCreateResponse) Kind() Kind { return PromiseCreate }
+func (r *PromiseCreateResponse) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type TaskCreateResponse struct {
 	Promise *promise.Promise `json:"promise,omitempty"`
 	Task    *task.Task       `json:"task,omitempty"`
 }
 
-func (r *TaskCreateResponse) String() string {
-	return fmt.Sprintf("TaskCreate(promise=%v, task=%v)", r.Promise, r.Task)
-}
+func (r *TaskCreateResponse) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *TaskCreateResponse) Kind() Kind { return TaskCreate }
+func (r *TaskCreateResponse) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type PromiseCompleteResponse struct {
 	Promise *promise.Promise `json:"promise,omitempty"`
 }
 
-func (r *PromiseCompleteResponse) String() string {
-	return fmt.Sprintf("PromiseComplete(promise=%v)", r.Promise)
+func (r *PromiseCompleteResponse) String() string { _ = "STUB: not implemented"; return "" }
+
+func (r *PromiseCompleteResponse) Kind() Kind {
+	_ = "STUB: not implemented"
+	return *
+
+	// Callbacks
+	new(Kind)
 }
-
-func (r *PromiseCompleteResponse) Kind() Kind { return PromiseComplete }
-
-// Callbacks
 
 type PromiseRegisterResponse struct {
 	Promise  *promise.Promise   `json:"promise,omitempty"`
 	Callback *callback.Callback `json:"callback,omitempty"`
 }
 
-func (r *PromiseRegisterResponse) String() string {
-	return fmt.Sprintf("PromiseRegister(promise=%v, callback=%v)", r.Promise, r.Callback)
+func (r *PromiseRegisterResponse) String() string { _ = "STUB: not implemented"; return "" }
+
+func (r *PromiseRegisterResponse) Kind() Kind {
+	_ = "STUB: not implemented"
+	return *
+
+	// Schedules
+	new(Kind)
 }
-
-func (r *PromiseRegisterResponse) Kind() Kind { return PromiseRegister }
-
-// Schedules
 
 type ScheduleGetResponse struct {
 	Schedule *schedule.Schedule `json:"schedule,omitempty"`
 }
 
-func (r *ScheduleGetResponse) String() string {
-	return fmt.Sprintf("ScheduleGet(schedule=%v)", r.Schedule)
-}
+func (r *ScheduleGetResponse) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *ScheduleGetResponse) Kind() Kind { return ScheduleRead }
+func (r *ScheduleGetResponse) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type ScheduleSearchResponse struct {
 	Schedules []*schedule.Schedule           `json:"schedules,omitempty"`
 	Cursor    *Cursor[ScheduleSearchRequest] `json:"cursor,omitempty"`
 }
 
-func (r *ScheduleSearchResponse) String() string {
-	return fmt.Sprintf("ScheduleSearch(schedules=%v, cursor=%v)", r.Schedules, r.Cursor)
-}
+func (r *ScheduleSearchResponse) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *ScheduleSearchResponse) Kind() Kind { return ScheduleSearch }
+func (r *ScheduleSearchResponse) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type ScheduleCreateResponse struct {
 	Schedule *schedule.Schedule `json:"schedule,omitempty"`
 }
 
-func (r *ScheduleCreateResponse) String() string {
-	return fmt.Sprintf("ScheduleCreate(schedule=%v)", r.Schedule)
-}
+func (r *ScheduleCreateResponse) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *ScheduleCreateResponse) Kind() Kind { return ScheduleCreate }
+func (r *ScheduleCreateResponse) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type ScheduleDeleteResponse struct{}
 
-func (r *ScheduleDeleteResponse) String() string {
-	return "ScheduleDelete()"
+func (r *ScheduleDeleteResponse) String() string { _ = "STUB: not implemented"; return "" }
+
+func (r *ScheduleDeleteResponse) Kind() Kind {
+	_ = "STUB: not implemented"
+	return *
+
+	// Tasks
+	new(Kind)
 }
-
-func (r *ScheduleDeleteResponse) Kind() Kind { return ScheduleDelete }
-
-// Tasks
 
 type TaskAcquireResponse struct {
 	Task            *task.Task       `json:"task,omitempty"`
@@ -140,150 +129,155 @@ type TaskAcquireResponse struct {
 	LeafPromiseHref string           `json:"leafPromiseHref,omitempty"`
 }
 
-func (r *TaskAcquireResponse) String() string {
-	return fmt.Sprintf("TaskAcquire(task=%v)", r.Task)
-}
+func (r *TaskAcquireResponse) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *TaskAcquireResponse) Kind() Kind { return TaskAcquire }
+func (r *TaskAcquireResponse) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type TaskCompleteResponse struct {
 	Task *task.Task `json:"task,omitempty"`
 }
 
-func (r *TaskCompleteResponse) String() string {
-	return fmt.Sprintf("TaskComplete(task=%v)", r.Task)
-}
+func (r *TaskCompleteResponse) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *TaskCompleteResponse) Kind() Kind { return TaskComplete }
+func (r *TaskCompleteResponse) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type TaskReleaseResponse struct {
 	Task *task.Task `json:"task,omitempty"`
 }
 
-func (r *TaskReleaseResponse) String() string {
-	return fmt.Sprintf("TaskRelease(task=%v)", r.Task)
-}
+func (r *TaskReleaseResponse) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *TaskReleaseResponse) Kind() Kind { return TaskRelease }
+func (r *TaskReleaseResponse) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type TaskHeartbeatResponse struct {
 	TasksAffected int64 `json:"tasksAffected"`
 }
 
-func (r *TaskHeartbeatResponse) String() string {
-	return fmt.Sprintf("TaskHeartbeat(tasksAffected=%d)", r.TasksAffected)
+func (r *TaskHeartbeatResponse) String() string { _ = "STUB: not implemented"; return "" }
+
+func (r *TaskHeartbeatResponse) Kind() Kind {
+	_ = "STUB: not implemented"
+	return *
+
+	// Echo
+	new(Kind)
 }
-
-func (r *TaskHeartbeatResponse) Kind() Kind { return TaskHeartbeat }
-
-// Echo
 
 type EchoResponse struct {
 	Data string `json:"data"`
 }
 
-func (r *EchoResponse) String() string {
-	return fmt.Sprintf("Echo(data=%s)", r.Data)
+func (r *EchoResponse) String() string { _ = "STUB: not implemented"; return "" }
+
+func (r *EchoResponse) Kind() Kind {
+	_ = "STUB: not implemented"
+
+	// Noop
+	return *new(Kind)
 }
-
-func (r *EchoResponse) Kind() Kind { return Echo }
-
-// Noop
 
 type NoopResponse struct{}
 
-func (r *NoopResponse) String() string {
-	return "Noop()"
+func (r *NoopResponse) String() string { _ = "STUB: not implemented"; return "" }
+
+func (r *NoopResponse) Kind() Kind {
+	_ = "STUB: not implemented"
+
+	// Marker methods that make each of the request types be a
+	// ResponsePayload type.
+	return *new(Kind)
 }
 
-func (r *NoopResponse) Kind() Kind { return Noop }
+func (r *PromiseGetResponse) isResponsePayload()      { _ = "STUB: not implemented"; return }
+func (r *PromiseSearchResponse) isResponsePayload()   { _ = "STUB: not implemented"; return }
+func (r *PromiseCreateResponse) isResponsePayload()   { _ = "STUB: not implemented"; return }
+func (r *TaskCreateResponse) isResponsePayload()      { _ = "STUB: not implemented"; return }
+func (r *PromiseCompleteResponse) isResponsePayload() { _ = "STUB: not implemented"; return }
+func (r *PromiseRegisterResponse) isResponsePayload() { _ = "STUB: not implemented"; return }
+func (r *ScheduleGetResponse) isResponsePayload()     { _ = "STUB: not implemented"; return }
+func (r *ScheduleSearchResponse) isResponsePayload()  { _ = "STUB: not implemented"; return }
+func (r *ScheduleCreateResponse) isResponsePayload()  { _ = "STUB: not implemented"; return }
+func (r *ScheduleDeleteResponse) isResponsePayload()  { _ = "STUB: not implemented"; return }
+func (r *TaskAcquireResponse) isResponsePayload()     { _ = "STUB: not implemented"; return }
+func (r *TaskCompleteResponse) isResponsePayload()    { _ = "STUB: not implemented"; return }
+func (r *TaskReleaseResponse) isResponsePayload()     { _ = "STUB: not implemented"; return }
+func (r *TaskHeartbeatResponse) isResponsePayload()   { _ = "STUB: not implemented"; return }
+func (r *EchoResponse) isResponsePayload()            { _ = "STUB: not implemented"; return }
+func (r *NoopResponse) isResponsePayload()            { _ = "STUB: not implemented"; return }
 
-// Marker methods that make each of the request types be a
-// ResponsePayload type.
-func (r *PromiseGetResponse) isResponsePayload()      {}
-func (r *PromiseSearchResponse) isResponsePayload()   {}
-func (r *PromiseCreateResponse) isResponsePayload()   {}
-func (r *TaskCreateResponse) isResponsePayload()      {}
-func (r *PromiseCompleteResponse) isResponsePayload() {}
-func (r *PromiseRegisterResponse) isResponsePayload() {}
-func (r *ScheduleGetResponse) isResponsePayload()     {}
-func (r *ScheduleSearchResponse) isResponsePayload()  {}
-func (r *ScheduleCreateResponse) isResponsePayload()  {}
-func (r *ScheduleDeleteResponse) isResponsePayload()  {}
-func (r *TaskAcquireResponse) isResponsePayload()     {}
-func (r *TaskCompleteResponse) isResponsePayload()    {}
-func (r *TaskReleaseResponse) isResponsePayload()     {}
-func (r *TaskHeartbeatResponse) isResponsePayload()   {}
-func (r *EchoResponse) isResponsePayload()            {}
-func (r *NoopResponse) isResponsePayload()            {}
+func (r *Response) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *Response) String() string {
-	util.Assert(r.Data != nil, "Payload must not be nil")
-	return fmt.Sprintf("Response(status=%d, %s)", r.Status, r.Data.String())
-}
-
-func (r *Response) Kind() Kind {
-	util.Assert(r.Data != nil, "Payload must not be nil")
-	return r.Data.Kind()
-}
+func (r *Response) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 // Methods to cast Response.Payload to specific response payload types (direct assertion)
 func (r *Response) AsPromiseGetResponse() *PromiseGetResponse {
-	return r.Data.(*PromiseGetResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsPromiseSearchResponse() *PromiseSearchResponse {
-	return r.Data.(*PromiseSearchResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsPromiseCreateResponse() *PromiseCreateResponse {
-	return r.Data.(*PromiseCreateResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsTaskCreateResponse() *TaskCreateResponse {
-	return r.Data.(*TaskCreateResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsPromiseCompleteResponse() *PromiseCompleteResponse {
-	return r.Data.(*PromiseCompleteResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsPromiseRegisterResponse() *PromiseRegisterResponse {
-	return r.Data.(*PromiseRegisterResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsScheduleGetResponse() *ScheduleGetResponse {
-	return r.Data.(*ScheduleGetResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsScheduleSearchResponse() *ScheduleSearchResponse {
-	return r.Data.(*ScheduleSearchResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsScheduleCreateResponse() *ScheduleCreateResponse {
-	return r.Data.(*ScheduleCreateResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsScheduleDeleteResponse() *ScheduleDeleteResponse {
-	return r.Data.(*ScheduleDeleteResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsTaskAcquireResponse() *TaskAcquireResponse {
-	return r.Data.(*TaskAcquireResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsTaskCompleteResponse() *TaskCompleteResponse {
-	return r.Data.(*TaskCompleteResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsTaskReleaseResponse() *TaskReleaseResponse {
-	return r.Data.(*TaskReleaseResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (r *Response) AsTaskHeartbeatResponse() *TaskHeartbeatResponse {
-	return r.Data.(*TaskHeartbeatResponse)
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (r *Response) AsEchoResponse() *EchoResponse {
-	return r.Data.(*EchoResponse)
-}
+func (r *Response) AsEchoResponse() *EchoResponse { _ = "STUB: not implemented"; return nil }

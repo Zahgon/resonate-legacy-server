@@ -1,14 +1,10 @@
 package echo
 
 import (
-	"log/slog"
-	"strconv"
-
 	"github.com/resonatehq/resonate/internal/aio"
 	"github.com/resonatehq/resonate/internal/kernel/bus"
 	"github.com/resonatehq/resonate/internal/kernel/t_aio"
 	"github.com/resonatehq/resonate/internal/metrics"
-	"github.com/resonatehq/resonate/internal/util"
 )
 
 // Config
@@ -28,66 +24,28 @@ type Echo struct {
 }
 
 func New(aio aio.AIO, metrics *metrics.Metrics, config *Config) (*Echo, error) {
-	sq := make(chan *bus.SQE[t_aio.Submission, t_aio.Completion], config.Size)
-	workers := make([]*EchoWorker, config.Workers)
-
-	for i := 0; i < config.Workers; i++ {
-		workers[i] = &EchoWorker{
-			i:       i,
-			sq:      sq,
-			flush:   make(chan int64, 1),
-			aio:     aio,
-			metrics: metrics,
-		}
-	}
-
-	return &Echo{
-		config:  config,
-		sq:      sq,
-		workers: workers,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func (e *Echo) String() string {
-	return t_aio.Echo.String()
-}
+func (e *Echo) String() string { _ = "STUB: not implemented"; return "" }
 
-func (e *Echo) Kind() t_aio.Kind {
-	return t_aio.Echo
-}
+func (e *Echo) Kind() t_aio.Kind { _ = "STUB: not implemented"; return *new(t_aio.Kind) }
 
-func (e *Echo) Start(chan<- error) error {
-	for _, worker := range e.workers {
-		go worker.Start()
-	}
-	return nil
-}
+func (e *Echo) Start(chan<- error) error { _ = "STUB: not implemented"; return nil }
 
-func (e *Echo) Stop() error {
-	close(e.sq)
-	return nil
-}
+func (e *Echo) Stop() error { _ = "STUB: not implemented"; return nil }
 
 func (e *Echo) Enqueue(sqe *bus.SQE[t_aio.Submission, t_aio.Completion]) bool {
-	select {
-	case e.sq <- sqe:
-		return true
-	default:
-		return false
-	}
+	_ = "STUB: not implemented"
+	return false
 }
 
-func (e *Echo) Flush(t int64) {}
+func (e *Echo) Flush(t int64) { _ = "STUB: not implemented"; return }
 
 func (e *Echo) Process(sqes []*bus.SQE[t_aio.Submission, t_aio.Completion]) []*bus.CQE[t_aio.Submission, t_aio.Completion] {
-	util.Assert(len(e.workers) > 0, "must be at least one worker")
-
-	cqes := make([]*bus.CQE[t_aio.Submission, t_aio.Completion], len(sqes))
-	for i, sqe := range sqes {
-		cqes[i] = e.workers[0].Process(sqe)
-	}
-
-	return cqes
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Worker
@@ -100,39 +58,15 @@ type EchoWorker struct {
 	metrics *metrics.Metrics
 }
 
-func (w *EchoWorker) String() string {
-	return t_aio.Echo.String()
-}
+func (w *EchoWorker) String() string { _ = "STUB: not implemented"; return "" }
 
-func (w *EchoWorker) Start() {
-	counter := w.metrics.AioWorkerInFlight.WithLabelValues(w.String(), strconv.Itoa(w.i))
-	w.metrics.AioWorker.WithLabelValues(w.String()).Inc()
-	defer w.metrics.AioWorker.WithLabelValues(w.String()).Dec()
+func (w *EchoWorker) Start() { _ = "STUB: not implemented"; return }
 
-	for {
-		sqe, ok := <-w.sq
-		if !ok {
-			return
-		}
-
-		slog.Debug("api:sqe:dequeue", "id", sqe.Id, "sqe", sqe)
-
-		counter.Inc()
-		w.aio.EnqueueCQE(w.Process(sqe)) // process one at a time
-		counter.Dec()
-	}
-}
+// process one at a time
 
 func (w *EchoWorker) Process(sqe *bus.SQE[t_aio.Submission, t_aio.Completion]) *bus.CQE[t_aio.Submission, t_aio.Completion] {
-	return &bus.CQE[t_aio.Submission, t_aio.Completion]{
-		Id: sqe.Id,
-		Completion: &t_aio.Completion{
-			Kind: t_aio.Echo,
-			Tags: sqe.Submission.Tags, // propagate the tags
-			Echo: &t_aio.EchoCompletion{
-				Data: sqe.Submission.Echo.Data,
-			},
-		},
-		Callback: sqe.Callback,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// propagate the tags

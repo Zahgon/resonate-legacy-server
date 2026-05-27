@@ -1,19 +1,13 @@
 package t_aio
 
-import "fmt"
-
 type EchoSubmission struct {
 	Data string
 }
 
-func (s *EchoSubmission) String() string {
-	return fmt.Sprintf("Echo(data=%s)", s.Data)
-}
+func (s *EchoSubmission) String() string { _ = "STUB: not implemented"; return "" }
 
 type EchoCompletion struct {
 	Data string
 }
 
-func (c *EchoCompletion) String() string {
-	return fmt.Sprintf("Echo(data=%s)", c.Data)
-}
+func (c *EchoCompletion) String() string { _ = "STUB: not implemented"; return "" }

@@ -2,10 +2,7 @@ package t_api
 
 import (
 	"encoding/json"
-	"errors"
-	"fmt"
 
-	"github.com/resonatehq/resonate/internal/util"
 	"github.com/resonatehq/resonate/pkg/message"
 	"github.com/resonatehq/resonate/pkg/promise"
 )
@@ -28,17 +25,11 @@ type PromiseGetRequest struct {
 	Id string `json:"id"`
 }
 
-func (r *PromiseGetRequest) String() string {
-	return fmt.Sprintf("PromiseGet(id=%s)", r.Id)
-}
+func (r *PromiseGetRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *PromiseGetRequest) Validate() error {
-	return nil
-}
+func (r *PromiseGetRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
-func (r *PromiseGetRequest) Kind() Kind {
-	return PromiseGet
-}
+func (r *PromiseGetRequest) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type PromiseSearchRequest struct {
 	Id     string            `json:"id"`
@@ -48,17 +39,11 @@ type PromiseSearchRequest struct {
 	SortId *int64            `json:"sortId"`
 }
 
-func (r *PromiseSearchRequest) String() string {
-	return fmt.Sprintf("PromiseSearch(id=%s, states=%v, tags=%v, limit=%d, sortId=%d)", r.Id, r.States, r.Tags, r.Limit, util.SafeDeref(r.SortId))
-}
+func (r *PromiseSearchRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *PromiseSearchRequest) Validate() error {
-	return nil
-}
+func (r *PromiseSearchRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
-func (r *PromiseSearchRequest) Kind() Kind {
-	return PromiseSearch
-}
+func (r *PromiseSearchRequest) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type PromiseCreateRequest struct {
 	Id      string            `json:"id"`
@@ -67,34 +52,22 @@ type PromiseCreateRequest struct {
 	Tags    map[string]string `json:"tags,omitempty"`
 }
 
-func (r *PromiseCreateRequest) String() string {
-	return fmt.Sprintf("PromiseCreate(id=%s, param=%v, timeout=%d, tags=%v)", r.Id, r.Param, r.Timeout, r.Tags)
-}
+func (r *PromiseCreateRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *PromiseCreateRequest) Validate() error {
-	return nil
-}
+func (r *PromiseCreateRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
-func (r *PromiseCreateRequest) Kind() Kind {
-	return PromiseCreate
-}
+func (r *PromiseCreateRequest) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type TaskCreateRequest struct {
 	Promise *PromiseCreateRequest
 	Task    *CreateTaskRequest
 }
 
-func (r *TaskCreateRequest) String() string {
-	return fmt.Sprintf("TaskCreate(promise=%v, task=%v)", r.Promise, r.Task)
-}
+func (r *TaskCreateRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *TaskCreateRequest) Validate() error {
-	return nil
-}
+func (r *TaskCreateRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
-func (r *TaskCreateRequest) Kind() Kind {
-	return TaskCreate
-}
+func (r *TaskCreateRequest) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type PromiseCompleteRequest struct {
 	Id    string        `json:"id"`
@@ -102,19 +75,17 @@ type PromiseCompleteRequest struct {
 	Value promise.Value `json:"value,omitempty"`
 }
 
-func (r *PromiseCompleteRequest) String() string {
-	return fmt.Sprintf("PromiseComplete(id=%s, state=%v, value=%v)", r.Id, r.State, r.Value)
-}
+func (r *PromiseCompleteRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *PromiseCompleteRequest) Validate() error {
-	return nil
-}
+func (r *PromiseCompleteRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
 func (r *PromiseCompleteRequest) Kind() Kind {
-	return PromiseComplete
-}
+	_ = "STUB: not implemented"
+	return *
 
-// Callbacks
+	// Callbacks
+	new(Kind)
+}
 
 type PromiseRegisterRequest struct {
 	Id        string          `json:"id"`
@@ -124,38 +95,27 @@ type PromiseRegisterRequest struct {
 	Timeout   int64           `json:"timeout"`
 }
 
-func (r *PromiseRegisterRequest) String() string {
-	return fmt.Sprintf("PromiseRegister(id=%s, promiseId=%s, recv=%s, mesg=%s, timeout=%d)", r.Id, r.PromiseId, r.Recv, r.Mesg, r.Timeout)
-}
+func (r *PromiseRegisterRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *PromiseRegisterRequest) Validate() error {
-	if r.Mesg.Type == "resume" && r.PromiseId == r.Mesg.Root {
-		return errors.New("promise and root promise must be different")
-	}
-	return nil
-}
+func (r *PromiseRegisterRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
 func (r *PromiseRegisterRequest) Kind() Kind {
-	return PromiseRegister
-}
+	_ = "STUB: not implemented"
+	return *
 
-// Schedules
+	// Schedules
+	new(Kind)
+}
 
 type ScheduleGetRequest struct {
 	Id string `json:"id"`
 }
 
-func (r *ScheduleGetRequest) String() string {
-	return fmt.Sprintf("ScheduleGet(id=%s)", r.Id)
-}
+func (r *ScheduleGetRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *ScheduleGetRequest) Validate() error {
-	return nil
-}
+func (r *ScheduleGetRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
-func (r *ScheduleGetRequest) Kind() Kind {
-	return ScheduleRead
-}
+func (r *ScheduleGetRequest) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type ScheduleSearchRequest struct {
 	Id     string            `json:"id"`
@@ -164,17 +124,11 @@ type ScheduleSearchRequest struct {
 	SortId *int64            `json:"sortId"`
 }
 
-func (r *ScheduleSearchRequest) String() string {
-	return fmt.Sprintf("ScheduleSearch(id=%s, tags=%v, limit=%d, sortId=%d)", r.Id, r.Tags, r.Limit, util.SafeDeref(r.SortId))
-}
+func (r *ScheduleSearchRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *ScheduleSearchRequest) Validate() error {
-	return nil
-}
+func (r *ScheduleSearchRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
-func (r *ScheduleSearchRequest) Kind() Kind {
-	return ScheduleSearch
-}
+func (r *ScheduleSearchRequest) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type ScheduleCreateRequest struct {
 	Id             string            `json:"id"`
@@ -187,45 +141,27 @@ type ScheduleCreateRequest struct {
 	PromiseTags    map[string]string `json:"promiseTags,omitempty"`
 }
 
-func (r *ScheduleCreateRequest) String() string {
-	return fmt.Sprintf(
-		"ScheduleCreate(id=%s, desc=%s, cron=%s, tags=%v, promiseId=%s, promiseTimeout=%d, promiseParam=%v, promiseTags=%v)",
-		r.Id,
-		r.Description,
-		r.Cron,
-		r.Tags,
-		r.PromiseId,
-		r.PromiseTimeout,
-		r.PromiseParam,
-		r.PromiseTags,
-	)
-}
+func (r *ScheduleCreateRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *ScheduleCreateRequest) Validate() error {
-	return nil
-}
+func (r *ScheduleCreateRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
-func (r *ScheduleCreateRequest) Kind() Kind {
-	return ScheduleCreate
-}
+func (r *ScheduleCreateRequest) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type ScheduleDeleteRequest struct {
 	Id string `json:"id"`
 }
 
-func (r *ScheduleDeleteRequest) String() string {
-	return fmt.Sprintf("ScheduleDelete(id=%s)", r.Id)
-}
+func (r *ScheduleDeleteRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *ScheduleDeleteRequest) Validate() error {
-	return nil
-}
+func (r *ScheduleDeleteRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
 func (r *ScheduleDeleteRequest) Kind() Kind {
-	return ScheduleDelete
-}
+	_ = "STUB: not implemented"
+	return *
 
-// Tasks
+	// Tasks
+	new(Kind)
+}
 
 // CreateTaskRequest is not a Request on its own it needs to be part of a CreatePromiseAndTask Request
 // that is why it does not implement the request interface
@@ -236,15 +172,7 @@ type CreateTaskRequest struct {
 	Timeout   int64  `json:"timeout"`
 }
 
-func (r *CreateTaskRequest) String() string {
-	return fmt.Sprintf(
-		"CreateTask(promiseId=%s, processId=%s, ttl=%d, timeout=%d)",
-		r.PromiseId,
-		r.ProcessId,
-		r.Ttl,
-		r.Timeout,
-	)
-}
+func (r *CreateTaskRequest) String() string { _ = "STUB: not implemented"; return "" }
 
 type TaskAcquireRequest struct {
 	Id        string `json:"id"`
@@ -253,134 +181,103 @@ type TaskAcquireRequest struct {
 	Ttl       int64  `json:"ttl" binding:"min=0"`
 }
 
-func (r *TaskAcquireRequest) String() string {
-	return fmt.Sprintf("TaskAcquire(id=%s, counter=%d, processId=%s, ttl=%d)", r.Id, r.Counter, r.ProcessId, r.Ttl)
-}
+func (r *TaskAcquireRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *TaskAcquireRequest) Validate() error {
-	return nil
-}
+func (r *TaskAcquireRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
-func (r *TaskAcquireRequest) Kind() Kind {
-	return TaskAcquire
-}
+func (r *TaskAcquireRequest) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type TaskCompleteRequest struct {
 	Id      string `json:"id"`
 	Counter int    `json:"counter"`
 }
 
-func (r *TaskCompleteRequest) String() string {
-	return fmt.Sprintf("TaskComplete(id=%s, counter=%d)", r.Id, r.Counter)
-}
+func (r *TaskCompleteRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *TaskCompleteRequest) Validate() error {
-	return nil
-}
+func (r *TaskCompleteRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
-func (r *TaskCompleteRequest) Kind() Kind {
-	return TaskComplete
-}
+func (r *TaskCompleteRequest) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type TaskReleaseRequest struct {
 	Id      string `json:"id"`
 	Counter int    `json:"counter"`
 }
 
-func (r *TaskReleaseRequest) String() string {
-	return fmt.Sprintf("TaskRelease(id=%s, counter=%d)", r.Id, r.Counter)
-}
+func (r *TaskReleaseRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *TaskReleaseRequest) Validate() error {
-	return nil
-}
+func (r *TaskReleaseRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
-func (r *TaskReleaseRequest) Kind() Kind {
-	return TaskRelease
-}
+func (r *TaskReleaseRequest) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
 
 type TaskHeartbeatRequest struct {
 	ProcessId string `json:"processId"`
 }
 
-func (r *TaskHeartbeatRequest) String() string {
-	return fmt.Sprintf("TaskHeartbeat(processId=%s)", r.ProcessId)
-}
+func (r *TaskHeartbeatRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *TaskHeartbeatRequest) Validate() error {
-	return nil
-}
+func (r *TaskHeartbeatRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
 func (r *TaskHeartbeatRequest) Kind() Kind {
-	return TaskHeartbeat
-}
+	_ = "STUB: not implemented"
+	return *
 
-// Echo
+	// Echo
+	new(Kind)
+}
 
 type EchoRequest struct {
 	Data string `json:"data"`
 }
 
-func (r *EchoRequest) String() string {
-	return fmt.Sprintf("Echo(data=%s)", r.Data)
-}
+func (r *EchoRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *EchoRequest) Validate() error {
-	return nil
-}
+func (r *EchoRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
 func (r *EchoRequest) Kind() Kind {
-	return Echo
-}
+	_ = "STUB: not implemented"
 
-// Noop
+	// Noop
+	return *new(Kind)
+}
 
 type NoopRequest struct{}
 
-func (r *NoopRequest) String() string {
-	return "Noop()"
-}
+func (r *NoopRequest) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *NoopRequest) Validate() error {
-	return nil
-}
+func (r *NoopRequest) Validate() error { _ = "STUB: not implemented"; return nil }
 
 func (r *NoopRequest) Kind() Kind {
-	return Noop
+	_ = "STUB: not implemented"
+
+	// Marker methods that make each of the request types be a
+	// RequestPayload type.
+	return *new(Kind)
 }
 
-// Marker methods that make each of the request types be a
-// RequestPayload type.
-func (r *PromiseGetRequest) isRequestPayload()      {}
-func (r *PromiseSearchRequest) isRequestPayload()   {}
-func (r *PromiseCreateRequest) isRequestPayload()   {}
-func (r *TaskCreateRequest) isRequestPayload()      {}
-func (r *PromiseCompleteRequest) isRequestPayload() {}
-func (r *PromiseRegisterRequest) isRequestPayload() {}
-func (r *ScheduleGetRequest) isRequestPayload()     {}
-func (r *ScheduleSearchRequest) isRequestPayload()  {}
-func (r *ScheduleCreateRequest) isRequestPayload()  {}
-func (r *ScheduleDeleteRequest) isRequestPayload()  {}
-func (r *TaskAcquireRequest) isRequestPayload()     {}
-func (r *TaskCompleteRequest) isRequestPayload()    {}
-func (r *TaskReleaseRequest) isRequestPayload()     {}
-func (r *TaskHeartbeatRequest) isRequestPayload()   {}
-func (r *EchoRequest) isRequestPayload()            {}
-func (r *NoopRequest) isRequestPayload()            {}
+func (r *PromiseGetRequest) isRequestPayload()      { _ = "STUB: not implemented"; return }
+func (r *PromiseSearchRequest) isRequestPayload()   { _ = "STUB: not implemented"; return }
+func (r *PromiseCreateRequest) isRequestPayload()   { _ = "STUB: not implemented"; return }
+func (r *TaskCreateRequest) isRequestPayload()      { _ = "STUB: not implemented"; return }
+func (r *PromiseCompleteRequest) isRequestPayload() { _ = "STUB: not implemented"; return }
+func (r *PromiseRegisterRequest) isRequestPayload() { _ = "STUB: not implemented"; return }
+func (r *ScheduleGetRequest) isRequestPayload()     { _ = "STUB: not implemented"; return }
+func (r *ScheduleSearchRequest) isRequestPayload()  { _ = "STUB: not implemented"; return }
+func (r *ScheduleCreateRequest) isRequestPayload()  { _ = "STUB: not implemented"; return }
+func (r *ScheduleDeleteRequest) isRequestPayload()  { _ = "STUB: not implemented"; return }
+func (r *TaskAcquireRequest) isRequestPayload()     { _ = "STUB: not implemented"; return }
+func (r *TaskCompleteRequest) isRequestPayload()    { _ = "STUB: not implemented"; return }
+func (r *TaskReleaseRequest) isRequestPayload()     { _ = "STUB: not implemented"; return }
+func (r *TaskHeartbeatRequest) isRequestPayload()   { _ = "STUB: not implemented"; return }
+func (r *EchoRequest) isRequestPayload()            { _ = "STUB: not implemented"; return }
+func (r *NoopRequest) isRequestPayload() {
+	_ = "STUB: not implemented"
 
-// Request Methods
-
-func (r *Request) String() string {
-	util.Assert(r.Data != nil, "Payload cannot be nil")
-	return r.Data.String()
+	// Request Methods
+	return
 }
 
-func (r *Request) Kind() Kind {
-	util.Assert(r.Data != nil, "Payload cannot be nil")
-	return r.Data.Kind()
-}
+func (r *Request) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *Request) Validate() error {
-	util.Assert(r.Data != nil, "Payload cannot be nil")
-	return r.Data.Validate()
-}
+func (r *Request) Kind() Kind { _ = "STUB: not implemented"; return *new(Kind) }
+
+func (r *Request) Validate() error { _ = "STUB: not implemented"; return nil }

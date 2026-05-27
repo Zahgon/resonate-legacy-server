@@ -1,12 +1,8 @@
 package base
 
 import (
-	"fmt"
-	"log/slog"
-	"strconv"
 	"time"
 
-	"github.com/resonatehq/resonate/internal/kernel/t_aio"
 	"github.com/resonatehq/resonate/internal/metrics"
 	"github.com/resonatehq/resonate/internal/plugins"
 )
@@ -39,96 +35,22 @@ type Plugin struct {
 }
 
 func NewPlugin(name string, config *BaseConfig, metrics *metrics.Metrics, processor Processor, cleanup func() error) *Plugin {
-	sq := make(chan *plugins.Message, config.Size)
-	workers := make([]*Worker, config.Workers)
-
-	for i := 0; i < config.Workers; i++ {
-		workers[i] = &Worker{
-			id:        i,
-			sq:        sq,
-			processor: processor,
-			config:    config,
-			metrics:   metrics,
-			name:      name,
-		}
-	}
-
-	return &Plugin{
-		name:    name,
-		sq:      sq,
-		workers: workers,
-		cleanup: cleanup,
-	}
-}
-
-func (p *Plugin) String() string {
-	return fmt.Sprintf("%s:%s", t_aio.Sender.String(), p.name)
-}
-
-func (p *Plugin) Type() string {
-	return p.name
-}
-
-func (p *Plugin) Start(chan<- error) error {
-	for _, worker := range p.workers {
-		go worker.Start()
-	}
+	_ = "STUB: not implemented"
 	return nil
 }
 
-func (p *Plugin) Stop() error {
-	if p.sq != nil {
-		close(p.sq)
-	}
-	if p.cleanup != nil {
-		return p.cleanup()
-	}
-	return nil
-}
+func (p *Plugin) String() string { _ = "STUB: not implemented"; return "" }
 
-func (p *Plugin) Enqueue(msg *plugins.Message) bool {
-	if p.sq == nil || msg == nil {
-		return false
-	}
+func (p *Plugin) Type() string { _ = "STUB: not implemented"; return "" }
 
-	select {
-	case p.sq <- msg:
-		return true
-	default:
-		return false
-	}
-}
+func (p *Plugin) Start(chan<- error) error { _ = "STUB: not implemented"; return nil }
 
-func (p *Plugin) Addr() string {
-	return ""
-}
+func (p *Plugin) Stop() error { _ = "STUB: not implemented"; return nil }
 
-func (w *Worker) String() string {
-	return fmt.Sprintf("%s:%s", t_aio.Sender.String(), w.name)
-}
+func (p *Plugin) Enqueue(msg *plugins.Message) bool { _ = "STUB: not implemented"; return false }
 
-func (w *Worker) Start() {
-	counter := w.metrics.AioWorkerInFlight.WithLabelValues(w.String(), strconv.Itoa(w.id))
-	w.metrics.AioWorker.WithLabelValues(w.String()).Inc()
-	defer w.metrics.AioWorker.WithLabelValues(w.String()).Dec()
+func (p *Plugin) Addr() string { _ = "STUB: not implemented"; return "" }
 
-	for {
-		msg, ok := <-w.sq
-		if !ok {
-			return
-		}
+func (w *Worker) String() string { _ = "STUB: not implemented"; return "" }
 
-		counter.Inc()
-		success, err := w.processor.Process(msg.Addr, msg.Head, msg.Body)
-		if err != nil {
-			slog.Warn("failed to process message", "plugin", w.name, "err", err)
-		}
-
-		msg.Done(&t_aio.SenderCompletion{
-			Success:     success,
-			TimeToRetry: w.config.TimeToRetry.Milliseconds(),
-			TimeToClaim: w.config.TimeToClaim.Milliseconds(),
-		})
-		counter.Dec()
-	}
-}
+func (w *Worker) Start() { _ = "STUB: not implemented"; return }

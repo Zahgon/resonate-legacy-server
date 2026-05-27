@@ -1,8 +1,6 @@
 package t_aio
 
 import (
-	"fmt"
-
 	"github.com/resonatehq/resonate/pkg/message"
 	"github.com/resonatehq/resonate/pkg/promise"
 	"github.com/resonatehq/resonate/pkg/schedule"
@@ -13,9 +11,7 @@ type StoreSubmission struct {
 	Transaction *Transaction
 }
 
-func (s *StoreSubmission) String() string {
-	return fmt.Sprintf("Store(transaction=Transaction(commands=%s))", s.Transaction.Commands)
-}
+func (s *StoreSubmission) String() string { _ = "STUB: not implemented"; return "" }
 
 type Transaction struct {
 	Fence    *task.FencingToken
@@ -31,18 +27,14 @@ type ReadPromiseCommand struct {
 	Id string
 }
 
-func (c *ReadPromiseCommand) String() string {
-	return "ReadPromise"
-}
+func (c *ReadPromiseCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type ReadPromisesCommand struct {
 	Time  int64
 	Limit int
 }
 
-func (c *ReadPromisesCommand) String() string {
-	return "ReadPromises"
-}
+func (c *ReadPromisesCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type SearchPromisesCommand struct {
 	Id     string
@@ -52,9 +44,7 @@ type SearchPromisesCommand struct {
 	SortId *int64
 }
 
-func (c *SearchPromisesCommand) String() string {
-	return "SearchPromises"
-}
+func (c *SearchPromisesCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type CreatePromiseCommand struct {
 	Id        string
@@ -65,9 +55,7 @@ type CreatePromiseCommand struct {
 	CreatedOn int64
 }
 
-func (c *CreatePromiseCommand) String() string {
-	return "CreatePromise"
-}
+func (c *CreatePromiseCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type UpdatePromiseCommand struct {
 	Id          string
@@ -76,9 +64,7 @@ type UpdatePromiseCommand struct {
 	CompletedOn int64
 }
 
-func (c *UpdatePromiseCommand) String() string {
-	return "UpdatePromise"
-}
+func (c *UpdatePromiseCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type CreateCallbackCommand struct {
 	Id        string
@@ -89,34 +75,26 @@ type CreateCallbackCommand struct {
 	CreatedOn int64
 }
 
-func (c *CreateCallbackCommand) String() string {
-	return "CreateCallback"
-}
+func (c *CreateCallbackCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type DeleteCallbacksCommand struct {
 	PromiseId string
 }
 
-func (c *DeleteCallbacksCommand) String() string {
-	return "DeleteCallbacks"
-}
+func (c *DeleteCallbacksCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type ReadScheduleCommand struct {
 	Id string
 }
 
-func (c *ReadScheduleCommand) String() string {
-	return "ReadSchedule"
-}
+func (c *ReadScheduleCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type ReadSchedulesCommand struct {
 	NextRunTime int64
 	Limit       int
 }
 
-func (c *ReadSchedulesCommand) String() string {
-	return "ReadSchedules"
-}
+func (c *ReadSchedulesCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type SearchSchedulesCommand struct {
 	Id     string
@@ -125,9 +103,7 @@ type SearchSchedulesCommand struct {
 	SortId *int64
 }
 
-func (c *SearchSchedulesCommand) String() string {
-	return "SearchSchedules"
-}
+func (c *SearchSchedulesCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type CreateScheduleCommand struct {
 	Id             string
@@ -142,9 +118,7 @@ type CreateScheduleCommand struct {
 	CreatedOn      int64
 }
 
-func (c *CreateScheduleCommand) String() string {
-	return "CreateSchedule"
-}
+func (c *CreateScheduleCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type UpdateScheduleCommand struct {
 	Id          string
@@ -152,25 +126,19 @@ type UpdateScheduleCommand struct {
 	NextRunTime int64
 }
 
-func (c *UpdateScheduleCommand) String() string {
-	return "UpdateSchedule"
-}
+func (c *UpdateScheduleCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type DeleteScheduleCommand struct {
 	Id string
 }
 
-func (c *DeleteScheduleCommand) String() string {
-	return "DeleteSchedule"
-}
+func (c *DeleteScheduleCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type ReadTaskCommand struct {
 	Id string
 }
 
-func (c *ReadTaskCommand) String() string {
-	return "ReadTask"
-}
+func (c *ReadTaskCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type ReadTasksCommand struct {
 	States []task.State
@@ -178,18 +146,14 @@ type ReadTasksCommand struct {
 	Limit  int
 }
 
-func (c *ReadTasksCommand) String() string {
-	return "ReadTasks"
-}
+func (c *ReadTasksCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type ReadEnqueueableTasksCommand struct {
 	Time  int64
 	Limit int
 }
 
-func (c *ReadEnqueueableTasksCommand) String() string {
-	return "ReadEnqueueableTasks"
-}
+func (c *ReadEnqueueableTasksCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type CreateTaskCommand struct {
 	Id        string
@@ -203,27 +167,21 @@ type CreateTaskCommand struct {
 	CreatedOn int64
 }
 
-func (c *CreateTaskCommand) String() string {
-	return "CreateTask"
-}
+func (c *CreateTaskCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type CreateTasksCommand struct {
 	PromiseId string
 	CreatedOn int64
 }
 
-func (c *CreateTasksCommand) String() string {
-	return "CreateTasks"
-}
+func (c *CreateTasksCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type CompleteTasksCommand struct {
 	RootPromiseId string
 	CompletedOn   int64
 }
 
-func (c *CompleteTasksCommand) String() string {
-	return "CompleteTasks"
-}
+func (c *CompleteTasksCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type UpdateTaskCommand struct {
 	Id             string
@@ -238,59 +196,51 @@ type UpdateTaskCommand struct {
 	CurrentCounter int
 }
 
-func (c *UpdateTaskCommand) String() string {
-	return "UpdateTask"
-}
+func (c *UpdateTaskCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type HeartbeatTasksCommand struct {
 	ProcessId string
 	Time      int64
 }
 
-func (c *HeartbeatTasksCommand) String() string {
-	return "HeartbeatTasks"
-}
+func (c *HeartbeatTasksCommand) String() string { _ = "STUB: not implemented"; return "" }
 
 type CreatePromiseAndTaskCommand struct {
 	PromiseCommand *CreatePromiseCommand
 	TaskCommand    *CreateTaskCommand
 }
 
-func (c *CreatePromiseAndTaskCommand) String() string {
-	return "CreatePromiseAndTask"
-}
+func (c *CreatePromiseAndTaskCommand) String() string { _ = "STUB: not implemented"; return "" }
 
-func (*ReadPromiseCommand) isCommand()          {}
-func (*ReadPromisesCommand) isCommand()         {}
-func (*SearchPromisesCommand) isCommand()       {}
-func (*CreatePromiseCommand) isCommand()        {}
-func (*UpdatePromiseCommand) isCommand()        {}
-func (*CreateCallbackCommand) isCommand()       {}
-func (*DeleteCallbacksCommand) isCommand()      {}
-func (*ReadScheduleCommand) isCommand()         {}
-func (*ReadSchedulesCommand) isCommand()        {}
-func (*SearchSchedulesCommand) isCommand()      {}
-func (*CreateScheduleCommand) isCommand()       {}
-func (*UpdateScheduleCommand) isCommand()       {}
-func (*DeleteScheduleCommand) isCommand()       {}
-func (*ReadTaskCommand) isCommand()             {}
-func (*ReadTasksCommand) isCommand()            {}
-func (*ReadEnqueueableTasksCommand) isCommand() {}
-func (*CreateTaskCommand) isCommand()           {}
-func (*CreateTasksCommand) isCommand()          {}
-func (*CompleteTasksCommand) isCommand()        {}
-func (*UpdateTaskCommand) isCommand()           {}
-func (*HeartbeatTasksCommand) isCommand()       {}
-func (*CreatePromiseAndTaskCommand) isCommand() {}
+func (*ReadPromiseCommand) isCommand()          { _ = "STUB: not implemented"; return }
+func (*ReadPromisesCommand) isCommand()         { _ = "STUB: not implemented"; return }
+func (*SearchPromisesCommand) isCommand()       { _ = "STUB: not implemented"; return }
+func (*CreatePromiseCommand) isCommand()        { _ = "STUB: not implemented"; return }
+func (*UpdatePromiseCommand) isCommand()        { _ = "STUB: not implemented"; return }
+func (*CreateCallbackCommand) isCommand()       { _ = "STUB: not implemented"; return }
+func (*DeleteCallbacksCommand) isCommand()      { _ = "STUB: not implemented"; return }
+func (*ReadScheduleCommand) isCommand()         { _ = "STUB: not implemented"; return }
+func (*ReadSchedulesCommand) isCommand()        { _ = "STUB: not implemented"; return }
+func (*SearchSchedulesCommand) isCommand()      { _ = "STUB: not implemented"; return }
+func (*CreateScheduleCommand) isCommand()       { _ = "STUB: not implemented"; return }
+func (*UpdateScheduleCommand) isCommand()       { _ = "STUB: not implemented"; return }
+func (*DeleteScheduleCommand) isCommand()       { _ = "STUB: not implemented"; return }
+func (*ReadTaskCommand) isCommand()             { _ = "STUB: not implemented"; return }
+func (*ReadTasksCommand) isCommand()            { _ = "STUB: not implemented"; return }
+func (*ReadEnqueueableTasksCommand) isCommand() { _ = "STUB: not implemented"; return }
+func (*CreateTaskCommand) isCommand()           { _ = "STUB: not implemented"; return }
+func (*CreateTasksCommand) isCommand()          { _ = "STUB: not implemented"; return }
+func (*CompleteTasksCommand) isCommand()        { _ = "STUB: not implemented"; return }
+func (*UpdateTaskCommand) isCommand()           { _ = "STUB: not implemented"; return }
+func (*HeartbeatTasksCommand) isCommand()       { _ = "STUB: not implemented"; return }
+func (*CreatePromiseAndTaskCommand) isCommand() { _ = "STUB: not implemented"; return }
 
 type StoreCompletion struct {
 	Valid   bool
 	Results []Result
 }
 
-func (c *StoreCompletion) String() string {
-	return fmt.Sprintf("Store(valid=%t, results=%s)", c.Valid, c.Results)
-}
+func (c *StoreCompletion) String() string { _ = "STUB: not implemented"; return "" }
 
 type Result interface {
 	String() string
@@ -303,25 +253,19 @@ type QueryPromisesResult struct {
 	Records      []*promise.PromiseRecord
 }
 
-func (r *QueryPromisesResult) String() string {
-	return "QueryPromises"
-}
+func (r *QueryPromisesResult) String() string { _ = "STUB: not implemented"; return "" }
 
 type AlterPromisesResult struct {
 	RowsAffected int64
 }
 
-func (r *AlterPromisesResult) String() string {
-	return "AlterPromises"
-}
+func (r *AlterPromisesResult) String() string { _ = "STUB: not implemented"; return "" }
 
 type AlterCallbacksResult struct {
 	RowsAffected int64
 }
 
-func (r *AlterCallbacksResult) String() string {
-	return "AlterCallbacks"
-}
+func (r *AlterCallbacksResult) String() string { _ = "STUB: not implemented"; return "" }
 
 type QuerySchedulesResult struct {
 	RowsReturned int64
@@ -329,61 +273,45 @@ type QuerySchedulesResult struct {
 	Records      []*schedule.ScheduleRecord
 }
 
-func (r *QuerySchedulesResult) String() string {
-	return "QuerySchedules"
-}
+func (r *QuerySchedulesResult) String() string { _ = "STUB: not implemented"; return "" }
 
 type AlterSchedulesResult struct {
 	RowsAffected int64
 }
 
-func (r *AlterSchedulesResult) String() string {
-	return "AlterSchedules"
-}
+func (r *AlterSchedulesResult) String() string { _ = "STUB: not implemented"; return "" }
 
 type QueryTasksResult struct {
 	RowsReturned int64
 	Records      []*task.TaskRecord
 }
 
-func (r *QueryTasksResult) String() string {
-	return "QueryTasks"
-}
+func (r *QueryTasksResult) String() string { _ = "STUB: not implemented"; return "" }
 
 type AlterTasksResult struct {
 	RowsAffected int64
 }
 
-func (r *AlterTasksResult) String() string {
-	return "AlterTasks"
-}
+func (r *AlterTasksResult) String() string { _ = "STUB: not implemented"; return "" }
 
-func (r *QueryPromisesResult) isResult()  {}
-func (r *AlterPromisesResult) isResult()  {}
-func (r *AlterCallbacksResult) isResult() {}
-func (r *QuerySchedulesResult) isResult() {}
-func (r *AlterSchedulesResult) isResult() {}
-func (r *QueryTasksResult) isResult()     {}
-func (r *AlterTasksResult) isResult()     {}
+func (r *QueryPromisesResult) isResult()  { _ = "STUB: not implemented"; return }
+func (r *AlterPromisesResult) isResult()  { _ = "STUB: not implemented"; return }
+func (r *AlterCallbacksResult) isResult() { _ = "STUB: not implemented"; return }
+func (r *QuerySchedulesResult) isResult() { _ = "STUB: not implemented"; return }
+func (r *AlterSchedulesResult) isResult() { _ = "STUB: not implemented"; return }
+func (r *QueryTasksResult) isResult()     { _ = "STUB: not implemented"; return }
+func (r *AlterTasksResult) isResult()     { _ = "STUB: not implemented"; return }
 
-func AsQueryPromises(r Result) *QueryPromisesResult {
-	return r.(*QueryPromisesResult)
-}
-func AsAlterPromises(r Result) *AlterPromisesResult {
-	return r.(*AlterPromisesResult)
-}
-func AsAlterCallbacks(r Result) *AlterCallbacksResult {
-	return r.(*AlterCallbacksResult)
-}
-func AsQuerySchedules(r Result) *QuerySchedulesResult {
-	return r.(*QuerySchedulesResult)
-}
-func AsAlterSchedules(r Result) *AlterSchedulesResult {
-	return r.(*AlterSchedulesResult)
-}
-func AsQueryTasks(r Result) *QueryTasksResult {
-	return r.(*QueryTasksResult)
-}
-func AsAlterTasks(r Result) *AlterTasksResult {
-	return r.(*AlterTasksResult)
-}
+func AsQueryPromises(r Result) *QueryPromisesResult { _ = "STUB: not implemented"; return nil }
+
+func AsAlterPromises(r Result) *AlterPromisesResult { _ = "STUB: not implemented"; return nil }
+
+func AsAlterCallbacks(r Result) *AlterCallbacksResult { _ = "STUB: not implemented"; return nil }
+
+func AsQuerySchedules(r Result) *QuerySchedulesResult { _ = "STUB: not implemented"; return nil }
+
+func AsAlterSchedules(r Result) *AlterSchedulesResult { _ = "STUB: not implemented"; return nil }
+
+func AsQueryTasks(r Result) *QueryTasksResult { _ = "STUB: not implemented"; return nil }
+
+func AsAlterTasks(r Result) *AlterTasksResult { _ = "STUB: not implemented"; return nil }

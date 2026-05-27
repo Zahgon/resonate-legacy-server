@@ -1,8 +1,6 @@
 package bus
 
 import (
-	"fmt"
-
 	"github.com/resonatehq/resonate/internal/kernel/t_aio"
 	"github.com/resonatehq/resonate/internal/kernel/t_api"
 )
@@ -21,9 +19,7 @@ type SQE[I Input, O Output] struct {
 	Submission *I
 }
 
-func (sqe *SQE[I, O]) String() string {
-	return fmt.Sprintf("SQE(id=%s, submission=%v)", sqe.Id, sqe.Submission)
-}
+func (sqe *SQE[I, O]) String() string { _ = "STUB: not implemented"; return "" }
 
 type CQE[I Input, O Output] struct {
 	Id         string
@@ -32,10 +28,6 @@ type CQE[I Input, O Output] struct {
 	Error      error
 }
 
-func (cqe *CQE[I, O]) Invoke() {
-	cqe.Callback(cqe.Completion, cqe.Error)
-}
+func (cqe *CQE[I, O]) Invoke() { _ = "STUB: not implemented"; return }
 
-func (cqe *CQE[I, O]) String() string {
-	return fmt.Sprintf("CQE(id=%s, completion=%v, error=%v)", cqe.Id, cqe.Completion, cqe.Error)
-}
+func (cqe *CQE[I, O]) String() string { _ = "STUB: not implemented"; return "" }

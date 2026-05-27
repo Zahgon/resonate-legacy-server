@@ -1,33 +1,18 @@
 package postgres
 
 import (
-	"context"
 	"database/sql"
-	"encoding/json"
-	"errors"
-	"fmt"
 	"math/rand" // nosemgrep
-	"net/url"
-	"strconv"
-	"strings"
 	"time"
 
 	"github.com/go-viper/mapstructure/v2"
 	"github.com/resonatehq/resonate/internal/aio"
-	"github.com/resonatehq/resonate/internal/app/subsystems/aio/store"
-	"github.com/resonatehq/resonate/internal/app/subsystems/aio/store/migrations"
 	"github.com/resonatehq/resonate/internal/kernel/bus"
 	"github.com/resonatehq/resonate/internal/kernel/t_aio"
 	"github.com/resonatehq/resonate/internal/metrics"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
-
-	cmdUtil "github.com/resonatehq/resonate/cmd/util"
-	"github.com/resonatehq/resonate/internal/util"
-	"github.com/resonatehq/resonate/pkg/promise"
-	"github.com/resonatehq/resonate/pkg/schedule"
-	"github.com/resonatehq/resonate/pkg/task"
 
 	_ "github.com/lib/pq"
 )
@@ -290,33 +275,23 @@ type Config struct {
 }
 
 func (c *Config) Bind(cmd *cobra.Command, flg *pflag.FlagSet, vip *viper.Viper, name string, prefix string, keyPrefix string) {
-	cmdUtil.Bind(c, cmd, flg, vip, name, prefix, keyPrefix)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (c *Config) Decode(value any, decodeHook mapstructure.DecodeHookFunc) error {
-	decoderConfig := &mapstructure.DecoderConfig{
-		Result:     c,
-		DecodeHook: decodeHook,
-	}
-
-	decoder, err := mapstructure.NewDecoder(decoderConfig)
-	if err != nil {
-		return err
-	}
-
-	if err := decoder.Decode(value); err != nil {
-		return err
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (c *Config) New(aio aio.AIO, metrics *metrics.Metrics) (aio.Subsystem, error) {
-	return New(aio, metrics, c)
+	_ = "STUB: not implemented"
+	return *new(aio.Subsystem), nil
 }
 
 func (c *Config) NewDST(aio aio.AIO, metrics *metrics.Metrics, _ *rand.Rand, _ chan any) (aio.SubsystemDST, error) {
-	return New(aio, metrics, c)
+	_ = "STUB: not implemented"
+	return *new(aio.SubsystemDST), nil
 }
 
 // Subsystem
@@ -328,9 +303,7 @@ type PostgresStore struct {
 	workers []*PostgresStoreWorker
 }
 
-func (s *PostgresStore) DB() *sql.DB {
-	return s.db
-}
+func (s *PostgresStore) DB() *sql.DB { _ = "STUB: not implemented"; return nil }
 
 type ConnConfig struct {
 	Host     string
@@ -341,160 +314,43 @@ type ConnConfig struct {
 	Query    map[string]string
 }
 
-func NewConn(config *ConnConfig) (*sql.DB, error) {
-	rawQuery := make([]string, len(config.Query))
-	for i, q := range util.OrderedRangeKV(config.Query) {
-		rawQuery[i] = fmt.Sprintf("%s=%s", q.Key, q.Value)
-	}
-
-	dbUrl := &url.URL{
-		User:     url.UserPassword(config.Username, config.Password),
-		Host:     fmt.Sprintf("%s:%s", config.Host, config.Port),
-		Path:     config.Database,
-		Scheme:   "postgres",
-		RawQuery: strings.Join(rawQuery, "&"),
-	}
-
-	return sql.Open("postgres", dbUrl.String())
-}
+func NewConn(config *ConnConfig) (*sql.DB, error) { _ = "STUB: not implemented"; return nil, nil }
 
 func New(aio aio.AIO, metrics *metrics.Metrics, config *Config) (*PostgresStore, error) {
-	sq := make(chan *bus.SQE[t_aio.Submission, t_aio.Completion], config.Size)
-	workers := make([]*PostgresStoreWorker, config.Workers)
-
-	rawQuery := make([]string, len(config.Query))
-	for i, q := range util.OrderedRangeKV(config.Query) {
-		rawQuery[i] = fmt.Sprintf("%s=%s", q.Key, q.Value)
-	}
-
-	connConfig := &ConnConfig{
-		Host:     config.Host,
-		Port:     config.Port,
-		Username: config.Username,
-		Password: config.Password,
-		Database: config.Database,
-		Query:    config.Query,
-	}
-
-	db, err := NewConn(connConfig)
-	if err != nil {
-		return nil, err
-	}
-
-	db.SetMaxOpenConns(config.Workers)
-	db.SetMaxIdleConns(config.Workers)
-	db.SetConnMaxIdleTime(0)
-
-	for i := 0; i < config.Workers; i++ {
-		workers[i] = &PostgresStoreWorker{
-			config:  config,
-			i:       i,
-			db:      db,
-			sq:      sq,
-			flush:   make(chan int64, 1),
-			aio:     aio,
-			metrics: metrics,
-		}
-	}
-
-	return &PostgresStore{
-		config:  config,
-		sq:      sq,
-		db:      db,
-		workers: workers,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func (s *PostgresStore) String() string {
-	return "store:postgres"
-}
+func (s *PostgresStore) String() string { _ = "STUB: not implemented"; return "" }
 
-func (s *PostgresStore) Kind() t_aio.Kind {
-	return t_aio.Store
-}
+func (s *PostgresStore) Kind() t_aio.Kind { _ = "STUB: not implemented"; return *new(t_aio.Kind) }
 
-func (s *PostgresStore) Start(chan<- error) error {
-	if _, err := s.db.Exec(CREATE_TABLE_STATEMENT); err != nil {
-		return err
-	}
-	ms := migrations.NewPostgresMigrationStore(s.db)
+func (s *PostgresStore) Start(chan<- error) error { _ = "STUB: not implemented"; return nil }
 
-	version, err := ms.GetCurrentVersion()
-	if err != nil {
-		return err
-	}
+// Get pending migrations
 
-	// Get pending migrations
-	pending, err := migrations.GetPendingMigrations(version, ms)
-	if err != nil {
-		return err
-	}
+// If version == 0, the db is fresh and we can apply all migrations automatically
 
-	// If version == 0, the db is fresh and we can apply all migrations automatically
-	if version == 0 {
-		if len(pending) > 0 {
-			// Validate migration sequence
-			if err := migrations.ValidateMigrationSequence(pending, version); err != nil {
-				return err
-			}
+// Validate migration sequence
 
-			// Apply all migrations
-			if err := migrations.ApplyMigrations(pending, ms); err != nil {
-				return err
-			}
-		}
-	} else {
-		// For existing databases, check for pending migrations and error if any exist
-		if len(pending) > 0 {
-			return errors.New("pending migrations, run `resonate migrate` for more information")
-		}
-	}
+// Apply all migrations
 
-	for _, worker := range s.workers {
-		go worker.Start()
-	}
+// For existing databases, check for pending migrations and error if any exist
 
-	return nil
-}
+func (s *PostgresStore) Stop() error { _ = "STUB: not implemented"; return nil }
 
-func (s *PostgresStore) Stop() error {
-	close(s.sq)
-
-	if s.config.Reset {
-		if err := s.Reset(); err != nil {
-			return err
-		}
-	}
-
-	return s.db.Close()
-}
-
-func (s *PostgresStore) Reset() error {
-	if _, err := s.db.Exec(DROP_TABLE_STATEMENT); err != nil {
-		return err
-	}
-
-	return nil
-}
+func (s *PostgresStore) Reset() error { _ = "STUB: not implemented"; return nil }
 
 func (s *PostgresStore) Enqueue(sqe *bus.SQE[t_aio.Submission, t_aio.Completion]) bool {
-	select {
-	case s.sq <- sqe:
-		return true
-	default:
-		return false
-	}
+	_ = "STUB: not implemented"
+	return false
 }
 
-func (s *PostgresStore) Flush(t int64) {
-	for _, worker := range s.workers {
-		worker.Flush(t)
-	}
-}
+func (s *PostgresStore) Flush(t int64) { _ = "STUB: not implemented"; return }
 
 func (s *PostgresStore) Process(sqes []*bus.SQE[t_aio.Submission, t_aio.Completion]) []*bus.CQE[t_aio.Submission, t_aio.Completion] {
-	util.Assert(len(s.workers) > 0, "must be at least one worker")
-	return s.workers[0].Process(sqes)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Worker
@@ -509,979 +365,185 @@ type PostgresStoreWorker struct {
 	metrics *metrics.Metrics
 }
 
-func (w *PostgresStoreWorker) String() string {
-	return "store:postgres"
-}
+func (w *PostgresStoreWorker) String() string { _ = "STUB: not implemented"; return "" }
 
-func (w *PostgresStoreWorker) Start() {
-	counter := w.metrics.AioWorkerInFlight.WithLabelValues(w.String(), strconv.Itoa(w.i))
-	w.metrics.AioWorker.WithLabelValues(w.String()).Inc()
-	defer w.metrics.AioWorker.WithLabelValues(w.String()).Dec()
-
-	for {
-		sqes, ok := store.Collect(w.sq, w.flush, w.config.BatchSize)
-		if len(sqes) > 0 {
-			counter.Set(float64(len(sqes)))
-			for _, cqe := range w.Process(sqes) {
-				w.aio.EnqueueCQE(cqe)
-				counter.Dec()
-			}
-		}
-		if !ok {
-			return
-		}
-	}
-}
+func (w *PostgresStoreWorker) Start() { _ = "STUB: not implemented"; return }
 
 func (w *PostgresStoreWorker) Flush(t int64) {
+	_ = "STUB: not implemented"
 	// ignore case where flush channel is full,
 	// this means the flush is waiting on the cq
-	select {
-	case w.flush <- t:
-	default:
-	}
+	return
 }
 
 func (w *PostgresStoreWorker) Process(sqes []*bus.SQE[t_aio.Submission, t_aio.Completion]) []*bus.CQE[t_aio.Submission, t_aio.Completion] {
-	return store.Process(w, sqes)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (w *PostgresStoreWorker) Execute(transactions []*t_aio.Transaction) ([]*t_aio.StoreCompletion, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), w.config.TxTimeout)
-	defer cancel()
-
-	tx, err := w.db.BeginTx(ctx, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	results, err := w.performCommands(tx, transactions)
-	if err != nil {
-		if rbErr := tx.Rollback(); rbErr != nil {
-			err = fmt.Errorf("tx failed: %v, unable to rollback: %v", err, rbErr)
-		}
-		return nil, err
-	}
-
-	if err := tx.Commit(); err != nil {
-		return nil, err
-	}
-
-	return results, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) performCommands(tx *sql.Tx, transactions []*t_aio.Transaction) ([]*t_aio.StoreCompletion, error) {
+	_ = "STUB: not implemented"
 	// Lazily defined prepared statements
-	var promiseInsertStmt *sql.Stmt
-	var promiseUpdateStmt *sql.Stmt
-	var callbackInsertStmt *sql.Stmt
-	var callbackDeleteStmt *sql.Stmt
-	var scheduleInsertStmt *sql.Stmt
-	var scheduleUpdateStmt *sql.Stmt
-	var scheduleDeleteStmt *sql.Stmt
-	var tasksInsertStmt *sql.Stmt
-	var taskInsertStmt *sql.Stmt
-	var taskUpdateStmt *sql.Stmt
-	var tasksCompleteStmt *sql.Stmt
-	var taskHeartbeatStmt *sql.Stmt
-
-	// Results
-	completions := make([]*t_aio.StoreCompletion, len(transactions))
-
-	for i, transaction := range transactions {
-		util.Assert(len(transaction.Commands) > 0, "expected a command")
-
-		valid, err := w.validFencingToken(tx, transaction)
-		if err != nil {
-			return nil, err
-		}
-
-		if !valid {
-			completions[i] = &t_aio.StoreCompletion{
-				Valid: false,
-			}
-			continue
-		}
-		results := make([]t_aio.Result, len(transaction.Commands))
-
-		completions[i] = &t_aio.StoreCompletion{
-			Valid:   true,
-			Results: results,
-		}
-
-		for j, command := range transaction.Commands {
-			var err error
-
-			switch v := command.(type) {
-			// Promises
-			case *t_aio.ReadPromiseCommand:
-				results[j], err = w.readPromise(tx, v)
-			case *t_aio.ReadPromisesCommand:
-				results[j], err = w.readPromises(tx, v)
-			case *t_aio.SearchPromisesCommand:
-				results[j], err = w.searchPromises(tx, v)
-			case *t_aio.CreatePromiseCommand:
-				if promiseInsertStmt == nil {
-					promiseInsertStmt, err = tx.Prepare(PROMISE_INSERT_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.createPromise(tx, promiseInsertStmt, v)
-			case *t_aio.UpdatePromiseCommand:
-				if promiseUpdateStmt == nil {
-					promiseUpdateStmt, err = tx.Prepare(PROMISE_UPDATE_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.updatePromise(tx, promiseUpdateStmt, v)
-
-			// Callbacks
-			case *t_aio.CreateCallbackCommand:
-				if callbackInsertStmt == nil {
-					callbackInsertStmt, err = tx.Prepare(CALLBACK_INSERT_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.createCallback(tx, callbackInsertStmt, v)
-			case *t_aio.DeleteCallbacksCommand:
-				if callbackDeleteStmt == nil {
-					callbackDeleteStmt, err = tx.Prepare(CALLBACK_DELETE_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.deleteCallbacks(tx, callbackDeleteStmt, v)
-
-			// Schedules
-			case *t_aio.ReadScheduleCommand:
-				results[j], err = w.readSchedule(tx, v)
-			case *t_aio.ReadSchedulesCommand:
-				results[j], err = w.readSchedules(tx, v)
-			case *t_aio.SearchSchedulesCommand:
-				results[j], err = w.searchSchedules(tx, v)
-			case *t_aio.CreateScheduleCommand:
-				if scheduleInsertStmt == nil {
-					scheduleInsertStmt, err = tx.Prepare(SCHEDULE_INSERT_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.createSchedule(tx, scheduleInsertStmt, v)
-			case *t_aio.UpdateScheduleCommand:
-				if scheduleUpdateStmt == nil {
-					scheduleUpdateStmt, err = tx.Prepare(SCHEDULE_UPDATE_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.updateSchedule(tx, scheduleUpdateStmt, v)
-			case *t_aio.DeleteScheduleCommand:
-				if scheduleDeleteStmt == nil {
-					scheduleDeleteStmt, err = tx.Prepare(SCHEDULE_DELETE_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.deleteSchedule(tx, scheduleDeleteStmt, v)
-
-			// Tasks
-			case *t_aio.ReadTaskCommand:
-				results[j], err = w.readTask(tx, v)
-			case *t_aio.ReadTasksCommand:
-				results[j], err = w.readTasks(tx, v)
-			case *t_aio.ReadEnqueueableTasksCommand:
-				results[j], err = w.readEnqueueableTasks(tx, v)
-			case *t_aio.CreateTaskCommand:
-				if taskInsertStmt == nil {
-					taskInsertStmt, err = tx.Prepare(TASK_INSERT_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.createTask(tx, taskInsertStmt, v)
-			case *t_aio.CreateTasksCommand:
-				if tasksInsertStmt == nil {
-					tasksInsertStmt, err = tx.Prepare(TASK_INSERT_ALL_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.createTasks(tx, tasksInsertStmt, v)
-			case *t_aio.UpdateTaskCommand:
-				if taskUpdateStmt == nil {
-					taskUpdateStmt, err = tx.Prepare(TASK_UPDATE_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.updateTask(tx, taskUpdateStmt, v)
-			case *t_aio.CompleteTasksCommand:
-				if tasksCompleteStmt == nil {
-					tasksCompleteStmt, err = tx.Prepare(TASK_COMPLETE_BY_ROOT_ID_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.completeTasks(tx, tasksCompleteStmt, v)
-			case *t_aio.HeartbeatTasksCommand:
-				if taskHeartbeatStmt == nil {
-					taskHeartbeatStmt, err = tx.Prepare(TASK_HEARTBEAT_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.heartbeatTasks(tx, taskHeartbeatStmt, v)
-
-			case *t_aio.CreatePromiseAndTaskCommand:
-				if promiseInsertStmt == nil {
-					promiseInsertStmt, err = tx.Prepare(PROMISE_INSERT_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-
-				if taskInsertStmt == nil {
-					taskInsertStmt, err = tx.Prepare(TASK_INSERT_STATEMENT)
-					if err != nil {
-						return nil, err
-					}
-				}
-				results[j], err = w.createPromiseAndTask(tx, promiseInsertStmt, taskInsertStmt, v)
-
-			default:
-				panic(fmt.Sprintf("invalid command: %s", command.String()))
-			}
-
-			if err != nil {
-				return nil, err
-			}
-		}
-	}
-
-	return completions, nil
+	return nil, nil
 }
+
+// Results
+
+// Promises
+
+// Callbacks
+
+// Schedules
+
+// Tasks
 
 // Promises
 
 func (w *PostgresStoreWorker) readPromise(tx *sql.Tx, cmd *t_aio.ReadPromiseCommand) (*t_aio.QueryPromisesResult, error) {
+	_ = "STUB: not implemented"
 	// select
-	row := tx.QueryRow(PROMISE_SELECT_STATEMENT, cmd.Id)
-	record := &promise.PromiseRecord{}
-	rowsReturned := int64(1)
-
-	if err := row.Scan(
-		&record.Id,
-		&record.State,
-		&record.ParamHeaders,
-		&record.ParamData,
-		&record.ValueHeaders,
-		&record.ValueData,
-		&record.Timeout,
-		&record.Tags,
-		&record.CreatedOn,
-		&record.CompletedOn,
-	); err != nil {
-		if err == sql.ErrNoRows {
-			rowsReturned = 0
-		} else {
-			return nil, err
-		}
-	}
-
-	var records []*promise.PromiseRecord
-	if rowsReturned == 1 {
-		records = append(records, record)
-	}
-
-	return &t_aio.QueryPromisesResult{
-		RowsReturned: rowsReturned,
-		Records:      records,
-	}, nil
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) readPromises(tx *sql.Tx, cmd *t_aio.ReadPromisesCommand) (*t_aio.QueryPromisesResult, error) {
+	_ = "STUB: not implemented"
 	// select
-	rows, err := tx.Query(PROMISE_SELECT_ALL_STATEMENT, cmd.Time, cmd.Limit)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsReturned := int64(0)
-	var records []*promise.PromiseRecord
-	var lastSortId int64
-
-	for rows.Next() {
-		record := &promise.PromiseRecord{}
-		if err := rows.Scan(
-			&record.Id,
-			&record.State,
-			&record.ParamHeaders,
-			&record.ParamData,
-			&record.ValueHeaders,
-			&record.ValueData,
-			&record.Timeout,
-			&record.Tags,
-			&record.CreatedOn,
-			&record.CompletedOn,
-			&record.SortId,
-		); err != nil {
-			return nil, err
-		}
-
-		records = append(records, record)
-		lastSortId = record.SortId
-		rowsReturned++
-	}
-
-	return &t_aio.QueryPromisesResult{
-		RowsReturned: rowsReturned,
-		LastSortId:   lastSortId,
-		Records:      records,
-	}, nil
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) searchPromises(tx *sql.Tx, cmd *t_aio.SearchPromisesCommand) (*t_aio.QueryPromisesResult, error) {
-	util.Assert(cmd.Id != "", "query cannot be empty")
-	util.Assert(cmd.States != nil, "states cannot be empty")
-	util.Assert(cmd.Tags != nil, "tags cannot be empty")
-
-	// convert query
-	id := strings.ReplaceAll(cmd.Id, "*", "%")
-
-	// convert list of state to bit mask
-	mask := 0
-	for _, state := range cmd.States {
-		mask = mask | int(state)
-	}
-
-	// tags
-	var tags *string
-
-	if len(cmd.Tags) > 0 {
-		t, err := json.Marshal(cmd.Tags)
-		if err != nil {
-			return nil, err
-		}
-
-		tags = util.ToPointer(string(t))
-	}
-
-	args := []any{
-		cmd.SortId,
-		id,
-		mask,
-		tags,
-		cmd.Limit,
-	}
-
-	// select
-	rows, err := tx.Query(PROMISE_SEARCH_STATEMENT, args...)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsReturned := int64(0)
-	var records []*promise.PromiseRecord
-	var lastSortId int64
-
-	for rows.Next() {
-		record := &promise.PromiseRecord{}
-		if err := rows.Scan(
-			&record.Id,
-			&record.State,
-			&record.ParamHeaders,
-			&record.ParamData,
-			&record.ValueHeaders,
-			&record.ValueData,
-			&record.Timeout,
-			&record.Tags,
-			&record.CreatedOn,
-			&record.CompletedOn,
-			&record.SortId,
-		); err != nil {
-			return nil, err
-		}
-
-		records = append(records, record)
-		lastSortId = record.SortId
-		rowsReturned++
-	}
-
-	return &t_aio.QueryPromisesResult{
-		RowsReturned: rowsReturned,
-		LastSortId:   lastSortId,
-		Records:      records,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
+
+// convert query
+
+// convert list of state to bit mask
+
+// tags
+
+// select
 
 func (w *PostgresStoreWorker) createPromise(_ *sql.Tx, stmt *sql.Stmt, cmd *t_aio.CreatePromiseCommand) (*t_aio.AlterPromisesResult, error) {
-	util.Assert(cmd.State.In(promise.Pending|promise.Resolved|promise.Timedout), "init state must be one of pending, resolved, timedout")
-	util.Assert(cmd.Param.Headers != nil, "param headers must not be nil")
-	util.Assert(cmd.Param.Data != nil, "param data must not be nil")
-	util.Assert(cmd.Tags != nil, "tags must not be nil")
-
-	headers, err := json.Marshal(cmd.Param.Headers)
-	if err != nil {
-		return nil, err
-	}
-
-	tags, err := json.Marshal(cmd.Tags)
-	if err != nil {
-		return nil, err
-	}
-
-	// insert
-	res, err := stmt.Exec(cmd.Id, cmd.State, headers, cmd.Param.Data, cmd.Timeout, cmd.Id, tags, cmd.CreatedOn)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, err
-	}
-
-	return &t_aio.AlterPromisesResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
+// insert
+
 func (w *PostgresStoreWorker) createPromiseAndTask(tx *sql.Tx, promiseStmt *sql.Stmt, taskStmt *sql.Stmt, cmd *t_aio.CreatePromiseAndTaskCommand) (*t_aio.AlterPromisesResult, error) {
-	res, err := w.createPromise(tx, promiseStmt, cmd.PromiseCommand)
-	if err != nil {
-		return nil, err
-	}
-
-	if res.RowsAffected == 1 {
-		if _, err := w.createTask(tx, taskStmt, cmd.TaskCommand); err != nil {
-			return nil, err
-		}
-	}
-
-	return res, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) updatePromise(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.UpdatePromiseCommand) (*t_aio.AlterPromisesResult, error) {
-	util.Assert(cmd.State.In(promise.Resolved|promise.Rejected|promise.Canceled|promise.Timedout), "state must be canceled, resolved, rejected, or timedout")
-	util.Assert(cmd.Value.Headers != nil, "value headers must not be nil")
-	util.Assert(cmd.Value.Data != nil, "value data must not be nil")
-
-	headers, err := json.Marshal(cmd.Value.Headers)
-	if err != nil {
-		return nil, err
-	}
-
-	// update
-	res, err := stmt.Exec(cmd.State, headers, cmd.Value.Data, cmd.Id, cmd.CompletedOn, cmd.Id)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, err
-	}
-
-	return &t_aio.AlterPromisesResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
+
+// update
 
 // Callbacks
 
 func (w *PostgresStoreWorker) createCallback(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.CreateCallbackCommand) (*t_aio.AlterCallbacksResult, error) {
-	util.Assert(cmd.Recv != nil, "recv must not be nil")
-	util.Assert(cmd.Mesg != nil, "mesg must not be nil")
-
-	mesg, err := json.Marshal(cmd.Mesg)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := stmt.Exec(cmd.Id, cmd.PromiseId, cmd.Mesg.Root, cmd.Recv, mesg, cmd.Timeout, cmd.CreatedOn)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, err
-	}
-
-	return &t_aio.AlterCallbacksResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) deleteCallbacks(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.DeleteCallbacksCommand) (*t_aio.AlterCallbacksResult, error) {
-	res, err := stmt.Exec(cmd.PromiseId)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, err
-	}
-
-	return &t_aio.AlterCallbacksResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // Schedules
 
 func (w *PostgresStoreWorker) readSchedule(tx *sql.Tx, cmd *t_aio.ReadScheduleCommand) (*t_aio.QuerySchedulesResult, error) {
-	row := tx.QueryRow(SCHEDULE_SELECT_STATEMENT, cmd.Id)
-	record := &schedule.ScheduleRecord{}
-	rowsReturned := int64(1)
-
-	if err := row.Scan(
-		&record.Id,
-		&record.Description,
-		&record.Cron,
-		&record.Tags,
-		&record.PromiseId,
-		&record.PromiseTimeout,
-		&record.PromiseParamHeaders,
-		&record.PromiseParamData,
-		&record.PromiseTags,
-		&record.LastRunTime,
-		&record.NextRunTime,
-		&record.CreatedOn,
-	); err != nil {
-		if err == sql.ErrNoRows {
-			rowsReturned = 0
-		} else {
-			return nil, err
-		}
-	}
-
-	var records []*schedule.ScheduleRecord
-	if rowsReturned == 1 {
-		records = append(records, record)
-	}
-
-	return &t_aio.QuerySchedulesResult{
-		RowsReturned: rowsReturned,
-		Records:      records,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) readSchedules(tx *sql.Tx, cmd *t_aio.ReadSchedulesCommand) (*t_aio.QuerySchedulesResult, error) {
-	rows, err := tx.Query(SCHEDULE_SELECT_ALL_STATEMENT, cmd.NextRunTime, cmd.Limit)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsReturned := int64(0)
-	var records []*schedule.ScheduleRecord
-
-	for rows.Next() {
-		record := &schedule.ScheduleRecord{}
-		if err := rows.Scan(
-			&record.Id,
-			&record.Cron,
-			&record.PromiseId,
-			&record.PromiseTimeout,
-			&record.PromiseParamHeaders,
-			&record.PromiseParamData,
-			&record.PromiseTags,
-			&record.LastRunTime,
-			&record.NextRunTime,
-		); err != nil {
-			return nil, err
-		}
-
-		records = append(records, record)
-		rowsReturned++
-	}
-
-	return &t_aio.QuerySchedulesResult{
-		RowsReturned: rowsReturned,
-		Records:      records,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) searchSchedules(tx *sql.Tx, cmd *t_aio.SearchSchedulesCommand) (*t_aio.QuerySchedulesResult, error) {
-	util.Assert(cmd.Id != "", "query cannot be empty")
-	util.Assert(cmd.Tags != nil, "tags cannot be empty")
-
-	// convert query
-	id := strings.ReplaceAll(cmd.Id, "*", "%")
-
-	// tags
-	var tags *string
-	if len(cmd.Tags) > 0 {
-		t, err := json.Marshal(cmd.Tags)
-		if err != nil {
-			return nil, err
-		}
-
-		tags = util.ToPointer(string(t))
-	}
-
-	// select
-	rows, err := tx.Query(SCHEDULE_SEARCH_STATEMENT, cmd.SortId, id, tags, cmd.Limit)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsReturned := int64(0)
-	var records []*schedule.ScheduleRecord
-	var lastSortId int64
-
-	for rows.Next() {
-		record := &schedule.ScheduleRecord{}
-		if err := rows.Scan(
-			&record.Id,
-			&record.Cron,
-			&record.Tags,
-			&record.LastRunTime,
-			&record.NextRunTime,
-			&record.CreatedOn,
-			&record.SortId,
-		); err != nil {
-			return nil, err
-		}
-
-		records = append(records, record)
-		lastSortId = record.SortId
-		rowsReturned++
-	}
-
-	return &t_aio.QuerySchedulesResult{
-		RowsReturned: rowsReturned,
-		LastSortId:   lastSortId,
-		Records:      records,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
+// convert query
+
+// tags
+
+// select
+
 func (w *PostgresStoreWorker) createSchedule(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.CreateScheduleCommand) (*t_aio.AlterSchedulesResult, error) {
-	tags, err := json.Marshal(cmd.Tags)
-	if err != nil {
-		return nil, err
-	}
-
-	promiseParamHeaders, err := json.Marshal(cmd.PromiseParam.Headers)
-	if err != nil {
-		return nil, err
-	}
-
-	promiseTags, err := json.Marshal(cmd.PromiseTags)
-	if err != nil {
-		return nil, err
-	}
-
-	res, err := stmt.Exec(
-		cmd.Id,
-		cmd.Description,
-		cmd.Cron,
-		tags,
-		cmd.PromiseId,
-		cmd.PromiseTimeout,
-		promiseParamHeaders,
-		cmd.PromiseParam.Data,
-		promiseTags,
-		cmd.NextRunTime,
-		cmd.Id,
-		cmd.CreatedOn,
-	)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, err
-	}
-
-	return &t_aio.AlterSchedulesResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) updateSchedule(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.UpdateScheduleCommand) (*t_aio.AlterSchedulesResult, error) {
-	res, err := stmt.Exec(cmd.NextRunTime, cmd.Id, cmd.LastRunTime)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, err
-	}
-
-	return &t_aio.AlterSchedulesResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) deleteSchedule(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.DeleteScheduleCommand) (*t_aio.AlterSchedulesResult, error) {
-	res, err := stmt.Exec(cmd.Id)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, err
-	}
-
-	return &t_aio.AlterSchedulesResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // Tasks
 
 func (w *PostgresStoreWorker) readTask(tx *sql.Tx, cmd *t_aio.ReadTaskCommand) (*t_aio.QueryTasksResult, error) {
-	row := tx.QueryRow(TASK_SELECT_STATEMENT, cmd.Id)
-	record := &task.TaskRecord{}
-	rowsReturned := int64(1)
-
-	if err := row.Scan(
-		&record.Id,
-		&record.ProcessId,
-		&record.State,
-		&record.RootPromiseId,
-		&record.Recv,
-		&record.Mesg,
-		&record.Timeout,
-		&record.Counter,
-		&record.Attempt,
-		&record.Ttl,
-		&record.ExpiresAt,
-		&record.CreatedOn,
-		&record.CompletedOn,
-	); err != nil {
-		if err == sql.ErrNoRows {
-			rowsReturned = 0
-		} else {
-			return nil, store.StoreErr(err)
-		}
-	}
-
-	var records []*task.TaskRecord
-	if rowsReturned == 1 {
-		records = append(records, record)
-	}
-
-	return &t_aio.QueryTasksResult{
-		RowsReturned: rowsReturned,
-		Records:      records,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) readTasks(tx *sql.Tx, cmd *t_aio.ReadTasksCommand) (*t_aio.QueryTasksResult, error) {
-	util.Assert(len(cmd.States) > 0, "must provide at least one state")
-
-	var states task.State
-	for _, state := range cmd.States {
-		states |= state
-	}
-
-	rows, err := tx.Query(TASK_SELECT_ALL_STATEMENT, states, cmd.Time, cmd.Limit)
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	rowsReturned := int64(0)
-	var records []*task.TaskRecord
-
-	for rows.Next() {
-		record := &task.TaskRecord{}
-		if err := rows.Scan(
-			&record.Id,
-			&record.ProcessId,
-			&record.State,
-			&record.RootPromiseId,
-			&record.Recv,
-			&record.Mesg,
-			&record.Timeout,
-			&record.Counter,
-			&record.Attempt,
-			&record.Ttl,
-			&record.ExpiresAt,
-			&record.CreatedOn,
-			&record.CompletedOn,
-		); err != nil {
-			return nil, store.StoreErr(err)
-		}
-
-		records = append(records, record)
-		rowsReturned++
-	}
-
-	return &t_aio.QueryTasksResult{
-		RowsReturned: rowsReturned,
-		Records:      records,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) readEnqueueableTasks(tx *sql.Tx, cmd *t_aio.ReadEnqueueableTasksCommand) (*t_aio.QueryTasksResult, error) {
-	rows, err := tx.Query(TASK_SELECT_ENQUEUEABLE_STATEMENT, cmd.Time, cmd.Limit)
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	rowsReturned := int64(0)
-	var records []*task.TaskRecord
-
-	for rows.Next() {
-		record := &task.TaskRecord{}
-		if err := rows.Scan(
-			&record.Id,
-			&record.ProcessId,
-			&record.State,
-			&record.RootPromiseId,
-			&record.Recv,
-			&record.Mesg,
-			&record.Timeout,
-			&record.Counter,
-			&record.Attempt,
-			&record.Ttl,
-			&record.ExpiresAt,
-			&record.CreatedOn,
-			&record.CompletedOn,
-		); err != nil {
-			return nil, store.StoreErr(err)
-		}
-
-		records = append(records, record)
-		rowsReturned++
-	}
-
-	return &t_aio.QueryTasksResult{
-		RowsReturned: rowsReturned,
-		Records:      records,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) createTask(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.CreateTaskCommand) (*t_aio.AlterTasksResult, error) {
-	util.Assert(cmd.Recv != nil, "recv must not be nil")
-	util.Assert(cmd.Mesg != nil, "mesg must not be nil")
-	util.Assert(cmd.State.In(task.Init|task.Claimed), "state must be init or claimed")
-	util.Assert(cmd.State != task.Claimed || cmd.ProcessId != nil, "process id must be set if state is claimed")
-
-	mesg, err := json.Marshal(cmd.Mesg)
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	// insert
-	res, err := stmt.Exec(cmd.Id, cmd.Recv, mesg, cmd.Timeout, cmd.ProcessId, cmd.State, cmd.Mesg.Root, cmd.Ttl, cmd.ExpiresAt, cmd.CreatedOn)
-	if err != nil {
-		return nil, err
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, err
-	}
-
-	return &t_aio.AlterTasksResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
+// insert
+
 func (w *PostgresStoreWorker) createTasks(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.CreateTasksCommand) (*t_aio.AlterTasksResult, error) {
-	res, err := stmt.Exec(cmd.CreatedOn, cmd.PromiseId)
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	return &t_aio.AlterTasksResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) completeTasks(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.CompleteTasksCommand) (*t_aio.AlterTasksResult, error) {
-	res, err := stmt.Exec(cmd.CompletedOn, cmd.RootPromiseId)
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	return &t_aio.AlterTasksResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) updateTask(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.UpdateTaskCommand) (*t_aio.AlterTasksResult, error) {
-	util.Assert(len(cmd.CurrentStates) > 0, "must provide at least one current state")
-
-	var currentStates task.State
-	for _, state := range cmd.CurrentStates {
-		currentStates |= state
-	}
-
-	res, err := stmt.Exec(
-		cmd.ProcessId,
-		cmd.State,
-		cmd.Counter,
-		cmd.Attempt,
-		cmd.Ttl,
-		cmd.ExpiresAt,
-		cmd.CompletedOn,
-		cmd.Id,
-		currentStates,
-		cmd.CurrentCounter,
-	)
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	return &t_aio.AlterTasksResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) heartbeatTasks(tx *sql.Tx, stmt *sql.Stmt, cmd *t_aio.HeartbeatTasksCommand) (*t_aio.AlterTasksResult, error) {
-	res, err := stmt.Exec(cmd.Time, cmd.ProcessId)
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	rowsAffected, err := res.RowsAffected()
-	if err != nil {
-		return nil, store.StoreErr(err)
-	}
-
-	return &t_aio.AlterTasksResult{
-		RowsAffected: rowsAffected,
-	}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func (w *PostgresStoreWorker) validFencingToken(tx *sql.Tx, transaction *t_aio.Transaction) (bool, error) {
+	_ = "STUB: not implemented"
 	// if the task is not provided continue with the operation
-	if transaction.Fence == nil {
-		return true, nil
-	}
-
-	var rowCount int64
-	err := tx.QueryRow(TASK_VALIDATE_STATEMENT, transaction.Fence.TaskId, transaction.Fence.TaskCounter).Scan(&rowCount)
-
-	if err != nil {
-		return false, store.StoreErr(err)
-	}
-	util.Assert(rowCount == 1 || rowCount == 0, "must be zero or one")
-	return rowCount == 1, nil
+	return false, nil
 }

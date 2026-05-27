@@ -1,13 +1,9 @@
 package config
 
 import (
-	"fmt"
 	"math/rand" // nosemgrep
-	"os"
-	"strings"
 
 	"github.com/go-viper/mapstructure/v2"
-	"github.com/resonatehq/resonate/cmd/util"
 	"github.com/resonatehq/resonate/internal/aio"
 	"github.com/resonatehq/resonate/internal/api"
 	"github.com/resonatehq/resonate/internal/kernel/system"
@@ -28,14 +24,7 @@ type Config struct {
 	LogLevel    string        `flag:"log-level" desc:"can be one of: debug, info, warn, error" default:"info"`
 }
 
-func (c *Config) Plugins() []plugin {
-	plugins := []plugin{}
-	plugins = append(plugins, c.API.Subsystems.AsPlugins()...)
-	plugins = append(plugins, c.AIO.Subsystems.AsPlugins()...)
-	plugins = append(plugins, c.AIO.Plugins.AsPlugins()...)
-
-	return plugins
-}
+func (c *Config) Plugins() []plugin { _ = "STUB: not implemented"; return nil }
 
 type API struct {
 	Size       int           `flag:"size" desc:"submission buffered channel size" default:"1000" dst:"1:1000"`
@@ -53,23 +42,7 @@ type Auth struct {
 	PublicKey string `flag:"public-key" desc:"public key path used for jwt based authentication"`
 }
 
-func (a *API) Middleware() ([]api.Middleware, error) {
-	middleware := []api.Middleware{}
-
-	if a.Auth.PublicKey != "" {
-		pem, err := os.ReadFile(a.Auth.PublicKey)
-		if err != nil {
-			return nil, err
-		}
-		m, err := api.NewJWTAuthenticator(pem)
-		if err != nil {
-			return nil, err
-		}
-		middleware = append(middleware, m)
-	}
-
-	return middleware, nil
-}
+func (a *API) Middleware() ([]api.Middleware, error) { _ = "STUB: not implemented"; return nil, nil }
 
 // Plugins
 
@@ -88,28 +61,13 @@ type APISubsystems struct {
 }
 
 func (a *APISubsystems) Add(name string, enabled bool, subsystem APISubsystem) {
-	kName := strings.ReplaceAll(name, "-", ".")
-	a.subsystems = append(a.subsystems, &apiSubsystem{
-		prefix:    fmt.Sprintf("api-%s", name),
-		key:       fmt.Sprintf("api.subsystems.%s.config", kName),
-		name:      name,
-		enabled:   &enabledFlag{fmt.Sprintf("api.subsystems.%s.enabled", kName), enabled},
-		subsystem: subsystem,
-	})
+	_ = "STUB: not implemented"
+	return
 }
 
-func (a *APISubsystems) All() []*apiSubsystem {
-	return a.subsystems
-}
+func (a *APISubsystems) All() []*apiSubsystem { _ = "STUB: not implemented"; return nil }
 
-func (a *APISubsystems) AsPlugins() []plugin {
-	subsystems := []plugin{}
-	for _, s := range a.subsystems {
-		subsystems = append(subsystems, s)
-	}
-
-	return subsystems
-}
+func (a *APISubsystems) AsPlugins() []plugin { _ = "STUB: not implemented"; return nil }
 
 type apiSubsystem struct {
 	subsystem APISubsystem
@@ -125,34 +83,23 @@ type APISubsystem interface {
 	New(api.API, *metrics.Metrics) (api.Subsystem, error)
 }
 
-func (a *apiSubsystem) Name() string {
-	return a.name
-}
+func (a *apiSubsystem) Name() string { _ = "STUB: not implemented"; return "" }
 
-func (a *apiSubsystem) Enabled() bool {
-	return a.enabled.val
-}
+func (a *apiSubsystem) Enabled() bool { _ = "STUB: not implemented"; return false }
 
 func (a *apiSubsystem) Bind(cmd *cobra.Command, flg *pflag.FlagSet, vip *viper.Viper, name string) {
-	n := fmt.Sprintf("%s-enable", a.prefix)
-	flg.Bool(n, a.enabled.val, "enable subsystem")
-	_ = vip.BindPFlag(a.enabled.key, flg.Lookup(n))
-
-	a.subsystem.Bind(cmd, flg, vip, name, a.prefix, a.key)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (a *apiSubsystem) Decode(vip *viper.Viper, hooks mapstructure.DecodeHookFunc) error {
-	value, ok := util.Extract(vip.AllSettings(), a.key)
-	if !ok {
-		panic("plugin config not found")
-	}
-
-	a.enabled.val = vip.GetBool(a.enabled.key)
-	return a.subsystem.Decode(value, hooks)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (a *apiSubsystem) New(api api.API, metrics *metrics.Metrics) (api.Subsystem, error) {
-	return a.subsystem.New(api, metrics)
+	_ = "STUB: not implemented"
+	return *new(api.Subsystem), nil
 }
 
 type AIOSubsystems struct {
@@ -160,28 +107,13 @@ type AIOSubsystems struct {
 }
 
 func (a *AIOSubsystems) Add(name string, enabled bool, subsystem AIOSubsystem) {
-	kName := strings.ReplaceAll(name, "-", ".")
-	a.subsystems = append(a.subsystems, &aioSubsystem{
-		subsystem: subsystem,
-		prefix:    fmt.Sprintf("aio-%s", name),
-		key:       fmt.Sprintf("aio.subsystems.%s.config", kName),
-		name:      name,
-		enabled:   &enabledFlag{fmt.Sprintf("aio.subsystems.%s.enabled", kName), enabled},
-	})
+	_ = "STUB: not implemented"
+	return
 }
 
-func (a *AIOSubsystems) All() []*aioSubsystem {
-	return a.subsystems
-}
+func (a *AIOSubsystems) All() []*aioSubsystem { _ = "STUB: not implemented"; return nil }
 
-func (a *AIOSubsystems) AsPlugins() []plugin {
-	subsystems := []plugin{}
-	for _, s := range a.subsystems {
-		subsystems = append(subsystems, s)
-	}
-
-	return subsystems
-}
+func (a *AIOSubsystems) AsPlugins() []plugin { _ = "STUB: not implemented"; return nil }
 
 type aioSubsystem struct {
 	subsystem AIOSubsystem
@@ -198,38 +130,28 @@ type AIOSubsystem interface {
 	NewDST(aio.AIO, *metrics.Metrics, *rand.Rand, chan any) (aio.SubsystemDST, error)
 }
 
-func (a *aioSubsystem) Name() string {
-	return a.name
-}
+func (a *aioSubsystem) Name() string { _ = "STUB: not implemented"; return "" }
 
-func (a *aioSubsystem) Enabled() bool {
-	return a.enabled.val
-}
+func (a *aioSubsystem) Enabled() bool { _ = "STUB: not implemented"; return false }
 
 func (a *aioSubsystem) Bind(cmd *cobra.Command, flg *pflag.FlagSet, vip *viper.Viper, name string) {
-	n := fmt.Sprintf("%s-enable", a.prefix)
-	flg.Bool(n, a.enabled.val, "enable subsystem")
-	_ = vip.BindPFlag(a.enabled.key, flg.Lookup(n))
-
-	a.subsystem.Bind(cmd, flg, vip, name, a.prefix, a.key)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (a *aioSubsystem) Decode(vip *viper.Viper, hooks mapstructure.DecodeHookFunc) error {
-	value, ok := util.Extract(vip.AllSettings(), a.key)
-	if !ok {
-		panic("plugin config not found")
-	}
-
-	a.enabled.val = vip.GetBool(a.enabled.key)
-	return a.subsystem.Decode(value, hooks)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (a *aioSubsystem) New(aio aio.AIO, metrics *metrics.Metrics) (aio.Subsystem, error) {
-	return a.subsystem.New(aio, metrics)
+	_ = "STUB: not implemented"
+	return *new(aio.Subsystem), nil
 }
 
 func (a *aioSubsystem) NewDST(aio aio.AIO, metrics *metrics.Metrics, r *rand.Rand, c chan any) (aio.SubsystemDST, error) {
-	return a.subsystem.NewDST(aio, metrics, r, c)
+	_ = "STUB: not implemented"
+	return *new(aio.SubsystemDST), nil
 }
 
 type AIOPlugins struct {
@@ -237,28 +159,13 @@ type AIOPlugins struct {
 }
 
 func (a *AIOPlugins) Add(name string, enabled bool, plugin AIOPlugin) {
-	kName := strings.ReplaceAll(name, "-", ".")
-	a.plugins = append(a.plugins, &aioPlugin{
-		plugin:  plugin,
-		prefix:  fmt.Sprintf("aio-%s", name),
-		key:     fmt.Sprintf("aio.plugins.%s.config", kName),
-		name:    name,
-		enabled: &enabledFlag{fmt.Sprintf("aio.plugins.%s.enabled", kName), enabled},
-	})
+	_ = "STUB: not implemented"
+	return
 }
 
-func (a *AIOPlugins) All() []*aioPlugin {
-	return a.plugins
-}
+func (a *AIOPlugins) All() []*aioPlugin { _ = "STUB: not implemented"; return nil }
 
-func (a *AIOPlugins) AsPlugins() []plugin {
-	plugins := []plugin{}
-	for _, p := range a.plugins {
-		plugins = append(plugins, p)
-	}
-
-	return plugins
-}
+func (a *AIOPlugins) AsPlugins() []plugin { _ = "STUB: not implemented"; return nil }
 
 type aioPlugin struct {
 	plugin  AIOPlugin
@@ -274,32 +181,21 @@ type AIOPlugin interface {
 	New(*metrics.Metrics) (plugins.Plugin, error)
 }
 
-func (a *aioPlugin) Name() string {
-	return a.name
-}
+func (a *aioPlugin) Name() string { _ = "STUB: not implemented"; return "" }
 
-func (a *aioPlugin) Enabled() bool {
-	return a.enabled.val
-}
+func (a *aioPlugin) Enabled() bool { _ = "STUB: not implemented"; return false }
 
 func (a *aioPlugin) Bind(cmd *cobra.Command, flg *pflag.FlagSet, vip *viper.Viper, name string) {
-	n := fmt.Sprintf("%s-enable", a.prefix)
-	flg.Bool(n, a.enabled.val, "enable plugin")
-	_ = vip.BindPFlag(a.enabled.key, flg.Lookup(n))
-
-	a.plugin.Bind(cmd, flg, vip, name, a.prefix, a.key)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (a *aioPlugin) Decode(vip *viper.Viper, hooks mapstructure.DecodeHookFunc) error {
-	value, ok := util.Extract(vip.AllSettings(), a.key)
-	if !ok {
-		panic("plugin config not found")
-	}
-
-	a.enabled.val = vip.GetBool(a.enabled.key)
-	return a.plugin.Decode(value, hooks)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func (a *aioPlugin) New(metrics *metrics.Metrics) (plugins.Plugin, error) {
-	return a.plugin.New(metrics)
+	_ = "STUB: not implemented"
+	return *new(plugins.Plugin), nil
 }

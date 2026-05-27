@@ -926,8 +926,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -960,8 +960,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -995,8 +995,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1029,8 +1029,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1064,8 +1064,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1100,8 +1100,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusPromiseNotFound,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusPromiseNotFound,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1134,8 +1134,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusPromiseNotFound,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusPromiseNotFound,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1171,8 +1171,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1205,8 +1205,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1240,8 +1240,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1275,8 +1275,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1309,8 +1309,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1346,8 +1346,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusPromiseNotFound,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusPromiseNotFound,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1380,8 +1380,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusPromiseNotFound,
-			Data: &t_api.PromiseRegisterResponse{},
+			Status: t_api.StatusPromiseNotFound,
+			Data:   &t_api.PromiseRegisterResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1651,8 +1651,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusNoContent,
-			Data: &t_api.ScheduleDeleteResponse{},
+			Status: t_api.StatusNoContent,
+			Data:   &t_api.ScheduleDeleteResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1861,8 +1861,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.TaskCompleteResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.TaskCompleteResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1891,8 +1891,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.TaskCompleteResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.TaskCompleteResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1917,8 +1917,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.TaskReleaseResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.TaskReleaseResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{
@@ -1947,8 +1947,8 @@ var TestCases = []*testCase{
 			},
 		},
 		Res: &t_api.Response{
-			Status:  t_api.StatusCreated,
-			Data: &t_api.TaskReleaseResponse{},
+			Status: t_api.StatusCreated,
+			Data:   &t_api.TaskReleaseResponse{},
 		},
 		Http: &httpTestCase{
 			Req: &httpTestCaseRequest{

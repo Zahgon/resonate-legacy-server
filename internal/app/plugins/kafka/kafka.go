@@ -1,11 +1,6 @@
 package kafka
 
 import (
-	"encoding/json"
-	"fmt"
-	"log/slog"
-	"strconv"
-	"strings"
 	"time"
 
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
@@ -14,8 +9,6 @@ import (
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 
-	cmdUtil "github.com/resonatehq/resonate/cmd/util"
-	"github.com/resonatehq/resonate/internal/kernel/t_aio"
 	"github.com/resonatehq/resonate/internal/metrics"
 	"github.com/resonatehq/resonate/internal/plugins"
 )
@@ -31,29 +24,18 @@ type Config struct {
 }
 
 func (c *Config) Bind(cmd *cobra.Command, flg *pflag.FlagSet, vip *viper.Viper, name string, prefix string, keyPrefix string) {
-	cmdUtil.Bind(c, cmd, flg, vip, name, prefix, keyPrefix)
+	_ = "STUB: not implemented"
+	return
 }
 
 func (c *Config) Decode(value any, decodeHook mapstructure.DecodeHookFunc) error {
-	decoderConfig := &mapstructure.DecoderConfig{
-		Result:     c,
-		DecodeHook: decodeHook,
-	}
-
-	decoder, err := mapstructure.NewDecoder(decoderConfig)
-	if err != nil {
-		return err
-	}
-
-	if err := decoder.Decode(value); err != nil {
-		return err
-	}
-
+	_ = "STUB: not implemented"
 	return nil
 }
 
 func (c *Config) New(metrics *metrics.Metrics) (plugins.Plugin, error) {
-	return New(metrics, c)
+	_ = "STUB: not implemented"
+	return *new(plugins.Plugin), nil
 }
 
 type Producer interface {
@@ -81,153 +63,37 @@ type Addr struct {
 	Headers map[string]string `json:"headers,omitempty"`
 }
 
-func (a *Addr) validate() error {
-	if a.Topic == "" {
-		return fmt.Errorf("topic required")
-	}
-	return nil
-}
+func (a *Addr) validate() error { _ = "STUB: not implemented"; return nil }
 
 func New(metrics *metrics.Metrics, config *Config) (*Kafka, error) {
-	producerConfig := &kafka.ConfigMap{
-		"bootstrap.servers":   strings.Join(config.Brokers, ", "),
-		"delivery.timeout.ms": strconv.FormatInt(config.Timeout.Milliseconds(), 10),
-		"compression.type":    config.Compression,
-		"retries":             3,
-		"acks":                "all",
-	}
-	producer, err := kafka.NewProducer(producerConfig)
-	if err != nil {
-		return nil, fmt.Errorf("kafka producer: %w", err)
-	}
-	return NewWithProducer(metrics, config, producer)
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 func NewWithProducer(metrics *metrics.Metrics, config *Config, producer Producer) (*Kafka, error) {
-	sq := make(chan *plugins.Message, config.Size)
-	workers := make([]*Worker, config.Workers)
-
-	for i := range workers {
-		workers[i] = &Worker{
-			i:        i,
-			sq:       sq,
-			timeout:  config.Timeout,
-			metrics:  metrics,
-			config:   config,
-			producer: producer,
-		}
-	}
-
-	return &Kafka{sq: sq, workers: workers}, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
-func (k *Kafka) String() string {
-	return fmt.Sprintf("%s:kafka", t_aio.Sender.String())
-}
+func (k *Kafka) String() string { _ = "STUB: not implemented"; return "" }
 
-func (k *Kafka) Type() string {
-	return "kafka"
-}
+func (k *Kafka) Type() string { _ = "STUB: not implemented"; return "" }
 
-func (k *Kafka) Addr() string {
-	return ""
-}
+func (k *Kafka) Addr() string { _ = "STUB: not implemented"; return "" }
 
-func (k *Kafka) Start(chan<- error) error {
-	for _, worker := range k.workers {
-		go worker.Start()
-	}
+func (k *Kafka) Start(chan<- error) error { _ = "STUB: not implemented"; return nil }
 
-	return nil
-}
+func (k *Kafka) Stop() error { _ = "STUB: not implemented"; return nil }
 
-func (k *Kafka) Stop() error {
-	close(k.sq)
-	if len(k.workers) > 0 && k.workers[0].producer != nil {
-		k.workers[0].producer.Close()
-	}
-	return nil
-}
+func (k *Kafka) Enqueue(msg *plugins.Message) bool { _ = "STUB: not implemented"; return false }
 
-func (k *Kafka) Enqueue(msg *plugins.Message) bool {
-	select {
-	case k.sq <- msg:
-		return true
-	default:
-		return false
-	}
-}
+func (w *Worker) String() string { _ = "STUB: not implemented"; return "" }
 
-func (w *Worker) String() string {
-	return fmt.Sprintf("%s:kafka", t_aio.Sender.String())
-}
-
-func (w *Worker) Start() {
-	counter := w.metrics.AioWorkerInFlight.WithLabelValues(w.String(), strconv.Itoa(w.i))
-	w.metrics.AioWorker.WithLabelValues(w.String()).Inc()
-	defer w.metrics.AioWorker.WithLabelValues(w.String()).Dec()
-
-	for msg := range w.sq {
-		counter.Inc()
-		success, err := w.Process(msg.Addr, msg.Body)
-		if err != nil {
-			slog.Warn("failed to send task", "err", err)
-		}
-		msg.Done(&t_aio.SenderCompletion{
-			Success:     success,
-			TimeToRetry: w.config.TimeToRetry.Milliseconds(),
-			TimeToClaim: w.config.TimeToClaim.Milliseconds(),
-		})
-		counter.Dec()
-	}
-}
+func (w *Worker) Start() { _ = "STUB: not implemented"; return }
 
 func (w *Worker) Process(data []byte, body []byte) (bool, error) {
-	var addr Addr
-	if err := json.Unmarshal(data, &addr); err != nil {
-		return false, err
-	}
-
-	if err := addr.validate(); err != nil {
-		return false, err
-	}
-
-	msg := &kafka.Message{
-		TopicPartition: kafka.TopicPartition{Topic: &addr.Topic, Partition: kafka.PartitionAny},
-		Value:          body,
-	}
-
-	if addr.Key != nil {
-		msg.Key = []byte(*addr.Key)
-	}
-
-	if len(addr.Headers) > 0 {
-		msg.Headers = make([]kafka.Header, 0, len(addr.Headers))
-		for k, v := range addr.Headers { // nosemgrep: range-over-map
-			msg.Headers = append(msg.Headers, kafka.Header{
-				Key:   k,
-				Value: []byte(v),
-			})
-		}
-	}
-
-	deliveryChan := make(chan kafka.Event, 1)
-	defer close(deliveryChan)
-
-	err := w.producer.Produce(msg, deliveryChan)
-	if err != nil {
-		return false, err
-	}
-
-	e := <-deliveryChan
-	m, ok := e.(*kafka.Message)
-	if !ok {
-		return false, fmt.Errorf("expected kafka.Message delivery event, got %T", e)
-	}
-
-	if m.TopicPartition.Error != nil {
-		return false, m.TopicPartition.Error
-	}
-
-	return true, nil
+	_ = "STUB: not implemented"
+	return false, nil
 }
+
+// nosemgrep: range-over-map

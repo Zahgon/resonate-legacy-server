@@ -10,7 +10,6 @@ import (
 	"github.com/resonatehq/resonate/pkg/promise"
 	"github.com/resonatehq/resonate/pkg/schedule"
 	"github.com/resonatehq/resonate/pkg/task"
-	"github.com/stretchr/testify/assert"
 )
 
 type testCase struct {
@@ -20,51 +19,13 @@ type testCase struct {
 	expected     []*t_aio.StoreCompletion
 }
 
-func (c *testCase) Run(t *testing.T, store store.Store) {
-	t.Run(c.name, func(t *testing.T) {
-		// assert panic occurs
-		if c.panic {
-			defer func() {
-				if r := recover(); r == nil {
-					t.Errorf("The function did not panic as expected")
-				}
-			}()
-		}
+func (c *testCase) Run(t *testing.T, store store.Store) { _ = "STUB: not implemented"; return }
 
-		completions, err := store.Execute(c.transactions)
-		if err != nil {
-			t.Fatal(err)
-		}
+// assert panic occurs
 
-		assert.Len(t, completions, len(c.transactions))
+// normalize results
 
-		// normalize results
-		for _, completion := range completions {
-			for _, result := range completion.Results {
-				switch v := result.(type) {
-				case *t_aio.QueryPromisesResult:
-					for _, record := range v.Records {
-						record.ParamHeaders = normalizeJSON(record.ParamHeaders)
-						record.ValueHeaders = normalizeJSON(record.ValueHeaders)
-						record.Tags = normalizeJSON(record.Tags)
-					}
-				case *t_aio.QuerySchedulesResult:
-					for _, record := range v.Records {
-						record.PromiseParamHeaders = normalizeJSON(record.PromiseParamHeaders)
-						record.Tags = normalizeJSON(record.Tags)
-					}
-				}
-			}
-
-		}
-
-		assert.Equal(t, c.expected, completions, "Test Case: %s", c.name)
-	})
-}
-
-func (c *testCase) Panic() bool {
-	return c.panic
-}
+func (c *testCase) Panic() bool { _ = "STUB: not implemented"; return false }
 
 var TestCases = []*testCase{
 	// PROMISES

@@ -2,9 +2,7 @@ package task
 
 import (
 	"encoding/json"
-	"fmt"
 
-	"github.com/resonatehq/resonate/internal/util"
 	"github.com/resonatehq/resonate/pkg/message"
 )
 
@@ -29,28 +27,12 @@ type Task struct {
 	CompletedOn   *int64          `json:"completedOn,omitempty"`
 }
 
-func (t *Task) String() string {
-	return fmt.Sprintf(
-		"Task(id=%s, processId=%s, state=%s, rootPromiseId=%s, recv=%s, mesg=%v, timeout=%d, counter=%d, attempt=%d, ttl=%d, expiresAt=%d, createdOn=%d, completedOn=%d)",
-		t.Id,
-		util.SafeDeref(t.ProcessId),
-		t.State,
-		t.RootPromiseId,
-		t.Recv,
-		t.Mesg,
-		t.Timeout,
-		t.Counter,
-		t.Attempt,
-		t.Ttl,
-		t.ExpiresAt,
-		util.SafeDeref(t.CreatedOn),
-		util.SafeDeref(t.CompletedOn),
-	)
-}
+func (t *Task) String() string { _ = "STUB: not implemented"; return "" }
 
 func (t1 *Task) Equals(t2 *Task) bool {
+	_ = "STUB: not implemented"
 	// for dst only
-	return t1.Id == t2.Id && t1.State == t2.State && t1.Counter == t2.Counter
+	return false
 }
 
 type State int
@@ -63,23 +45,6 @@ const (
 	Timedout                    // 16
 )
 
-func (s State) String() string {
-	switch s {
-	case Init:
-		return "INIT"
-	case Enqueued:
-		return "ENQUEUED"
-	case Claimed:
-		return "CLAIMED"
-	case Completed:
-		return "COMPLETED"
-	case Timedout:
-		return "TIMEDOUT"
-	default:
-		panic("invalid state")
-	}
-}
+func (s State) String() string { _ = "STUB: not implemented"; return "" }
 
-func (s State) In(mask State) bool {
-	return s&mask != 0
-}
+func (s State) In(mask State) bool { _ = "STUB: not implemented"; return false }

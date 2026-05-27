@@ -1,9 +1,5 @@
 package message
 
-import (
-	"fmt"
-)
-
 type Mesg struct {
 	Type Type              `json:"type"`
 	Head map[string]string `json:"head,omitempty"`
@@ -11,9 +7,7 @@ type Mesg struct {
 	Leaf string            `json:"leaf"`
 }
 
-func (m *Mesg) String() string {
-	return fmt.Sprintf("Mesg(type=%s, root=%s, leaf=%s)", m.Type, m.Root, m.Leaf)
-}
+func (m *Mesg) String() string { _ = "STUB: not implemented"; return "" }
 
 type Type string
 

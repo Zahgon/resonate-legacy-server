@@ -61,8 +61,4 @@ func init() {
 	rootCmd.SetErr(os.Stderr)
 }
 
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		os.Exit(1)
-	}
-}
+func Execute() { _ = "STUB: not implemented"; return }

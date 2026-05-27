@@ -1,8 +1,6 @@
 package t_aio
 
 import (
-	"fmt"
-
 	"github.com/resonatehq/resonate/pkg/promise"
 	"github.com/resonatehq/resonate/pkg/task"
 )
@@ -16,9 +14,7 @@ type SenderSubmission struct {
 	HeartbeatHref string
 }
 
-func (s *SenderSubmission) String() string {
-	return fmt.Sprintf("Sender(task=%s)", s.Task)
-}
+func (s *SenderSubmission) String() string { _ = "STUB: not implemented"; return "" }
 
 type SenderCompletion struct {
 	Success     bool
@@ -26,6 +22,4 @@ type SenderCompletion struct {
 	TimeToClaim int64
 }
 
-func (c *SenderCompletion) String() string {
-	return fmt.Sprintf("Sender(success=%t, ttr=%d, ttc=%d)", c.Success, c.TimeToRetry, c.TimeToClaim)
-}
+func (c *SenderCompletion) String() string { _ = "STUB: not implemented"; return "" }

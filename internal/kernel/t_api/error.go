@@ -5,26 +5,12 @@ type Error struct {
 	originalError error
 }
 
-func NewError(code StatusCode, error error) *Error {
-	return &Error{
-		code:          code,
-		originalError: error,
-	}
-}
+func NewError(code StatusCode, error error) *Error { _ = "STUB: not implemented"; return nil }
 
-func (e *Error) Code() StatusCode {
-	return e.code
-}
+func (e *Error) Code() StatusCode { _ = "STUB: not implemented"; return *new(StatusCode) }
 
-func (e *Error) Error() string {
-	return e.code.String()
-}
+func (e *Error) Error() string { _ = "STUB: not implemented"; return "" }
 
-func (e *Error) Unwrap() error {
-	return e.originalError
-}
+func (e *Error) Unwrap() error { _ = "STUB: not implemented"; return nil }
 
-func (e *Error) Is(target error) bool {
-	_, ok := target.(*Error)
-	return ok
-}
+func (e *Error) Is(target error) bool { _ = "STUB: not implemented"; return false }
